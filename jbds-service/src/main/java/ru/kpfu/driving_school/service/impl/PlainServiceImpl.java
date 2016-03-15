@@ -10,6 +10,6 @@ import ru.kpfu.driving_school.service.PlainService;
 public class PlainServiceImpl implements PlainService {
     @Override
     public String getHello() {
-        return "Pidr";
+        return "Hello";
     }
 }
