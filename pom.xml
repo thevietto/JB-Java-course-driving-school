@@ -81,7 +81,7 @@
 
     </dependencies>
     <build>
-        <finalName>JBDS</finalName>
+        <finalName>jdbs-main</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

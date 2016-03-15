@@ -19,6 +19,7 @@
     </dependencies>
 
     <build>
+        <finalName>jbds-service</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

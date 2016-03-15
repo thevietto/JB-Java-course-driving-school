@@ -23,7 +23,7 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>module-web</finalName>
+        <finalName>jbds-web</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>

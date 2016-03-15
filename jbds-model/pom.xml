@@ -22,4 +22,8 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <finalName>jbds-model</finalName>
+    </build>
 </project>
