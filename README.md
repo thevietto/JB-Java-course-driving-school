@@ -6,9 +6,9 @@ Some instructions going here
 in folder src/main/resources: 
 <ul>
     <li>create 2 properties file</li>
-    <li>name them database.properties and liquebase.properties</li>
+    <li>name them database.properties and liquibase.properties</li>
     <li>then tune them as database.properties.example 
-     and liquebase.properties.example respectively</li>
+     and liquibase.properties.example respectively</li>
      </ul>
 <p>changelog.xml file is for migrations</p>
 <p>special profile and plugin for it you can see in pom.xml in jbds-domain module</p>
