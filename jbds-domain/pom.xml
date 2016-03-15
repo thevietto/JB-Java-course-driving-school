@@ -2,28 +2,19 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <groupId>ru.kpfu.itis.driving-school</groupId>
-        <artifactId>main</artifactId>
+        <artifactId>jbds-pom</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jbds-model</artifactId>
+    <artifactId>jbds-domain</artifactId>
     <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>3.8.1</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
-
     <build>
-        <finalName>jbds-model</finalName>
+        <finalName>jbds-domain</finalName>
     </build>
 </project>
