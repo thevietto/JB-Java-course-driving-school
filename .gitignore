@@ -71,3 +71,8 @@ crashlytics.properties
 crashlytics-build.properties
 
 # Created by .ignore support plugin (hsz.mobi)
+
+*/src/main/resources/database.properties
+*/src/main/resources/liquebase.properties
+
+*.properties
