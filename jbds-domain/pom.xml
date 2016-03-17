@@ -83,7 +83,7 @@
             </build>
         </profile>
         <profile>
-            <id>seeds</id>
+            <id>db-seeds</id>
             <build>
                 <plugins>
                     <plugin>
@@ -96,7 +96,7 @@
                                 <phase>process-resources</phase>
                                 <configuration>
                                     <changeLogFile>${basedir}/src/main/resources/db/seeds.xml</changeLogFile>
-                                    <propertyFileWillOverride>false</propertyFileWillOverride>
+                                    <propertyFileWillOverride>true</propertyFileWillOverride>
                                     <dropFirst>false</dropFirst>
                                     <propertyFile>${basedir}/src/main/resources/liquibase.properties
                                     </propertyFile>
