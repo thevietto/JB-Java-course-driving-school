@@ -3,6 +3,7 @@ package ru.kpfu.driving_school.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "ds_admin")
 public class DSAdminAccount {
 
     @Id

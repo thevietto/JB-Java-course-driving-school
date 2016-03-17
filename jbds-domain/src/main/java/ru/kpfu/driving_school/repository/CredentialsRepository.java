@@ -9,4 +9,5 @@ import ru.kpfu.driving_school.model.Credentials;
 public interface CredentialsRepository extends JpaRepository<Credentials, Long> {
 
     Credentials findOneByLogin(String login);
+
 }

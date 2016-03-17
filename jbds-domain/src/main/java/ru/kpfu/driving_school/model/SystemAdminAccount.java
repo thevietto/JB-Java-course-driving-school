@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "system_admin")
 public class SystemAdminAccount {
 
     @Id

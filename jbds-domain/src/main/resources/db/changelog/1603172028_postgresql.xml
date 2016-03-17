@@ -1,0 +1,55 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1603172028_1" author="etovladislav">
+        <createTable tableName="credential">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="login" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar(255)"/>
+            <column name="role" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="1603172028_2" author="etovladislav">
+        <createTable tableName="system_admin">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="credential_id" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1603172028_3" author="etovladislav">
+        <addForeignKeyConstraint baseColumnNames="credential_id"
+                                 baseTableName="system_admin"
+                                 constraintName="fk_credential"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credential"/>
+    </changeSet>
+
+    <changeSet id="1603172028_4" author="etovladislav">
+        <createTable tableName="ds_admin">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="credential_id" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="1603172028_5" author="etovladislav">
+        <addForeignKeyConstraint baseColumnNames="credential_id"
+                                 baseTableName="ds_admin"
+                                 constraintName="fk_credential"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credential"/>
+    </changeSet>
+</databaseChangeLog>
