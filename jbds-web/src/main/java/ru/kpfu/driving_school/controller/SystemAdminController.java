@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/system")
 public class SystemAdminController {
 
-    @RequestMapping(value = {"/", "/index"})
+    @RequestMapping(value = {""})
     public String getSystemIndex() {
         return "system-admin";
     }

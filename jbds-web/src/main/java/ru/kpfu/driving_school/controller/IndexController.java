@@ -16,8 +16,13 @@ public class IndexController {
 
     @RequestMapping(value = {"/", "index"})
     public String getIndex() {
-        System.out.println(plainService.getHello());
+//        System.out.println(plainService.getHello());
         return "index";
+    }
+
+    @RequestMapping("forbidden")
+    public String getForbidden() {
+        return "forbidden";
     }
 
 }

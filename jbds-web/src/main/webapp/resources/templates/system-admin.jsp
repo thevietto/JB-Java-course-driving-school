@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>Title</title>
+    <title>System</title>
 </head>
 <body>
 System Admin
