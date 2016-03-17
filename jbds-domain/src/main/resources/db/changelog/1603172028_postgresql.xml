@@ -52,4 +52,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="credential"/>
     </changeSet>
+
 </databaseChangeLog>

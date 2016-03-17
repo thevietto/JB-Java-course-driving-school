@@ -25,10 +25,12 @@ public class AuthController {
     public String defaultAfterLogin(HttpServletRequest request) {
         if (request.isUserInRole("ROLE_ADMIN")) {
             return "redirect:/admin";
-        }
-        if (request.isUserInRole("ROLE_STUDENT")) {
+        } else if (request.isUserInRole("ROLE_STUDENT")) {
             return "redirect:/student";
+        } else if (request.isUserInRole("ROLE_SYSTEM_ADMIN")) {
+            return "redirect:/admin-system";
+        } else {
+            return "login";
         }
-        return "redirect:/admin-system";
     }
 }

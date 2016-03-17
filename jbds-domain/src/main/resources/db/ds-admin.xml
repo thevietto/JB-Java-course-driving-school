@@ -6,7 +6,12 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <include file="changelog/1603172028_postgresql.xml" relativeToChangelogFile="true"/>
-    <include file="changelog/1603225543_postgresql.xml" relativeToChangelogFile="true"/>
+    <changeSet id="bitches_2" author="GoodBoy">
+        <loadUpdateData tableName="ds_admin" primaryKey="id" file="db/ds-admin.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+
+    </changeSet>
+
 
 </databaseChangeLog>

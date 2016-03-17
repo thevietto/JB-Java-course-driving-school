@@ -1,9 +1,9 @@
 package ru.kpfu.driving_school.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
+@Table(name = "students")
 public class StudentAccount {
 
     @Id
@@ -14,6 +14,8 @@ public class StudentAccount {
     @JoinColumn(name = "credential_id")
     private Credentials credentials;
 
+    @Column(unique = true)
+    private String fio;
 
     public StudentAccount() {
     }
@@ -32,5 +34,13 @@ public class StudentAccount {
 
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
+    }
+
+    public String getFio() {
+        return fio;
+    }
+
+    public void setFio(String fio) {
+        this.fio = fio;
     }
 }
