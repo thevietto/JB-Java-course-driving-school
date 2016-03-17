@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * Created by aleksandrpliskin on 17.03.16.
  */
@@ -17,5 +19,16 @@ public class AuthController {
             model.addAttribute("error", error);
         }
         return "login";
+    }
+
+    @RequestMapping("/default")
+    public String defaultAfterLogin(HttpServletRequest request) {
+        if (request.isUserInRole("ROLE_ADMIN")) {
+            return "redirect:/admin";
+        }
+        if (request.isUserInRole("ROLE_STUDENT")) {
+            return "redirect:/student";
+        }
+        return "redirect:/admin-system";
     }
 }

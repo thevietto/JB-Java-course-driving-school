@@ -3,9 +3,6 @@ package ru.kpfu.driving_school.model;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by aleksandrpliskin on 15.03.16.
- */
 @Entity
 public class StudentAccount {
 
@@ -13,7 +10,8 @@ public class StudentAccount {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false)
+    @OneToOne
+    @JoinColumn(name = "credential_id")
     private Credentials credentials;
 
     private String group;
@@ -27,15 +25,6 @@ public class StudentAccount {
     private String address;
 
     public StudentAccount() {
-
-    }
-
-    public Credentials getCredentials() {
-        return credentials;
-    }
-
-    public void setCredentials(Credentials credentials) {
-        this.credentials = credentials;
     }
 
     public long getId() {
@@ -46,12 +35,28 @@ public class StudentAccount {
         this.id = id;
     }
 
-    public String getAddress() {
-        return address;
+    public Credentials getCredentials() {
+        return credentials;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
+    }
+
+    public String getGroup() {
+        return group;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public String getStream() {
+        return stream;
+    }
+
+    public void setStream(String stream) {
+        this.stream = stream;
     }
 
     public Date getBirthDate() {
@@ -70,19 +75,11 @@ public class StudentAccount {
         this.email = email;
     }
 
-    public String getGroup() {
-        return group;
+    public String getAddress() {
+        return address;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
-    }
-
-    public String getStream() {
-        return stream;
-    }
-
-    public void setStream(String stream) {
-        this.stream = stream;
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

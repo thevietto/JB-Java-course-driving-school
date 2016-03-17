@@ -12,7 +12,7 @@
 
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
 
     <listener>
@@ -22,6 +22,8 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>WEB-INF/root-config.xml</param-value>
     </context-param>
+
+    <!--Кодировка-->
 
     <filter>
         <filter-name>encodingFilter</filter-name>
@@ -40,6 +42,8 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <!--Безопасность-->
 
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>

@@ -2,9 +2,6 @@ package ru.kpfu.driving_school.model;
 
 import javax.persistence.*;
 
-/**
- * Created by aleksandrpliskin on 17.03.16.
- */
 @Entity
 public class DSAdminAccount {
 
@@ -12,9 +9,26 @@ public class DSAdminAccount {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(nullable = false)
+    @OneToOne
+    @JoinColumn(name = "credential_id")
     private Credentials credentials;
 
     public DSAdminAccount() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
     }
 }

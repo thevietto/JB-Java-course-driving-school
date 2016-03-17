@@ -5,7 +5,7 @@
        xmlns:jpa="http://www.springframework.org/schema/data/jpa" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
 
-    <context:property-placeholder location="classpath:database.properties" ignore-unresolvable="true"/>
+    <context:property-placeholder location="classpath:database.properties.example" ignore-unresolvable="true"/>
 
     <jpa:repositories base-package="ru.kpfu.driving_school.repository"/>
 
@@ -19,7 +19,7 @@
     <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
         <property name="database" value="POSTGRESQL"/>
         <property name="showSql" value="true"/>
-        <property name="generateDdl" value="false"/>
+        <property name="generateDdl" value="true"/>
         <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
     </bean>
 

@@ -14,11 +14,9 @@ import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.repository.CredentialsRepository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-/**
- * Created by aleksandrpliskin on 17.03.16.
- */
 public class AuthProviderImpl implements AuthenticationProvider {
 
     @Autowired

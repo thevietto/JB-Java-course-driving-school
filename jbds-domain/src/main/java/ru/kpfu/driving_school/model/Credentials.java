@@ -12,7 +12,7 @@ public class Credentials {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
@@ -26,12 +26,20 @@ public class Credentials {
     public Credentials() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     public String getLogin() {
@@ -46,15 +54,7 @@ public class Credentials {
         return password;
     }
 
-    public void setPassword(String passsword) {
-        this.password = passsword;
-    }
-
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole userRole) {
-        this.role = userRole;
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

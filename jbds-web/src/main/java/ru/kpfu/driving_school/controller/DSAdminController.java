@@ -19,6 +19,4 @@ public class DSAdminController {
     public String getIndex() {
         return "ds-admin-index";
     }
-
-
 }

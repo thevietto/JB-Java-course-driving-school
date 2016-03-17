@@ -3,21 +3,34 @@ package ru.kpfu.driving_school.model;
 import javax.persistence.*;
 import java.util.List;
 
-/**
- * Created by aleksandrpliskin on 17.03.16.
- */
 @Entity
 public class SystemAdminAccount {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
-    @Column(nullable = false)
+    @OneToOne
+    @JoinColumn(name = "credential_id")
     private Credentials credentials;
 
-    private List<DSAdminAccount> DSadmins;
 
     public SystemAdminAccount() {
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Credentials getCredentials() {
+        return credentials;
+    }
+
+    public void setCredentials(Credentials credentials) {
+        this.credentials = credentials;
     }
 }
