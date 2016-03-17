@@ -83,7 +83,7 @@
             </build>
         </profile>
         <profile>
-            <id>seeds</id>
+            <id>db-seeds</id>
             <build>
                 <plugins>
                     <plugin>
