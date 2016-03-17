@@ -5,5 +5,6 @@
 
     <import resource="classpath*:configs/service-config.xml"/>
     <import resource="classpath*:configs/domain-config.xml"/>
+    <import resource="security-config.xml"/>
 
 </beans>

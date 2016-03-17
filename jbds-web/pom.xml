@@ -9,17 +9,46 @@
     <artifactId>jbds-web</artifactId>
     <packaging>war</packaging>
 
+    <properties>
+        <spring.security.version>4.0.3.RELEASE</spring.security.version>
+    </properties>
+
 
     <dependencies>
         <dependency>
             <groupId>ru.kpfu.itis.driving-school</groupId>
             <artifactId>jbds-service</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${servie.version}</version>
         </dependency>
         <dependency>
             <groupId>ru.kpfu.itis.driving-school</groupId>
             <artifactId>jbds-domain</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${domain.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>${spring.security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
     </dependencies>
 

@@ -5,7 +5,7 @@ package ru.kpfu.driving_school.model.enums;
  */
 public enum UserRole {
 
-    ROLE_USER,
+    ROLE_STUDENT,
     ROLE_ADMIN,
     ROLE_SYSTEM_ADMIN
 
