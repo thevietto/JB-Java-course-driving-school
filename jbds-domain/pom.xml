@@ -83,7 +83,7 @@
             </build>
         </profile>
         <profile>
-            <id>credentials</id>
+            <id>seeds</id>
             <build>
                 <plugins>
                     <plugin>
@@ -95,91 +95,7 @@
                                 <id>default-cli</id>
                                 <phase>process-resources</phase>
                                 <configuration>
-                                    <changeLogFile>${basedir}/src/main/resources/db/credentials.xml</changeLogFile>
-                                    <propertyFileWillOverride>false</propertyFileWillOverride>
-                                    <dropFirst>false</dropFirst>
-                                    <propertyFile>${basedir}/src/main/resources/liquibase.properties
-                                    </propertyFile>
-                                </configuration>
-                                <goals>
-                                    <goal>update</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>students</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.liquibase</groupId>
-                        <artifactId>liquibase-maven-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <executions>
-                            <execution>
-                                <id>default-cli</id>
-                                <phase>process-resources</phase>
-                                <configuration>
-                                    <changeLogFile>${basedir}/src/main/resources/db/students.xml</changeLogFile>
-                                    <propertyFileWillOverride>false</propertyFileWillOverride>
-                                    <dropFirst>false</dropFirst>
-                                    <propertyFile>${basedir}/src/main/resources/liquibase.properties
-                                    </propertyFile>
-                                </configuration>
-                                <goals>
-                                    <goal>update</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>ds-admins</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.liquibase</groupId>
-                        <artifactId>liquibase-maven-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <executions>
-                            <execution>
-                                <id>default-cli</id>
-                                <phase>process-resources</phase>
-                                <configuration>
-                                    <changeLogFile>${basedir}/src/main/resources/db/ds-admin.xml</changeLogFile>
-                                    <propertyFileWillOverride>false</propertyFileWillOverride>
-                                    <dropFirst>false</dropFirst>
-                                    <propertyFile>${basedir}/src/main/resources/liquibase.properties
-                                    </propertyFile>
-                                </configuration>
-                                <goals>
-                                    <goal>update</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-        <profile>
-            <id>sys-admins</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.liquibase</groupId>
-                        <artifactId>liquibase-maven-plugin</artifactId>
-                        <version>3.1.0</version>
-                        <executions>
-                            <execution>
-                                <id>default-cli</id>
-                                <phase>process-resources</phase>
-                                <configuration>
-                                    <changeLogFile>${basedir}/src/main/resources/db/sysadmin.xml</changeLogFile>
+                                    <changeLogFile>${basedir}/src/main/resources/db/seeds.xml</changeLogFile>
                                     <propertyFileWillOverride>false</propertyFileWillOverride>
                                     <dropFirst>false</dropFirst>
                                     <propertyFile>${basedir}/src/main/resources/liquibase.properties
