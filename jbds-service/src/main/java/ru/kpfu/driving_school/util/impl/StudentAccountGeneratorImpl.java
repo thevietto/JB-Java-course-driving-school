@@ -57,7 +57,7 @@ public class StudentAccountGeneratorImpl implements StudentAccountGenerator {
         surname = translate(surname);
         lastname = translate(lastname);
         String login = "";
-        login += firstname;
+        login += surname;
         boolean unique = false;
         boolean firstCharName = false;
         boolean firstCharLastName = false;
@@ -87,24 +87,14 @@ public class StudentAccountGeneratorImpl implements StudentAccountGenerator {
         return login;
     }
 
-    public static String translate(String fname) {
+    private static String translate(String fname) {
         RusToEng translator = new RusToEng();
-        System.out.println("data received from jsf form =" + fname);
         String russian = null;
         try {
             russian = translator.translate(fname);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(" translated text of the form  " + russian);
-        String staticText = "This is static text inside the function";
-        String russian2 = null;
-        try {
-            russian2 = translator.translate(staticText);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        System.out.println("Translated static text = " + russian2);
         return russian;
     }
 }

@@ -1,26 +1,34 @@
 package ru.kpfu.driving_school.util.impl;
 
-public class RusToEng {
+/**
+ * Created by aleksandrpliskin on 18.03.16.
+ */
 
-    private String alpha = new String("абвгдеёжзиыйклмнопрстуфхцчшщьэюя");
-    private String[] _alpha = {"a","b","v","g","d","e","yo","g","z","i","y","i",
-            "k","l","m","n","o","p","r","s","t","u",
-            "f","h","tz","ch","sh","sh","'","e","yu","ya"};
+class RusToEng {
+
+    private final String alpha = "абвгдеёжзиыйклмнопрстуфхцчшщьэюя";
+    private final String[] _alpha = {"a", "b", "v", "g", "d", "e", "yo", "g", "z", "i", "y", "i",
+            "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
+            "f", "h", "tz", "ch", "sh", "sh", "'", "e", "yu", "ya"};
 
 
-
-    public String translate(String str){
+    String translate(String str) {
         str = str.toLowerCase();
         char[] chs = str.toCharArray();
-        StringBuffer result = new StringBuffer("");
-        for(int i=0; i<chs.length;i++){
-            int k = alpha.indexOf(chs[i]);
-            if(k != -1)
+        StringBuilder result = new StringBuilder("");
+        for (char ch : chs) {
+            int k = alpha.indexOf(ch);
+            if (k != -1)
                 result.append(_alpha[k]);
-            else{
-                result.append(chs[i]);
+            else {
+                result.append(ch);
             }
         }
-        return result.toString();
+        return firstUpperCase(result.toString());
+    }
+
+    private String firstUpperCase(String word) {
+        if (word == null || word.isEmpty()) return "";//или return word;
+        return word.substring(0, 1).toUpperCase() + word.substring(1);
     }
 }

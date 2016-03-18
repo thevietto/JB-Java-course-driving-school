@@ -6,5 +6,8 @@
 <h2>Driving Admin School here</h2>
 
 <p><a href="/logout">logout</a></p>
+
+
+<p><a href="/admin/add_students">add students</a></p>
 </body>
 </html>

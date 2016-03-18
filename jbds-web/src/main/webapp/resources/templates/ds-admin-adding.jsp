@@ -12,9 +12,9 @@
 </head>
 <body>
 <form action="/admin/add_students" method="post">
-    <p><label for="firstname"></label><input name="firstname"/></p>
-    <p><label for="surname"></label><input name="surname"/></p>
-    <p><label for="lastname"></label><input name="lastname"/></p>
+    <p><input name="firstname"/></p>
+    <p><input name="surname"/></p>
+    <p><input name="lastname"/></p>
     <input type="submit" value="go"/>
 </form>
 
