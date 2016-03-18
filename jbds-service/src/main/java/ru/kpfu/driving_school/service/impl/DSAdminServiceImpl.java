@@ -5,10 +5,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.StudentAccount;
+import ru.kpfu.driving_school.repository.CredentialsRepository;
 import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.DSAdminService;
-import ru.kpfu.driving_school.util.impl.StudentsFormToStudentsTransformer;
+import ru.kpfu.driving_school.util.impl.StudentAccountGenerator;
 
 import java.util.List;
 
@@ -23,6 +24,9 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Autowired
     private StudentRepository studentRepository;
+
+    @Autowired
+    private CredentialsRepository credentialsRepository;
 
     @Override
     public void addStudents(List<StudentAccount> students) {
@@ -47,7 +51,8 @@ public class DSAdminServiceImpl implements DSAdminService {
     @Override
     @Transactional
     public void saveNewStudent(StudentForm form) {
-        StudentAccount student = StudentsFormToStudentsTransformer.transform(form);
+        System.out.println(credentialsRepository.findOneByLogin("student"));
+        StudentAccount student = new StudentAccountGenerator(credentialsRepository).generateStudent(form);
         studentRepository.save(student);
     }
 }
