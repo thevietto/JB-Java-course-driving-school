@@ -2,12 +2,13 @@ package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.StudentAccount;
 import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.DSAdminService;
-import ru.kpfu.driving_school.service.form.StudentForm;
-import ru.kpfu.driving_school.service.util.impl.StudentsFormToStudentsTransformer;
+import ru.kpfu.driving_school.util.impl.StudentsFormToStudentsTransformer;
 
 import java.util.List;
 
@@ -44,7 +45,9 @@ public class DSAdminServiceImpl implements DSAdminService {
     }
 
     @Override
+    @Transactional
     public void saveNewStudent(StudentForm form) {
         StudentAccount student = StudentsFormToStudentsTransformer.transform(form);
+        studentRepository.save(student);
     }
 }

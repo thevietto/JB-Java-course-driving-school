@@ -6,7 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ru.kpfu.driving_school.service.form.StudentForm;
+import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.service.DSAdminService;
 
 import javax.validation.Valid;

@@ -1,7 +1,7 @@
-package ru.kpfu.driving_school.service.util;
+package ru.kpfu.driving_school.util;
 
+import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.StudentAccount;
-import ru.kpfu.driving_school.service.form.StudentForm;
 
 /**
  * Created by aleksandrpliskin on 18.03.16.

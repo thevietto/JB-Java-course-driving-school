@@ -1,13 +1,17 @@
-package ru.kpfu.driving_school.service.util.impl;
+package ru.kpfu.driving_school.util.impl;
 
 import com.google.api.translate.Language;
 import com.google.api.translate.Translate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.StudentAccount;
+import ru.kpfu.driving_school.model.enums.UserRole;
 import ru.kpfu.driving_school.repository.CredentialsRepository;
-import ru.kpfu.driving_school.service.form.StudentForm;
-import ru.kpfu.driving_school.service.util.StudentAccountGenerator;
+import ru.kpfu.driving_school.form.StudentForm;
+import ru.kpfu.driving_school.util.StudentAccountGenerator;
 
 import java.util.Random;
 
@@ -20,13 +24,26 @@ public class StudentAccountGeneratorImpl implements StudentAccountGenerator {
     private final String validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
 
     @Autowired
-    CredentialsRepository credentialsRepository;
+    private CredentialsRepository credentialsRepository;
 
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    @Transactional
     @Override
     public StudentAccount generateStudent(StudentForm form) {
-        String login = loginGen(form.getFirstname(), form.getSurname(), form.getLastname());
+        String fio = form.getFirstname() + ' ' + form.getSurname() + ' ' + form.getLastname();
+//        String login = loginGen(form.getFirstname(), form.getSurname(), form.getLastname());
+        String login = "student1";
         String password = passwordGen();
-        return new StudentAccount();
+        Credentials credentials = new Credentials();
+        credentials.setLogin(login);
+        credentials.setPassword(encoder.encode(password));
+        credentials.setRole(UserRole.ROLE_STUDENT);
+        credentialsRepository.save(credentials);
+        StudentAccount student = new StudentAccount();
+        student.setFio(fio);
+        student.setCredentials(credentials);
+        return student;
     }
 
     private String passwordGen() {

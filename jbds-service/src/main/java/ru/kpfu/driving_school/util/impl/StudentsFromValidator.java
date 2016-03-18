@@ -1,4 +1,4 @@
-package ru.kpfu.driving_school.service.util.impl;
+package ru.kpfu.driving_school.util.impl;
 
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;

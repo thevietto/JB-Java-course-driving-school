@@ -1,4 +1,4 @@
-package ru.kpfu.driving_school.service.form;
+package ru.kpfu.driving_school.form;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
