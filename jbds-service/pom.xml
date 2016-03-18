@@ -28,9 +28,24 @@
             <version>${domain.version}</version>
         </dependency>
         <dependency>
-            <groupId>ru.kpfu.itis.driving-school</groupId>
-            <artifactId>jbds-web</artifactId>
-            <version>${web.version}</version>
+            <groupId>com.google.apis</groupId>
+            <artifactId>google-api-services-translate</artifactId>
+            <version>v2-rev44-1.21.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode</groupId>
+            <artifactId>google-api-translate-java</artifactId>
+            <version>0.92</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>4.0.3.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
         </dependency>
     </dependencies>
 
