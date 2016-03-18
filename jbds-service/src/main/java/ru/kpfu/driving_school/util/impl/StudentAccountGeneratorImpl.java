@@ -19,8 +19,6 @@ import java.util.Random;
 @Component
 public class StudentAccountGeneratorImpl implements StudentAccountGenerator {
 
-    private final String validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-
     @Autowired
     private CredentialsRepository credentialsRepository;
 
@@ -47,6 +45,7 @@ public class StudentAccountGeneratorImpl implements StudentAccountGenerator {
         String s = "";
         Random generator = new Random();
         for (int i = 0; i < 10; i++) {
+            String validChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
             s += validChars.charAt(generator.nextInt(validChars.length()));
         }
         return s;

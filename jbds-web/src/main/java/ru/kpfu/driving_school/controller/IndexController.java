@@ -20,7 +20,7 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping("forbidden")
+    @RequestMapping("/forbidden")
     public String getForbidden() {
         return "forbidden";
     }
