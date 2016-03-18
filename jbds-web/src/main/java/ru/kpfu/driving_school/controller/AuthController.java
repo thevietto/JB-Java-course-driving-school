@@ -25,11 +25,11 @@ public class AuthController {
     @RequestMapping("/default")
     public String defaultAfterLogin(HttpServletRequest request) {
         if (request.isUserInRole("ROLE_ADMIN")) {
-            return "redirect:/ds-admin/";
+            return "redirect:/admin";
         } else if (request.isUserInRole("ROLE_STUDENT")) {
-            return "redirect:/student/";
+            return "redirect:/student";
         } else if (request.isUserInRole("ROLE_SYSTEM_ADMIN")) {
-            return "redirect:/system/";
+            return "redirect:/system";
         } else {
             return "login";
         }
