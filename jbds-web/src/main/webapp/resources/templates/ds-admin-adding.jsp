@@ -12,11 +12,14 @@
 </head>
 <body>
 <form action="/admin/add_students" method="post">
-    <p><input name="firstname"/></p>
-    <p><input name="surname"/></p>
-    <p><input name="lastname"/></p>
+    <p><label>Имя</label><input name="firstname"/></p>
+    <p><label>Фамилия</label><input name="surname"/></p>
+    <p><label>Отчество</label><input name="lastname"/></p>
     <input type="submit" value="go"/>
 </form>
+
+
+<h1>порядок важен!!!</h1>
 
 
 </body>

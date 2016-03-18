@@ -64,24 +64,28 @@ public class StudentAccountGeneratorImpl implements StudentAccountGenerator {
         int firstnameIs = 1;
         int lastnameIs = 1;
         while (!unique) {
-            if (credentialsRepository.findOneByLogin(login) == null) {
-                unique = true;
-            } else {
-                if (!firstCharName) {
-                    login += firstname.charAt(0);
-                    firstCharName = true;
-                } else if (!firstCharLastName) {
-                    login += lastname.charAt(0);
-                    firstCharLastName = true;
-                } else if (firstnameIs != firstname.length() - 1) {
-                    login += firstname.charAt(firstnameIs);
-                    firstnameIs++;
-                } else if (lastnameIs != lastname.length() - 1) {
-                    login += lastname.charAt(lastnameIs);
-                    lastnameIs++;
+            try {
+                if (credentialsRepository.findOneByLogin(login) == null) {
+                    unique = true;
                 } else {
-                    login += new Random().nextInt(10);
+                    if (!firstCharName) {
+                        login += firstname.charAt(0);
+                        firstCharName = true;
+                    } else if (!firstCharLastName) {
+                        login += lastname.charAt(0);
+                        firstCharLastName = true;
+                    } else if (firstnameIs != firstname.length() - 1) {
+                        login += firstname.charAt(firstnameIs);
+                        firstnameIs++;
+                    } else if (lastnameIs != lastname.length() - 1) {
+                        login += lastname.charAt(lastnameIs);
+                        lastnameIs++;
+                    } else {
+                        login += new Random().nextInt(10);
+                    }
                 }
+            } catch (Exception e) {
+                unique = true;
             }
         }
         return login;
