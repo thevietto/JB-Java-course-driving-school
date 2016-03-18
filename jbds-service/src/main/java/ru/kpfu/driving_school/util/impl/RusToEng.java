@@ -6,7 +6,6 @@ package ru.kpfu.driving_school.util.impl;
 
 class RusToEng {
 
-    private final String alpha = "абвгдеёжзиыйклмнопрстуфхцчшщьэюя";
     private final String[] _alpha = {"a", "b", "v", "g", "d", "e", "yo", "g", "z", "i", "y", "i",
             "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
             "f", "h", "tz", "ch", "sh", "sh", "'", "e", "yu", "ya"};
@@ -17,6 +16,7 @@ class RusToEng {
         char[] chs = str.toCharArray();
         StringBuilder result = new StringBuilder("");
         for (char ch : chs) {
+            String alpha = "абвгдеёжзиыйклмнопрстуфхцчшщьэюя";
             int k = alpha.indexOf(ch);
             if (k != -1)
                 result.append(_alpha[k]);

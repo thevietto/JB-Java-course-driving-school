@@ -1,7 +1,7 @@
 package ru.kpfu.driving_school.service;
 
-import ru.kpfu.driving_school.model.StudentAccount;
 import ru.kpfu.driving_school.form.StudentForm;
+import ru.kpfu.driving_school.model.StudentAccount;
 
 import java.util.List;
 

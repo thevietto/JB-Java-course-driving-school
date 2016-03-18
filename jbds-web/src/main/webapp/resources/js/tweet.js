@@ -26,10 +26,10 @@ function sendTweet() {
 
 function updateTweets() {
     $.ajax({
-        url:"tweets/getAll",
-        type:"GET",
+        url: "tweets/getAll",
+        type: "GET",
         dataType: "html",
-        success: function(data) {
+        success: function (data) {
             $("#js-tweets").html(data);
         }
     })

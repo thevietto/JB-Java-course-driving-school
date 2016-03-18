@@ -1,7 +1,6 @@
 package ru.kpfu.driving_school.model;
 
 import javax.persistence.*;
-import java.util.List;
 
 
 @Entity

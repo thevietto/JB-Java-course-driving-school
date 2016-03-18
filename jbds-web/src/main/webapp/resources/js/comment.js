@@ -26,10 +26,10 @@ function sendComment() {
 
 function updateComments() {
     $.ajax({
-        url:"/tweets/"+userId+"/comments",
-        type:"GET",
+        url: "/tweets/" + userId + "/comments",
+        type: "GET",
         dataType: "html",
-        success: function(data) {
+        success: function (data) {
             $("#js-comments").html(data);
         }
     })
