@@ -1,7 +1,5 @@
 package ru.kpfu.driving_school.util.impl;
 
-import com.google.api.translate.Language;
-import com.google.api.translate.Translate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -91,11 +89,11 @@ public class StudentAccountGeneratorImpl implements StudentAccountGenerator {
     }
 
     public static String translate(String fname) {
-        Translate translator = new Translate();
+        RusToEng translator = new RusToEng();
         System.out.println("data received from jsf form =" + fname);
         String russian = null;
         try {
-            russian = translator.translate(fname, Language.ENGLISH, Language.RUSSIAN);
+            russian = translator.translate(fname);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -103,7 +101,7 @@ public class StudentAccountGeneratorImpl implements StudentAccountGenerator {
         String staticText = "This is static text inside the function";
         String russian2 = null;
         try {
-            russian2 = translator.translate(staticText, Language.ENGLISH, Language.RUSSIAN);
+            russian2 = translator.translate(staticText);
         } catch (Exception e) {
             e.printStackTrace();
         }

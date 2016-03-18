@@ -7,9 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Created by aleksandrpliskin on 17.03.16.
- */
+
 @Controller
 public class AuthController {
 
