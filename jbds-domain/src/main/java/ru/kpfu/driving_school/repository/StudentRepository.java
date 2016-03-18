@@ -1,7 +1,6 @@
 package ru.kpfu.driving_school.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import ru.kpfu.driving_school.model.StudentAccount;
 
@@ -12,9 +11,5 @@ import ru.kpfu.driving_school.model.StudentAccount;
 public interface StudentRepository extends JpaRepository<StudentAccount, Long> {
 
     StudentAccount findOneByFio(String fio);
-
-    //TODO
-//    @Query(value = "insert into")
-//    void saveStudent(StudentAccount studentAccount);
 
 }

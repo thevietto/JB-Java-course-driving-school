@@ -21,10 +21,6 @@ public class RusToEng {
                 result.append(chs[i]);
             }
         }
-        return firstUpperCase(result.toString());
-    }
-    private String firstUpperCase(String word){
-        if(word == null || word.isEmpty()) return "";//или return word;
-        return word.substring(0, 1).toUpperCase() + word.substring(1);
+        return result.toString();
     }
 }
