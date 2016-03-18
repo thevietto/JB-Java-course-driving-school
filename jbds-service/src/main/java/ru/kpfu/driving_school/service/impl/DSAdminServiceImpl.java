@@ -51,7 +51,6 @@ public class DSAdminServiceImpl implements DSAdminService {
     @Override
     @Transactional
     public void saveNewStudent(StudentForm form) {
-        System.out.println(credentialsRepository.findOneByLogin("student"));
         StudentAccount student = new StudentAccountGenerator(credentialsRepository).generateStudent(form);
         studentRepository.save(student);
     }

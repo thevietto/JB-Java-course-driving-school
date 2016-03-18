@@ -9,5 +9,6 @@
     <include file="changelog/1603172028_postgresql.xml" relativeToChangelogFile="true"/>
     <include file="changelog/1603225543_postgresql.xml" relativeToChangelogFile="true"/>
     <include file="changelog/1803194720_postgresql.xml" relativeToChangelogFile="true"/>
+    <include file="changelog/1803231420_postgresql.xml" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>
