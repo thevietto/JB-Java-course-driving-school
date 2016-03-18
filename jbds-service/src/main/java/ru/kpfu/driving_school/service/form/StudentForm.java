@@ -1,4 +1,4 @@
-package ru.kpfu.driving_school.form;
+package ru.kpfu.driving_school.service.form;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by aleksandrpliskin on 18.03.16.
  */
-public class StudentsForm {
+public class StudentForm {
 
     @Size(min = 5, max = 100, message = "введите в виде: Иванов Иван Иванович")
     @Pattern(regexp = ".+ .+ .+")

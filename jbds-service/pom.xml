@@ -27,6 +27,11 @@
             <artifactId>jbds-domain</artifactId>
             <version>${domain.version}</version>
         </dependency>
+        <dependency>
+            <groupId>ru.kpfu.itis.driving-school</groupId>
+            <artifactId>jbds-web</artifactId>
+            <version>${web.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

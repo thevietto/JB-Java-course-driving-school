@@ -1,6 +1,7 @@
 package ru.kpfu.driving_school.service;
 
 import ru.kpfu.driving_school.model.StudentAccount;
+import ru.kpfu.driving_school.service.form.StudentForm;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface DSAdminService {
     void deleteStudent(String fio);
 
     void deleteStudent(StudentAccount student);
+
+    void saveNewStudent(StudentForm form);
 
 }

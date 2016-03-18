@@ -1,4 +1,4 @@
-package ru.kpfu.driving_school.util;
+package ru.kpfu.driving_school.service.util;
 
 //import com.google.api.services.translate.Translate;
 
@@ -6,10 +6,8 @@ import com.google.api.translate.Language;
 import com.google.api.translate.Translate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ru.kpfu.driving_school.form.StudentsForm;
 import ru.kpfu.driving_school.model.StudentAccount;
-
-import java.util.List;
+import ru.kpfu.driving_school.service.form.StudentForm;
 
 //import com.gtranslate.Translator;
 
@@ -23,7 +21,7 @@ public class StudentsFormToStudentsTransformer {
     @Autowired
     StudentAccountGenerator generator;
 
-    public static List<StudentAccount> transform(StudentsForm form) {
+    public static StudentAccount transform(StudentForm form) {
 
     }
 

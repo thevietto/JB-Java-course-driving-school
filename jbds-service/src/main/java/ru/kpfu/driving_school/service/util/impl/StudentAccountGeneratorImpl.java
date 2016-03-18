@@ -1,9 +1,9 @@
-package ru.kpfu.driving_school.util.impl;
+package ru.kpfu.driving_school.service.util.impl;
 
 import org.springframework.stereotype.Component;
-import ru.kpfu.driving_school.form.StudentsForm;
+import ru.kpfu.driving_school.service.form.StudentsForm;
 import ru.kpfu.driving_school.model.StudentAccount;
-import ru.kpfu.driving_school.util.StudentAccountGenerator;
+import ru.kpfu.driving_school.service.util.StudentAccountGenerator;
 
 import java.util.List;
 import java.util.Random;

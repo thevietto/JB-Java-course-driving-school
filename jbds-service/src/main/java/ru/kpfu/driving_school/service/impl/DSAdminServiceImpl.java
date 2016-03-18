@@ -6,6 +6,8 @@ import ru.kpfu.driving_school.model.StudentAccount;
 import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.DSAdminService;
+import ru.kpfu.driving_school.service.form.StudentForm;
+import ru.kpfu.driving_school.service.util.StudentsFormToStudentsTransformer;
 
 import java.util.List;
 
@@ -39,5 +41,10 @@ public class DSAdminServiceImpl implements DSAdminService {
     @Override
     public void deleteStudent(StudentAccount student) {
         studentRepository.delete(student);
+    }
+
+    @Override
+    public void saveNewStudent(StudentForm form) {
+        StudentAccount student = StudentsFormToStudentsTransformer.transform(form);
     }
 }

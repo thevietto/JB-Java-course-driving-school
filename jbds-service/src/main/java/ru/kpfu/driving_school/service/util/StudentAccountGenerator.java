@@ -1,10 +1,9 @@
-package ru.kpfu.driving_school.util;
+package ru.kpfu.driving_school.service.util;
 
-import ru.kpfu.driving_school.form.StudentsForm;
+import ru.kpfu.driving_school.service.form.StudentsForm;
 import ru.kpfu.driving_school.model.StudentAccount;
 
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Created by aleksandrpliskin on 18.03.16.

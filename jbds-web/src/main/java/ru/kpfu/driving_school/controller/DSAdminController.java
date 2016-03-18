@@ -2,10 +2,15 @@ package ru.kpfu.driving_school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import ru.kpfu.driving_school.service.form.StudentForm;
 import ru.kpfu.driving_school.service.DSAdminService;
+
+import javax.validation.Valid;
+
 
 /**
  * Created by aleksandrpliskin on 16.03.16.
@@ -27,7 +32,12 @@ public class DSAdminController {
     }
 
     @RequestMapping(value = "/admin/add_students", method = RequestMethod.POST)
-    public String getPageForAdding(Model model) {
-        return "ds-admin-index";
+    public String getPageForAdding(@ModelAttribute("studentform") @Valid StudentForm form, BindingResult result) {
+        if (result.hasErrors()) {
+            return "ds-admin-adding";
+        } else {
+            dsAdminService.saveNewStudent(form);
+            return "ds-admin-index";
+        }
     }
 }
