@@ -8,16 +8,16 @@ import javax.validation.constraints.Size;
  */
 public class StudentForm {
 
-    @Size(min = 1, max = 20, message = "имя неправильно введено")
-    @Pattern(regexp = ".+")
+    @Size(min = 1, max = 30, message = "имя неправильно введено")
+    @Pattern(regexp = "[А-Я].+")
     private String firstname;
 
-    @Size(min = 1, max = 20, message = "фамилия неправильно введено")
-    @Pattern(regexp = ".+")
+    @Size(min = 1, max = 30, message = "фамилия неправильно введено")
+    @Pattern(regexp = "[А-Я].+")
     private String surname;
 
-    @Size(min = 1, max = 20, message = "отчество неправильно введено")
-    @Pattern(regexp = ".+")
+    @Size(min = 1, max = 30, message = "отчество неправильно введено")
+    @Pattern(regexp = "[А-Я].+")
     private String lastname;
 
     public String getFirstname() {

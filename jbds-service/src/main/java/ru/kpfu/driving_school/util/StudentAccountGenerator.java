@@ -1,4 +1,4 @@
-package ru.kpfu.driving_school.util.impl;
+package ru.kpfu.driving_school.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;

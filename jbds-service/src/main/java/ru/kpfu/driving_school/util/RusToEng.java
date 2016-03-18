@@ -1,4 +1,4 @@
-package ru.kpfu.driving_school.util.impl;
+package ru.kpfu.driving_school.util;
 
 /**
  * Created by aleksandrpliskin on 18.03.16.

@@ -9,7 +9,7 @@ import ru.kpfu.driving_school.repository.CredentialsRepository;
 import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.DSAdminService;
-import ru.kpfu.driving_school.util.impl.StudentAccountGenerator;
+import ru.kpfu.driving_school.util.StudentAccountGenerator;
 
 import java.util.List;
 
