@@ -3,18 +3,19 @@ package ru.kpfu.driving_school.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "students")
+@Table(name = "student")
+@SequenceGenerator(sequenceName = "credential_id_seq", name = "credentials_gen")
 public class StudentAccount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "credentials_gen")
     private long id;
 
     @OneToOne
     @JoinColumn(name = "credential_id")
     private Credentials credentials;
 
-    @Column(unique = true)
+    @Column
     private String fio;
 
     public StudentAccount() {

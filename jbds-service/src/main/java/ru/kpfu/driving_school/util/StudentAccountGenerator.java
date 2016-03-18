@@ -67,13 +67,13 @@ public class StudentAccountGenerator {
                 if (!firstCharName) {
                     login += firstname.charAt(0);
                     firstCharName = true;
+                } else if (firstnameIs != firstname.length()) {
+                    login += firstname.charAt(firstnameIs);
+                    firstnameIs++;
                 } else if (!firstCharLastName) {
                     login += lastname.charAt(0);
                     firstCharLastName = true;
-                } else if (firstnameIs != firstname.length() - 1) {
-                    login += firstname.charAt(firstnameIs);
-                    firstnameIs++;
-                } else if (lastnameIs != lastname.length() - 1) {
+                } else if (lastnameIs != lastname.length()) {
                     login += lastname.charAt(lastnameIs);
                     lastnameIs++;
                 } else {
