@@ -1,4 +1,3 @@
-<%@ taglib prefix="sf" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: aleksandrpliskin
@@ -12,15 +11,13 @@
     <title></title>
 </head>
 <body>
+<form action="/admin/add_students" method="post">
+    <p><label for="firstname"></label><input name="firstname"/></p>
+    <p><label for="surname"></label><input name="surname"/></p>
+    <p><label for="lastname"></label><input name="lastname"/></p>
+    <input type="submit" value="go"/>
+</form>
 
-<sf:form action="/admin/add_students" method="post" modelAttribute="userform">
-
-    <sf:label path="firstname">Имя: </sf:label> <sf:input path="firstname"/>
-    <sf:label path="surname">Фамилия: </sf:label> <sf:input path="surname"/>
-    <sf:label path="lastname">rОтчество: </sf:label> <sf:input path="lastname"/>
-
-    <button type="submit">Сохранить</button>
-</sf:form>
 
 </body>
 </html>

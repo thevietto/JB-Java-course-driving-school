@@ -1,4 +1,4 @@
-package ru.kpfu.driving_school.service.util.impl;
+package ru.kpfu.driving_school.util.impl;
 
 public class RusToEng {
 

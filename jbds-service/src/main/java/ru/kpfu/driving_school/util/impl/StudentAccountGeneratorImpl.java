@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.StudentAccount;
 import ru.kpfu.driving_school.model.enums.UserRole;
 import ru.kpfu.driving_school.repository.CredentialsRepository;
-import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.util.StudentAccountGenerator;
 
 import java.util.Random;
@@ -30,8 +30,7 @@ public class StudentAccountGeneratorImpl implements StudentAccountGenerator {
     @Override
     public StudentAccount generateStudent(StudentForm form) {
         String fio = form.getFirstname() + ' ' + form.getSurname() + ' ' + form.getLastname();
-//        String login = loginGen(form.getFirstname(), form.getSurname(), form.getLastname());
-        String login = "student1";
+        String login = loginGen(form.getFirstname(), form.getSurname(), form.getLastname());
         String password = passwordGen();
         Credentials credentials = new Credentials();
         credentials.setLogin(login);
