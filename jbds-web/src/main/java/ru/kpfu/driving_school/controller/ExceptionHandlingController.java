@@ -15,7 +15,6 @@ public class ExceptionHandlingController {
     @ExceptionHandler(LoginAlreadyExistsException.class)
     @ResponseBody
     public ExceptionDto loginAlreadyExists() {
-        ExceptionDto exception = new ExceptionDto();
         return new ExceptionDto(400, "Login already exists");
     }
 }
