@@ -2,7 +2,6 @@ package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.StudentAccount;
 import ru.kpfu.driving_school.repository.CredentialsRepository;
