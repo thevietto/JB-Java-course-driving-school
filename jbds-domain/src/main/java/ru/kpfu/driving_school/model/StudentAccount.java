@@ -15,6 +15,10 @@ public class StudentAccount {
     @JoinColumn(name = "credential_id")
     private Credentials credentials;
 
+    @OneToOne
+    @JoinColumn(name = "student_stream_id")
+    private StudentStream stream;
+
     @Column
     private String fio;
 

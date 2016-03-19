@@ -11,5 +11,4 @@ import ru.kpfu.driving_school.model.StudentAccount;
 public interface StudentRepository extends JpaRepository<StudentAccount, Long> {
 
     StudentAccount findOneByFio(String fio);
-
 }

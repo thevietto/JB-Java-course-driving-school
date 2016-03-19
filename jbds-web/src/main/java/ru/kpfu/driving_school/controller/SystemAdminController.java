@@ -14,4 +14,12 @@ public class SystemAdminController {
     public String getSystemIndex() {
         return "system-admin";
     }
+
+    @RequestMapping(value = {"/change/student/"})
+    public String getSystemChangeStudent() {
+
+        return "system-admin-change-student";
+    }
+
+
 }
