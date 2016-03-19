@@ -2,8 +2,12 @@ package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentForm;
+import ru.kpfu.driving_school.model.Credentials;
+import ru.kpfu.driving_school.model.DSAdminAccount;
 import ru.kpfu.driving_school.model.StudentAccount;
+import ru.kpfu.driving_school.model.enums.UserRole;
 import ru.kpfu.driving_school.repository.CredentialsRepository;
 import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
@@ -30,6 +34,9 @@ public class DSAdminServiceImpl implements DSAdminService {
     @Autowired
     private Function<StudentForm, StudentAccount> generator;
 
+    @Autowired
+    private Function<DSAccountForm, DSAdminAccount> transformer;
+
     @Override
     public void addStudents(List<StudentAccount> students) {
         studentRepository.save(students);
@@ -54,5 +61,11 @@ public class DSAdminServiceImpl implements DSAdminService {
     public void saveNewStudent(StudentForm form) {
         StudentAccount student = generator.apply(form);
         studentRepository.save(student);
+    }
+
+    @Override
+    public void createDSAccount(DSAccountForm dsAccountForm) {
+        DSAdminAccount dsAdmin = transformer.apply(dsAccountForm);
+        dsAdminRepository.save(dsAdmin);
     }
 }
