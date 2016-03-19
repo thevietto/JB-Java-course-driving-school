@@ -13,23 +13,24 @@ import ru.kpfu.driving_school.service.DSAdminService;
  * Created by aleksandrpliskin on 16.03.16.
  */
 @Controller
+@RequestMapping("/admin")
 public class DSAdminController {
 
     @Autowired
     DSAdminService dsAdminService;
 
-    @RequestMapping("/admin")
+    @RequestMapping(value = "")
     public String getIndex() {
         return "ds-admin-index";
     }
 
-    @RequestMapping(value = "/admin/add_students", method = RequestMethod.GET)
-    public String getPageForAdding() {
+    @RequestMapping(value = "/add_students", method = RequestMethod.GET)
+    public String getNewStudentPage() {
         return "ds-admin-adding";
     }
 
-    @RequestMapping(value = "/admin/add_students", method = RequestMethod.POST)
-    public String getPageForAdding(@RequestParam String firstname, @RequestParam String surname, @RequestParam String lastname) {
+    @RequestMapping(value = "/add_students", method = RequestMethod.POST)
+    public String getNewStudentPage(@RequestParam String firstname, @RequestParam String surname, @RequestParam String lastname) {
         StudentForm form = new StudentForm();
         form.setFirstname(firstname);
         form.setSurname(surname);
