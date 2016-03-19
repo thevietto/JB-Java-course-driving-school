@@ -3,6 +3,7 @@ package ru.kpfu.driving_school.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+import ru.kpfu.driving_school.exception.LoginAlreadyExistsException;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.DSAdminAccount;
@@ -24,7 +25,7 @@ public class DSAdminAccountTransformer implements Function<DSAccountForm, DSAdmi
 
     public DSAdminAccount transform(DSAccountForm dsAccountForm) {
         if (credentialsRepository.findOneByLogin(dsAccountForm.getLogin()) != null) {
-            throw new RuntimeException();//TODO
+            throw new LoginAlreadyExistsException();
         }
         Credentials credentials = new Credentials();
         credentials.setLogin(dsAccountForm.getLogin());
