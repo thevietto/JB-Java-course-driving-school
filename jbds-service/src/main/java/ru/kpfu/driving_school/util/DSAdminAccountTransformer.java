@@ -23,7 +23,8 @@ public class DSAdminAccountTransformer implements Function<DSAccountForm, DSAdmi
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public DSAdminAccount transform(DSAccountForm dsAccountForm) {
+    @Override
+    public DSAdminAccount apply(DSAccountForm dsAccountForm) {
         if (credentialsRepository.findOneByLogin(dsAccountForm.getLogin()) != null) {
             throw new LoginAlreadyExistsException();
         }
@@ -35,10 +36,5 @@ public class DSAdminAccountTransformer implements Function<DSAccountForm, DSAdmi
         DSAdminAccount dsAdminAccount = new DSAdminAccount();
         dsAdminAccount.setCredentials(credentials);
         return dsAdminAccount;
-    }
-
-    @Override
-    public DSAdminAccount apply(DSAccountForm dsAccountForm) {
-        return transform(dsAccountForm);
     }
 }
