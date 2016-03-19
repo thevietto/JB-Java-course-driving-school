@@ -1,6 +1,8 @@
 package ru.kpfu.driving_school.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Component;
 import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.StudentAccount;
@@ -13,8 +15,10 @@ import java.util.function.Function;
 /**
  * Created by aleksandrpliskin on 18.03.16.
  */
-public class StudentAccountGenerator {
+@Component
+public class StudentAccountGenerator implements Function<StudentForm, StudentAccount> {
 
+    @Autowired
     private CredentialsRepository credentialsRepository;
 
     private final String[] _alpha = {"a", "b", "v", "g", "d", "e", "yo", "g", "z", "i", "y", "i",
@@ -23,9 +27,6 @@ public class StudentAccountGenerator {
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
-    public StudentAccountGenerator(CredentialsRepository credentialsRepository) {
-        this.credentialsRepository = credentialsRepository;
-    }
 
     public StudentAccount generateStudent(StudentForm form) {
         String fio = form.getFirstname() + ' ' + form.getSurname() + ' ' + form.getLastname();
@@ -102,4 +103,9 @@ public class StudentAccountGenerator {
         }
         return result.substring(0, 1).toUpperCase() + result.substring(1);
     };
+
+    @Override
+    public StudentAccount apply(StudentForm studentForm) {
+        return generateStudent(studentForm);
+    }
 }
