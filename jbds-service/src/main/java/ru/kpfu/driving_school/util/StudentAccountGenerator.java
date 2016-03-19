@@ -1,7 +1,6 @@
 package ru.kpfu.driving_school.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.StudentAccount;
@@ -9,6 +8,7 @@ import ru.kpfu.driving_school.model.enums.UserRole;
 import ru.kpfu.driving_school.repository.CredentialsRepository;
 
 import java.util.Random;
+import java.util.function.Function;
 
 /**
  * Created by aleksandrpliskin on 18.03.16.
@@ -17,17 +17,20 @@ public class StudentAccountGenerator {
 
     private CredentialsRepository credentialsRepository;
 
+    private final String[] _alpha = {"a", "b", "v", "g", "d", "e", "yo", "g", "z", "i", "y", "i",
+            "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
+            "f", "h", "tz", "ch", "sh", "sh", "'", "e", "yu", "ya"};
+
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     public StudentAccountGenerator(CredentialsRepository credentialsRepository) {
         this.credentialsRepository = credentialsRepository;
     }
 
-    @Transactional
     public StudentAccount generateStudent(StudentForm form) {
         String fio = form.getFirstname() + ' ' + form.getSurname() + ' ' + form.getLastname();
-        String login = loginGen(form.getFirstname(), form.getSurname(), form.getLastname());
-        String password = passwordGen();
+        String login = generateLogin(form.getFirstname(), form.getSurname(), form.getLastname());
+        String password = generatePassword();
         Credentials credentials = new Credentials();
         credentials.setLogin(login);
         credentials.setPassword(encoder.encode(password));
@@ -39,7 +42,7 @@ public class StudentAccountGenerator {
         return student;
     }
 
-    private String passwordGen() {
+    private String generatePassword() {
         String s = "";
         Random generator = new Random();
         for (int i = 0; i < 10; i++) {
@@ -49,10 +52,10 @@ public class StudentAccountGenerator {
         return s;
     }
 
-    private String loginGen(String firstname, String surname, String lastname) {
-        firstname = translate(firstname);
-        surname = translate(surname);
-        lastname = translate(lastname);
+    private String generateLogin(String firstname, String surname, String lastname) {
+        firstname = cyrillicToLatin.apply(firstname);
+        surname = cyrillicToLatin.apply(surname);
+        lastname = cyrillicToLatin.apply(lastname);
         String login = "";
         login += surname;
         boolean unique = false;
@@ -84,14 +87,19 @@ public class StudentAccountGenerator {
         return login;
     }
 
-    private String translate(String fname) {
-        RusToEng translator = new RusToEng();
-        String russian = null;
-        try {
-            russian = translator.translate(fname);
-        } catch (Exception e) {
-            e.printStackTrace();
+    private Function<String, String> cyrillicToLatin = s -> {
+        s = s.toLowerCase();
+        char[] chs = s.toCharArray();
+        StringBuilder result = new StringBuilder("");
+        for (char ch : chs) {
+            String alpha = "абвгдеёжзиыйклмнопрстуфхцчшщьэюя";
+            int k = alpha.indexOf(ch);
+            if (k != -1)
+                result.append(_alpha[k]);
+            else {
+                result.append(ch);
+            }
         }
-        return russian;
-    }
+        return s.substring(0, 1).toUpperCase() + s.substring(1);
+    };
 }

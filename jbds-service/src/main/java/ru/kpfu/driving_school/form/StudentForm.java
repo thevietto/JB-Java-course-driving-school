@@ -9,15 +9,15 @@ import javax.validation.constraints.Size;
 public class StudentForm {
 
     @Size(min = 1, max = 30, message = "имя неправильно введено")
-    @Pattern(regexp = "[А-Я].+")
+    @Pattern(regexp = ".+")
     private String firstname;
 
-    @Size(min = 1, max = 30, message = "фамилия неправильно введено")
-    @Pattern(regexp = "[А-Я].+")
+    @Size(min = 1, max = 30, message = "фамилия неправильно введена")
+    @Pattern(regexp = ".+")
     private String surname;
 
     @Size(min = 1, max = 30, message = "отчество неправильно введено")
-    @Pattern(regexp = "[А-Я].+")
+    @Pattern(regexp = ".+")
     private String lastname;
 
     public String getFirstname() {
