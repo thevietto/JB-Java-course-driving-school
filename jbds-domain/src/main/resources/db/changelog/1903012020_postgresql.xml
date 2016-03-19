@@ -1,0 +1,15 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1903012020_1" author="GoodBoy">
+        <dropUniqueConstraint
+                constraintName="student_fio_key"
+                schemaName="public"
+                tableName="student"
+                uniqueColumns="fio"/>
+    </changeSet>
+
+</databaseChangeLog>
