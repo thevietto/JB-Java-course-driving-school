@@ -1,19 +1,26 @@
 package ru.kpfu.driving_school.model;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
+@Table(name = "student")
+@SequenceGenerator(sequenceName = "credential_id_seq", name = "credentials_gen")
 public class StudentAccount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "credentials_gen")
     private long id;
 
     @OneToOne
     @JoinColumn(name = "credential_id")
     private Credentials credentials;
 
+    @OneToOne
+    @JoinColumn(name = "student_stream_id")
+    private StudentStream stream;
+
+    @Column
+    private String fio;
 
     public StudentAccount() {
     }
@@ -32,5 +39,13 @@ public class StudentAccount {
 
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
+    }
+
+    public String getFio() {
+        return fio;
+    }
+
+    public void setFio(String fio) {
+        this.fio = fio;
     }
 }

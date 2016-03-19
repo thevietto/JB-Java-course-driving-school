@@ -1,0 +1,15 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1803194720_1" author="GoodBoy">
+        <addAutoIncrement
+                columnName="id"
+                incrementBy="1"
+                startWith="15"
+                tableName="credential"/>
+    </changeSet>
+
+</databaseChangeLog>

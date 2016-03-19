@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 public class AuthController {
 
     @RequestMapping(value = "/login")
-    public String getLoginPage(@RequestParam(value = "error", required = false) Boolean error, Model model) {
+    public String getLoginPage(@RequestParam(value = "error", required = false) Boolean error,
+                               Model model) {
         if (Boolean.TRUE.equals(error)) {
             model.addAttribute("error", error);
         }
@@ -25,10 +26,12 @@ public class AuthController {
     public String defaultAfterLogin(HttpServletRequest request) {
         if (request.isUserInRole("ROLE_ADMIN")) {
             return "redirect:/admin";
-        }
-        if (request.isUserInRole("ROLE_STUDENT")) {
+        } else if (request.isUserInRole("ROLE_STUDENT")) {
             return "redirect:/student";
+        } else if (request.isUserInRole("ROLE_SYSTEM_ADMIN")) {
+            return "redirect:/system";
+        } else {
+            return "login";
         }
-        return "redirect:/admin-system";
     }
 }
