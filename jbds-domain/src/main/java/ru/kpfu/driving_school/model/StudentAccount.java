@@ -16,7 +16,7 @@ public class StudentAccount {
     private Credentials credentials;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "group_id")
     private StudentGroup group;
 
     @Column
