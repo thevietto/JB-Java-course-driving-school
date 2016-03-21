@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 
 @Entity
+@Table(name = "teacher")
 public class TeacherAccount {
 
     @Id
@@ -13,6 +14,8 @@ public class TeacherAccount {
     @OneToOne
     @JoinColumn(name = "credential_id")
     private Credentials credentials;
+
+    private String fio;
 
     public TeacherAccount() {
     }
