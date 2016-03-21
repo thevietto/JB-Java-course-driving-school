@@ -7,10 +7,10 @@ package ru.kpfu.driving_school.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "student_stream")
-public class StudentStream {
+@Table(name = "student_group")
+public class StudentGroup {
 
-    StudentStream() {
+    StudentGroup() {
 
     }
 
