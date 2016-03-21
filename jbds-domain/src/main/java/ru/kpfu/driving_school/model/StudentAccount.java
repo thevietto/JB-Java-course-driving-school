@@ -16,8 +16,8 @@ public class StudentAccount {
     private Credentials credentials;
 
     @OneToOne
-    @JoinColumn(name = "group_id")
-    private StudentGroup stream;
+    @JoinColumn(name = "id")
+    private StudentGroup group;
 
     @Column
     private String fio;
