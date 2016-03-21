@@ -2,6 +2,7 @@ package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.Credentials;
@@ -13,6 +14,9 @@ import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.DSAdminService;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 import java.util.function.Function;
 
@@ -36,6 +40,9 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Autowired
     private Function<DSAccountForm, DSAdminAccount> transformer;
+
+    @Autowired
+    private Function<File, List<StudentForm>> excelParser;
 
     @Override
     public void addStudents(List<StudentAccount> students) {
@@ -67,5 +74,39 @@ public class DSAdminServiceImpl implements DSAdminService {
     public void createDSAccount(DSAccountForm dsAccountForm) {
         DSAdminAccount dsAdmin = transformer.apply(dsAccountForm);
         dsAdminRepository.save(dsAdmin);
+    }
+
+    @Override
+    public void createGroupWithExcel(MultipartFile file){
+        String name = null;
+
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+
+                name = file.getOriginalFilename();
+
+                File uploadedFile = new File(name);
+
+                String dir = uploadedFile.getAbsolutePath();
+
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(uploadedFile));
+                stream.write(bytes);
+                stream.flush();
+                stream.close();
+
+                List<StudentForm> list = excelParser.apply(uploadedFile);
+
+                list.forEach(this::saveNewStudent);
+
+
+                if (uploadedFile.exists()){
+                    uploadedFile.delete();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
