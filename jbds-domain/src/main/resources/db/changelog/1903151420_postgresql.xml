@@ -1,0 +1,55 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1903151420_1" author="GoodBoy">
+        <dropForeignKeyConstraint
+                baseTableName="ds_admin"
+                constraintName="fk_credential"/>
+    </changeSet>
+
+    <changeSet id="1903151420_2" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="credential_id"
+                                 baseTableName="ds_admin"
+                                 constraintName="ds_admin_credential_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credential"/>
+    </changeSet>
+
+    <changeSet id="1903151420_3" author="GoodBoy">
+        <dropForeignKeyConstraint
+                baseTableName="system_admin"
+                constraintName="fk_credential"/>
+    </changeSet>
+
+    <changeSet id="1903151420_4" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="credential_id"
+                                 baseTableName="system_admin"
+                                 constraintName="system_admin_credential_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credential"/>
+    </changeSet>
+
+    <changeSet id="1903151420_5" author="GoodBoy">
+        <dropForeignKeyConstraint
+                baseTableName="teacheraccount"
+                constraintName="fk_577lumha7ramhgag38a22obau"/>
+    </changeSet>
+
+    <changeSet id="1903151420_6" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="credential_id"
+                                 baseTableName="teacheraccount"
+                                 constraintName="teacher_credential_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="credential"/>
+    </changeSet>
+
+    <changeSet id="1903151420_7" author="GoodBoy">
+        <renameTable
+                oldTableName="teacheraccount"
+                newTableName="teacher"/>
+    </changeSet>
+
+</databaseChangeLog>

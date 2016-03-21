@@ -2,16 +2,15 @@ package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.StudentAccount;
 import ru.kpfu.driving_school.repository.CredentialsRepository;
 import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.DSAdminService;
-import ru.kpfu.driving_school.util.StudentAccountGenerator;
 
 import java.util.List;
+import java.util.function.Function;
 
 /**
  * Created by aleksandrpliskin on 18.03.16.
@@ -27,6 +26,9 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Autowired
     private CredentialsRepository credentialsRepository;
+
+    @Autowired
+    private Function<StudentForm, StudentAccount> generator;
 
     @Override
     public void addStudents(List<StudentAccount> students) {
@@ -49,9 +51,8 @@ public class DSAdminServiceImpl implements DSAdminService {
     }
 
     @Override
-    @Transactional
     public void saveNewStudent(StudentForm form) {
-        StudentAccount student = new StudentAccountGenerator(credentialsRepository).generateStudent(form);
+        StudentAccount student = generator.apply(form);
         studentRepository.save(student);
     }
 }
