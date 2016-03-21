@@ -30,13 +30,13 @@ public class SystemAdminController {
     @RequestMapping(value = "/removeSubscription", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void removeSubscription(@RequestParam Long id) {
-        System.out.println(id);
+        System.out.println(id);//TODO
     }
 
     @RequestMapping(value = "/addSubscription", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void addSubscription(@RequestParam Long id) {
-        System.out.println(id);
+        System.out.println(id);//TODO
     }
 
 

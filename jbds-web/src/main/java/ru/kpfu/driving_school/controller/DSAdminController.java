@@ -37,6 +37,5 @@ public class DSAdminController {
         form.setLastname(lastname);
         dsAdminService.saveNewStudent(form);
         return "ds-admin-index";
-
     }
 }
