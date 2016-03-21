@@ -64,7 +64,8 @@ public class DSAdminServiceImpl implements DSAdminService {
     @Override
     public void saveNewStudent(StudentForm form, Credentials credentials) {
         StudentAccount student = generator.apply(form);
-        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentialId(credentials.getId()).getDrivingSchool();
+        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(credentials).getDrivingSchool();//TODO
+//        DrivingSchool drivingSchool = dsAdminRepository.findOneById(1L).getDrivingSchool();
         student.setDrivingSchool(drivingSchool);
         studentRepository.save(student);
     }
