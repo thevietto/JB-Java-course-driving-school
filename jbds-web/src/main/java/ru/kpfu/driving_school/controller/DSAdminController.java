@@ -1,11 +1,15 @@
 package ru.kpfu.driving_school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.kpfu.driving_school.form.StudentForm;
+import ru.kpfu.driving_school.model.Credentials;
+import ru.kpfu.driving_school.model.DSAdminAccount;
+import ru.kpfu.driving_school.model.DrivingSchool;
 import ru.kpfu.driving_school.service.DSAdminService;
 
 
@@ -35,7 +39,8 @@ public class DSAdminController {
         form.setFirstname(firstname);
         form.setSurname(surname);
         form.setLastname(lastname);
-        dsAdminService.saveNewStudent(form);
+        Credentials credentials = ((Credentials) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        dsAdminService.saveNewStudent(form, credentials);
         return "ds-admin-index";
 
     }

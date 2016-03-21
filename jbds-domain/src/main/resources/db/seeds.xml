@@ -12,6 +12,12 @@
         </loadUpdateData>
     </changeSet>
 
+    <changeSet id="bitches_5" author="GoodBoy">
+        <loadUpdateData tableName="driving_school" primaryKey="id" file="db/seeds/driving_school.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
     <changeSet id="bitches_2" author="GoodBoy">
         <loadUpdateData tableName="ds_admin" primaryKey="id" file="db/seeds/ds-admin.csv">
             <column name="id" type="numeric"/>

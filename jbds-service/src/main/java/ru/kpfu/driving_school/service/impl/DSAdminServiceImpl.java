@@ -6,10 +6,11 @@ import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.DSAdminAccount;
+import ru.kpfu.driving_school.model.DrivingSchool;
 import ru.kpfu.driving_school.model.StudentAccount;
-import ru.kpfu.driving_school.model.enums.UserRole;
 import ru.kpfu.driving_school.repository.CredentialsRepository;
 import ru.kpfu.driving_school.repository.DSAdminRepository;
+import ru.kpfu.driving_school.repository.DrivingSchoolRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.DSAdminService;
 
@@ -30,6 +31,9 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Autowired
     private CredentialsRepository credentialsRepository;
+
+    @Autowired
+    private DrivingSchoolRepository drivingSchoolRepository;
 
     @Autowired
     private Function<StudentForm, StudentAccount> generator;
@@ -58,14 +62,18 @@ public class DSAdminServiceImpl implements DSAdminService {
     }
 
     @Override
-    public void saveNewStudent(StudentForm form) {
+    public void saveNewStudent(StudentForm form, Credentials credentials) {
         StudentAccount student = generator.apply(form);
+        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentialId(credentials.getId()).getDrivingSchool();
+        student.setDrivingSchool(drivingSchool);
         studentRepository.save(student);
     }
 
     @Override
-    public void createDSAccount(DSAccountForm dsAccountForm) {
+    public void createDSAccount(DSAccountForm dsAccountForm, Credentials credentials, Long id) {
         DSAdminAccount dsAdmin = transformer.apply(dsAccountForm);
+        DrivingSchool drivingSchool = drivingSchoolRepository.findOne(id);
+        dsAdmin.setDrivingSchool(drivingSchool);
         dsAdminRepository.save(dsAdmin);
     }
 }

@@ -1,0 +1,67 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="2103192820_1" author="GoodBoy">
+        <createTable tableName="driving_school">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="tel" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="email" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2103192820_2" author="GoodBoy">
+        <addColumn tableName="ds_admin">
+            <column name="driving_school_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="2103192820_3" author="GoodBoy">
+        <addColumn tableName="student">
+            <column name="driving_school_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="2103192820_4" author="GoodBoy">
+        <addColumn tableName="teacher">
+            <column name="driving_school_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="2103192820_5" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="driving_school_id"
+                                 baseTableName="ds_admin"
+                                 constraintName="ds_admin_driving_school_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="driving_school"/>
+    </changeSet>
+
+    <changeSet id="2103192820_6" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="driving_school_id"
+                                 baseTableName="student"
+                                 constraintName="student_driving_school_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="driving_school"/>
+    </changeSet>
+
+    <changeSet id="2103192820_7" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="driving_school_id"
+                                 baseTableName="teacher"
+                                 constraintName="teacher_driving_school_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="driving_school"/>
+    </changeSet>
+
+</databaseChangeLog>

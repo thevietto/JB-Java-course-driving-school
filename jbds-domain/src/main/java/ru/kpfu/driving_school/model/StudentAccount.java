@@ -18,6 +18,10 @@ public class StudentAccount {
     @Column
     private String fio;
 
+    @ManyToOne
+    @JoinColumn(name = "driving_school_id")
+    private DrivingSchool drivingSchool;
+
     public StudentAccount() {
     }
 
@@ -43,5 +47,13 @@ public class StudentAccount {
 
     public void setFio(String fio) {
         this.fio = fio;
+    }
+
+    public DrivingSchool getDrivingSchool() {
+        return drivingSchool;
+    }
+
+    public void setDrivingSchool(DrivingSchool drivingSchool) {
+        this.drivingSchool = drivingSchool;
     }
 }
