@@ -7,7 +7,7 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="bitches_0" author="mikl">
-        <loadUpdateData tableName="student_stream" primaryKey="id" file="db/seeds/student-stream.csv">
+        <loadUpdateData tableName="student_group" primaryKey="id" file="db/seeds/student-group.csv">
             <column name="id" type="numeric"/>
         </loadUpdateData>
     </changeSet>
