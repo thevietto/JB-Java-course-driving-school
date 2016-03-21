@@ -21,10 +21,23 @@ public class SystemAdminController {
         return "system-admin";
     }
 
-    @RequestMapping(value = "/create-account-ds", method = RequestMethod.POST, consumes = "application/json;utf8")
+    @RequestMapping(value = "/create-account-ds", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void createAccountDS(@RequestBody DSAccountForm dsAccountForm) {
+    public void createAccountDS(@ModelAttribute DSAccountForm dsAccountForm) {
         dsAdminService.createDSAccount(dsAccountForm);
     }
+
+    @RequestMapping(value = "/removeSubscription", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void removeSubscription(@RequestParam Long id) {
+        System.out.println(id);
+    }
+
+    @RequestMapping(value = "/addSubscription", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void addSubscription(@RequestParam Long id) {
+        System.out.println(id);
+    }
+
 
 }
