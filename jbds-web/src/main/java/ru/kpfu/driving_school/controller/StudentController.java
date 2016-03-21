@@ -14,5 +14,4 @@ public class StudentController {
     public String getStudentPage() {
         return "student";
     }
-
 }
