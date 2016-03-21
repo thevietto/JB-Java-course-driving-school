@@ -21,6 +21,14 @@ public class SystemAdminController {
         return "system-admin";
     }
 
+    @RequestMapping(value = {"/change/student/"})
+    public String getSystemChangeStudent() {
+
+        return "system-admin-change-student";
+    }
+
+
+
     @RequestMapping(value = "/create-account-ds", method = RequestMethod.POST, consumes = "application/json;utf8")
     @ResponseStatus(HttpStatus.OK)
     public void createAccountDS(@RequestBody DSAccountForm dsAccountForm) {
