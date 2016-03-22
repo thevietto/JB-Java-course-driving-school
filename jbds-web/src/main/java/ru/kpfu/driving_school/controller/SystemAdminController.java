@@ -39,9 +39,9 @@ public class SystemAdminController {
         systemAdminService.removeSubscription(id);
     }
 
-    @RequestMapping(value = "/subscription/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/subscription", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void addSubscription(@PathVariable Long id) {
+    public void addSubscription(@RequestParam Long id) {
         systemAdminService.addSubscription(id);
     }
 
