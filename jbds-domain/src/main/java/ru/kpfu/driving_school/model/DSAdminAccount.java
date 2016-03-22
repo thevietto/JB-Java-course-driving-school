@@ -15,7 +15,8 @@ public class DSAdminAccount {
     @JoinColumn(name = "credential_id")
     private Credentials credentials;
 
-    private Boolean subscription;
+    @Column(name = "is_active")
+    private Boolean isActive;
 
     @ManyToOne
     @JoinColumn(name = "driving_school_id")
@@ -40,13 +41,14 @@ public class DSAdminAccount {
         this.credentials = credentials;
     }
 
-    public Boolean getSubscription() {
-        return subscription;
+    public Boolean getActive() {
+        return isActive;
     }
 
-    public void setSubscription(Boolean subscription) {
-        this.subscription = subscription;
+    public void setActive(Boolean active) {
+        isActive = active;
     }
+
     public DrivingSchool getDrivingSchool() {
         return drivingSchool;
     }

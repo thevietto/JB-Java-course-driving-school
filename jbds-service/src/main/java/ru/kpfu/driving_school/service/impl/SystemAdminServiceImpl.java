@@ -20,14 +20,14 @@ public class SystemAdminServiceImpl implements SystemAdminService {
     @Transactional
     public void addSubscription(Long id) {
         DSAdminAccount dsAdminAccount = dsAdminRepository.findOne(id);
-        dsAdminAccount.setSubscription(Boolean.TRUE);
+        dsAdminAccount.setActive(Boolean.TRUE);
         dsAdminRepository.save(dsAdminAccount);
     }
 
     @Override
     public void removeSubscription(Long id) {
         DSAdminAccount dsAdminAccount = dsAdminRepository.findOne(id);
-        dsAdminAccount.setSubscription(Boolean.FALSE);
+        dsAdminAccount.setActive(Boolean.FALSE);
         dsAdminRepository.save(dsAdminAccount);
     }
 }
