@@ -27,7 +27,7 @@ public class SystemAdminController {
         return "system-admin";
     }
 
-    @RequestMapping(value = "/createAccountDs", method = RequestMethod.POST)
+    @RequestMapping(value = "/accounts/driving_school", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void createAccountDS(@ModelAttribute DSAccountForm dsAccountForm) {
         dsAdminService.createDSAccount(dsAccountForm);
