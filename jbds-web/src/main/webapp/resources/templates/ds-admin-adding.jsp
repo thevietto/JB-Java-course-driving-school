@@ -17,6 +17,9 @@
     <p><label>Отчество</label><input name="lastname"/></p>
     <input type="submit" value="go"/>
 </form>
+<br/>
+
+<a href="/admin/upload_file">Добавить через excel</a>
 
 
 <h1>порядок важен!!!</h1>

@@ -12,7 +12,9 @@ import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.repository.DrivingSchoolRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.DSAdminService;
+import ru.kpfu.driving_school.util.ExcelStudentParser;
 import ru.kpfu.driving_school.util.SecurityUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.function.Function;
@@ -37,6 +39,9 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Autowired
     private Function<DSAccountForm, DSAdminAccount> transformer;
+
+    @Autowired
+    private ExcelStudentParser excelStudentParser;
 
     @Override
     public void addStudents(List<StudentAccount> students) {
@@ -72,5 +77,18 @@ public class DSAdminServiceImpl implements DSAdminService {
         DrivingSchool drivingSchool = drivingSchoolRepository.findOne(id);
         dsAdmin.setDrivingSchool(drivingSchool);
         dsAdminRepository.save(dsAdmin);
+    }
+
+    @Override
+    public void loadStudentGroupFromExcel(MultipartFile file) {
+
+        if (!file.isEmpty()) {
+            try {
+                List<StudentForm> list = excelStudentParser.read(file);
+                list.forEach(this::saveNewStudent);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

@@ -3,9 +3,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <import resource="classpath*:configs/service-config.xml"/>
-    <import resource="classpath*:configs/domain-config.xml"/>
-    <import resource="security-config.xml"/>
-    <import resource="application-config.xml"/>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="65536"/>
+    </bean>
 
 </beans>
