@@ -16,7 +16,8 @@ public class DrivingSchool {
 
     private String name;
 
-    private String tel;
+    @Column(name = "phone_number")
+    private String phoneNumber;
 
     private String email;
 
@@ -47,11 +48,11 @@ public class DrivingSchool {
         this.name = name;
     }
 
-    public String getTel() {
-        return tel;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setTel(String tel) {
-        this.tel = tel;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

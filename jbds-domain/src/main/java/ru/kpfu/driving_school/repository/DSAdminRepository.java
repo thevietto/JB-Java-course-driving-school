@@ -13,7 +13,4 @@ public interface DSAdminRepository extends JpaRepository<DSAdminAccount, Long> {
 
     DSAdminAccount findOneByCredentials(Credentials credentials);
 
-    DSAdminAccount findOneById(Long id);
-
-
 }

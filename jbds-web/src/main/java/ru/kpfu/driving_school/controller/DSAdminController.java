@@ -39,8 +39,7 @@ public class DSAdminController {
         form.setFirstname(firstname);
         form.setSurname(surname);
         form.setLastname(lastname);
-        Credentials credentials = ((Credentials) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        dsAdminService.saveNewStudent(form, credentials);
+        dsAdminService.saveNewStudent(form);
         return "ds-admin-index";
 
     }
