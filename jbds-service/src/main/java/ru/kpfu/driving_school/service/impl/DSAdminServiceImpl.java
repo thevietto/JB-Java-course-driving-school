@@ -27,13 +27,7 @@ public class DSAdminServiceImpl implements DSAdminService {
     private StudentRepository studentRepository;
 
     @Autowired
-    private CredentialsRepository credentialsRepository;
-
-    @Autowired
     private DrivingSchoolRepository drivingSchoolRepository;
-
-    @Autowired
-    private SystemAdminRepository systemAdminRepository;
 
     @Autowired
     private Function<StudentForm, StudentAccount> generator;
@@ -64,9 +58,7 @@ public class DSAdminServiceImpl implements DSAdminService {
     @Override
     public void saveNewStudent(StudentForm form, Credentials credentials) {
         StudentAccount student = generator.apply(form);
-        StudentAccount studentAccount = studentRepository.findOneByFio("Ivan Ivanov Ivanovich");
-        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(credentials).getDrivingSchool();//TODO
-//        DrivingSchool drivingSchool = dsAdminRepository.findOneById(1L).getDrivingSchool();
+        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(credentials).getDrivingSchool();
         student.setDrivingSchool(drivingSchool);
         studentRepository.save(student);
     }
