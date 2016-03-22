@@ -8,10 +8,7 @@ import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.DSAdminAccount;
 import ru.kpfu.driving_school.model.DrivingSchool;
 import ru.kpfu.driving_school.model.StudentAccount;
-import ru.kpfu.driving_school.repository.CredentialsRepository;
-import ru.kpfu.driving_school.repository.DSAdminRepository;
-import ru.kpfu.driving_school.repository.DrivingSchoolRepository;
-import ru.kpfu.driving_school.repository.StudentRepository;
+import ru.kpfu.driving_school.repository.*;
 import ru.kpfu.driving_school.service.DSAdminService;
 
 import java.util.List;
@@ -34,6 +31,9 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Autowired
     private DrivingSchoolRepository drivingSchoolRepository;
+
+    @Autowired
+    private SystemAdminRepository systemAdminRepository;
 
     @Autowired
     private Function<StudentForm, StudentAccount> generator;
@@ -64,6 +64,7 @@ public class DSAdminServiceImpl implements DSAdminService {
     @Override
     public void saveNewStudent(StudentForm form, Credentials credentials) {
         StudentAccount student = generator.apply(form);
+        StudentAccount studentAccount = studentRepository.findOneByFio("Ivan Ivanov Ivanovich");
         DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(credentials).getDrivingSchool();//TODO
 //        DrivingSchool drivingSchool = dsAdminRepository.findOneById(1L).getDrivingSchool();
         student.setDrivingSchool(drivingSchool);

@@ -7,6 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @SequenceGenerator(sequenceName = "driving_school_id_seq", name = "driving_school_gen")
+@Table(name = "driving_school")
 public class DrivingSchool {
 
     @Id
