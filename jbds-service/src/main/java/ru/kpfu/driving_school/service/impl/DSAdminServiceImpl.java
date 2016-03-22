@@ -12,10 +12,11 @@ import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.repository.DrivingSchoolRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.DSAdminService;
-import ru.kpfu.driving_school.util.SecurityUtils;
 
 import java.util.List;
 import java.util.function.Function;
+
+import static ru.kpfu.driving_school.util.SecurityUtils.getCurrentUser;
 
 /**
  * Created by aleksandrpliskin on 18.03.16.
@@ -31,9 +32,6 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Autowired
     private DrivingSchoolRepository drivingSchoolRepository;
-
-    @Autowired
-    private SecurityUtils securityUtils;
 
     @Autowired
     private Function<StudentForm, StudentAccount> generator;
@@ -64,7 +62,7 @@ public class DSAdminServiceImpl implements DSAdminService {
     @Override
     public void saveNewStudent(StudentForm form) {
         StudentAccount student = generator.apply(form);
-        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(securityUtils.getCurrentUser()).getDrivingSchool();
+        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(getCurrentUser()).getDrivingSchool();
         student.setDrivingSchool(drivingSchool);
         studentRepository.save(student);
     }

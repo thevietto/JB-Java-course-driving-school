@@ -1,12 +1,15 @@
 package ru.kpfu.driving_school.util;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import ru.kpfu.driving_school.model.Credentials;
 
 /**
  * Created by aleksandrpliskin on 22.03.16.
  */
-public interface SecurityUtils {
+public class SecurityUtils {
 
-    Credentials getCurrentUser();
+    public static Credentials getCurrentUser() {
+        return ((Credentials) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+    }
 
 }
