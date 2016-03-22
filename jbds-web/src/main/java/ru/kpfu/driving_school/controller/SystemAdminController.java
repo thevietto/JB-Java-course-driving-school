@@ -2,8 +2,10 @@ package ru.kpfu.driving_school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.driving_school.form.DSAccountForm;
+import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.service.DSAdminService;
 
 /**
@@ -23,8 +25,9 @@ public class SystemAdminController {
 
     @RequestMapping(value = "/create-account-ds", method = RequestMethod.POST, consumes = "application/json;utf8")
     @ResponseStatus(HttpStatus.OK)
-    public void createAccountDS(@RequestBody DSAccountForm dsAccountForm) {
-        dsAdminService.createDSAccount(dsAccountForm);
+    public void createAccountDS(@RequestBody DSAccountForm dsAccountForm, @RequestParam Long drivingSchoolId) {
+        Credentials credentials = ((Credentials) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        dsAdminService.createDSAccount(dsAccountForm, credentials, drivingSchoolId);
     }
 
 }

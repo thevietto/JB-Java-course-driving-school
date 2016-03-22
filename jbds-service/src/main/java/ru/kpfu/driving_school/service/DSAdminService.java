@@ -2,6 +2,7 @@ package ru.kpfu.driving_school.service;
 
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentForm;
+import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.StudentAccount;
 
 import java.util.List;
@@ -21,5 +22,5 @@ public interface DSAdminService {
 
     void saveNewStudent(StudentForm form);
 
-    void createDSAccount(DSAccountForm dsAccountForm);
+    void createDSAccount(DSAccountForm dsAccountForm, Credentials credentials, Long id);
 }
