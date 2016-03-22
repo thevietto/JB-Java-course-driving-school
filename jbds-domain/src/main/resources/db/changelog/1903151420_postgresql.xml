@@ -32,19 +32,26 @@
                                  referencedTableName="credential"/>
     </changeSet>
 
+    <changeSet id="1903151420_5" author="GoodBoy">
+        <createTable tableName="teacher">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="credential_id" type="bigint">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="fio" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
 
     <changeSet id="1903151420_6" author="GoodBoy">
         <addForeignKeyConstraint baseColumnNames="credential_id"
-                                 baseTableName="teacheraccount"
+                                 baseTableName="teacher"
                                  constraintName="teacher_credential_fk"
                                  referencedColumnNames="id"
                                  referencedTableName="credential"/>
-    </changeSet>
-
-    <changeSet id="1903151420_7" author="GoodBoy">
-        <renameTable
-                oldTableName="teacheraccount"
-                newTableName="teacher"/>
     </changeSet>
 
 </databaseChangeLog>

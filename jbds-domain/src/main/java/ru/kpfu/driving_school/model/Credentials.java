@@ -9,10 +9,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "credential")
+@SequenceGenerator(sequenceName = "credential_id_seq", name = "credentials_gen")
 public class Credentials {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "credentials_gen")
     private Long id;
 
     @Enumerated(EnumType.STRING)

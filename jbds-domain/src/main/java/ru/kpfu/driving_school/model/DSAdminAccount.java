@@ -4,10 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ds_admin")
+@SequenceGenerator(sequenceName = "ds_admin_id_seq", name = "ds_admin_gen")
 public class DSAdminAccount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ds_admin_gen")
     private long id;
 
     @OneToOne
@@ -15,6 +16,10 @@ public class DSAdminAccount {
     private Credentials credentials;
 
     private Boolean subscription;
+
+    @ManyToOne
+    @JoinColumn(name = "driving_school_id")
+    private DrivingSchool drivingSchool;
 
     public DSAdminAccount() {
     }
@@ -41,5 +46,12 @@ public class DSAdminAccount {
 
     public void setSubscription(Boolean subscription) {
         this.subscription = subscription;
+    }
+    public DrivingSchool getDrivingSchool() {
+        return drivingSchool;
+    }
+
+    public void setDrivingSchool(DrivingSchool drivingSchool) {
+        this.drivingSchool = drivingSchool;
     }
 }

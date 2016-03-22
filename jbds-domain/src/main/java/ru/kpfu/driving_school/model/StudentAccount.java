@@ -4,11 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "student")
-@SequenceGenerator(sequenceName = "credential_id_seq", name = "credentials_gen")
+@SequenceGenerator(sequenceName = "student_id_seq", name = "student_gen")
 public class StudentAccount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "credentials_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_gen")
     private long id;
 
     @OneToOne
@@ -17,6 +17,10 @@ public class StudentAccount {
 
     @Column
     private String fio;
+
+    @ManyToOne
+    @JoinColumn(name = "driving_school_id")
+    private DrivingSchool drivingSchool;
 
     public StudentAccount() {
     }
@@ -43,5 +47,13 @@ public class StudentAccount {
 
     public void setFio(String fio) {
         this.fio = fio;
+    }
+
+    public DrivingSchool getDrivingSchool() {
+        return drivingSchool;
+    }
+
+    public void setDrivingSchool(DrivingSchool drivingSchool) {
+        this.drivingSchool = drivingSchool;
     }
 }
