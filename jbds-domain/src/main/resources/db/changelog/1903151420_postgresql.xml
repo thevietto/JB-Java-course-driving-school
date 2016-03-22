@@ -32,11 +32,6 @@
                                  referencedTableName="credential"/>
     </changeSet>
 
-    <changeSet id="1903151420_5" author="GoodBoy">
-        <dropForeignKeyConstraint
-                baseTableName="teacheraccount"
-                constraintName="fk_577lumha7ramhgag38a22obau"/>
-    </changeSet>
 
     <changeSet id="1903151420_6" author="GoodBoy">
         <addForeignKeyConstraint baseColumnNames="credential_id"

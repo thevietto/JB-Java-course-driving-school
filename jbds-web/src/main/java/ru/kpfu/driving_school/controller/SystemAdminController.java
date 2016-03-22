@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.service.DSAdminService;
+import ru.kpfu.driving_school.service.SystemAdminService;
 
 /**
  * Created by aleksandrpliskin on 17.03.16.
@@ -15,6 +16,9 @@ public class SystemAdminController {
 
     @Autowired
     DSAdminService dsAdminService;
+
+    @Autowired
+    SystemAdminService systemAdminService;
 
     @RequestMapping(value = {""})
     public String getSystemIndex() {
@@ -30,13 +34,13 @@ public class SystemAdminController {
     @RequestMapping(value = "/removeSubscription", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void removeSubscription(@RequestParam Long id) {
-        System.out.println(id);//TODO
+        systemAdminService.removeSubscription(id);
     }
 
     @RequestMapping(value = "/addSubscription", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
     public void addSubscription(@RequestParam Long id) {
-        System.out.println(id);//TODO
+        systemAdminService.addSubscription(id);
     }
 
 
