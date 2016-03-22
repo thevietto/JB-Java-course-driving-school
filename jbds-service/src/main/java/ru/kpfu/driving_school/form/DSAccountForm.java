@@ -9,7 +9,17 @@ public class DSAccountForm {
 
     private String password;
 
+    private Long drivingSchoolId;
+
     public DSAccountForm() {
+    }
+
+    public Long getDrivingSchoolId() {
+        return drivingSchoolId;
+    }
+
+    public void setDrivingSchoolId(Long drivingSchoolId) {
+        this.drivingSchoolId = drivingSchoolId;
     }
 
     public String getLogin() {

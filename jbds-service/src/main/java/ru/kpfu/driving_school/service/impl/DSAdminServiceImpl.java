@@ -67,9 +67,9 @@ public class DSAdminServiceImpl implements DSAdminService {
     }
 
     @Override
-    public void createDSAccount(DSAccountForm dsAccountForm, Credentials credentials, Long id) {
+    public void createDSAccount(DSAccountForm dsAccountForm) {
         DSAdminAccount dsAdmin = transformer.apply(dsAccountForm);
-        DrivingSchool drivingSchool = drivingSchoolRepository.findOne(id);
+        DrivingSchool drivingSchool = drivingSchoolRepository.findOne(dsAccountForm.getDrivingSchoolId());
         dsAdmin.setDrivingSchool(drivingSchool);
         dsAdminRepository.save(dsAdmin);
     }

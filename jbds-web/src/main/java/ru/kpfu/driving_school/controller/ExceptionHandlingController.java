@@ -1,6 +1,7 @@
 package ru.kpfu.driving_school.controller;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.driving_school.exception.LoginAlreadyExistsException;
 import ru.kpfu.driving_school.exception.dto.ExceptionDto;
@@ -16,5 +17,12 @@ public class ExceptionHandlingController {
     @ResponseBody
     public ExceptionDto loginAlreadyExists() {
         return new ExceptionDto(400, "Login already exists");
+    }
+
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MissingServletRequestParameterException.class)
+    @ResponseBody
+    public ExceptionDto missingParamterHandler(Exception exception) {
+        return new ExceptionDto(400, "Required parameter missing");
     }
 }
