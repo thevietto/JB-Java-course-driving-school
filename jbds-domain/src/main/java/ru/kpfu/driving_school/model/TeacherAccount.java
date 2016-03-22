@@ -5,10 +5,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "teacher")
+@SequenceGenerator(sequenceName = "teacher_id_seq", name = "teacher_gen")
 public class TeacherAccount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teacher_gen")
     private long id;
 
     @OneToOne

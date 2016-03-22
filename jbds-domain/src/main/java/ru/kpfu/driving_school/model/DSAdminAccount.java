@@ -4,10 +4,11 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ds_admin")
+@SequenceGenerator(sequenceName = "ds_admin_id_seq", name = "ds_admin_gen")
 public class DSAdminAccount {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ds_admin_gen")
     private long id;
 
     @OneToOne
