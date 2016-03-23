@@ -12,11 +12,13 @@
     <title>Title</title>
 </head>
 <body>
-<form method="POST" action="upload_file" enctype="multipart/form-data">
+<form method="POST" action="/admin/add_students/students_file" enctype="multipart/form-data">
     File to upload: <input type="file" name="file"><br />
 
     <input type="submit" value="Upload">
     Press here to upload the file!
 </form>
+<div>Испльзуйте файлы формата .xls</div><br/>
+<div>Студенты в файле должны быть в виде "Фамилия | Имя | Отчество"</div>
 </body>
 </html>

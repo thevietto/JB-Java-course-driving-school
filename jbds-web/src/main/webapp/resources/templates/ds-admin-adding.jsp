@@ -19,7 +19,7 @@
 </form>
 <br/>
 
-<a href="/admin/upload_file">Добавить через excel</a>
+<a href="/admin/add_students/upload_file">Добавить через excel</a>
 
 
 <h1>порядок важен!!!</h1>

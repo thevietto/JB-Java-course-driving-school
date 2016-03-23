@@ -84,7 +84,7 @@ public class DSAdminServiceImpl implements DSAdminService {
 
         if (!file.isEmpty()) {
             try {
-                List<StudentForm> list = excelStudentParser.read(file);
+                List<StudentForm> list = excelStudentParser.parse(file);
                 list.forEach(this::saveNewStudent);
             } catch (Exception e) {
                 e.printStackTrace();

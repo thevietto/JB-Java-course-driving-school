@@ -17,10 +17,9 @@ import java.util.List;
 @Component
 public class ExcelStudentParser {
 
-    public List<StudentForm> read(MultipartFile file) {
+    public List<StudentForm> parse(MultipartFile file) throws IOException {
         HSSFWorkbook workbook = null;
         List<StudentForm> students = new ArrayList<>();
-        try {
             workbook = new HSSFWorkbook(file.getInputStream());
             HSSFSheet sheet = workbook.getSheetAt(0);
             for (int i = 0; i <= sheet.getLastRowNum(); i++) {
@@ -34,9 +33,6 @@ public class ExcelStudentParser {
                 students.add(studentForm);
             }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         return students;
     }
 }

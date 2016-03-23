@@ -13,8 +13,8 @@ import ru.kpfu.driving_school.service.DSAdminService;
  * Created by Azat Zaripov on 22.03.16.
  */
 @Controller
-@RequestMapping("/admin")
-public class FileController {
+@RequestMapping("/admin/add_students")
+public class ExcelFileController {
 
     @Autowired
     DSAdminService adminService;
@@ -24,7 +24,7 @@ public class FileController {
         return "excel-load";
     }
 
-    @RequestMapping(value = "/upload_file", method = RequestMethod.POST)
+    @RequestMapping(value = "/students_file", method = RequestMethod.POST)
     @ResponseBody
     public String uploadExcelFile(@RequestParam("file") MultipartFile file) {
         try {
