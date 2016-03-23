@@ -1,5 +1,6 @@
 package ru.kpfu.driving_school.service;
 
+import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.Credentials;
