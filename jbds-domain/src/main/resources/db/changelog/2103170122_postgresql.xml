@@ -1,0 +1,13 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2103170122_1" author="etovladislav">
+        <addColumn tableName="ds_admin">
+            <column name="subscription" type="boolean"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.service.DSAdminService;
+import ru.kpfu.driving_school.service.SystemAdminService;
 
 /**
  * Created by aleksandrpliskin on 17.03.16.
@@ -18,16 +19,31 @@ public class SystemAdminController {
     @Autowired
     DSAdminService dsAdminService;
 
+    @Autowired
+    SystemAdminService systemAdminService;
+
     @RequestMapping(value = {""})
     public String getSystemIndex() {
         return "system-admin";
     }
 
-    @RequestMapping(value = "/create-account-ds", method = RequestMethod.POST, consumes = "application/json;utf8")
+    @RequestMapping(value = "/accounts/driving_school", method = RequestMethod.POST)
     @ResponseStatus(HttpStatus.OK)
-    public void createAccountDS(@RequestBody DSAccountForm dsAccountForm, @RequestParam Long drivingSchoolId) {
-        Credentials credentials = ((Credentials) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
-        dsAdminService.createDSAccount(dsAccountForm, credentials, drivingSchoolId);
+    public void createAccountDS(@ModelAttribute DSAccountForm dsAccountForm) {
+        dsAdminService.createDSAccount(dsAccountForm);
     }
+
+    @RequestMapping(value = "/ds_admin_accounts/{id}/delete_subscription", method = RequestMethod.DELETE)
+    @ResponseStatus(HttpStatus.OK)
+    public void removeSubscription(@PathVariable Long id) {
+        systemAdminService.removeSubscription(id);
+    }
+
+    @RequestMapping(value = "/ds_admin_accounts/{id}/add_subscription", method = RequestMethod.PUT)
+    @ResponseStatus(HttpStatus.OK)
+    public void addSubscription(@PathVariable Long id) {
+        systemAdminService.addSubscription(id);
+    }
+
 
 }

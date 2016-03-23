@@ -15,6 +15,9 @@ public class DSAdminAccount {
     @JoinColumn(name = "credential_id")
     private Credentials credentials;
 
+    @Column(name = "is_active")
+    private Boolean isActive;
+
     @ManyToOne
     @JoinColumn(name = "driving_school_id")
     private DrivingSchool drivingSchool;
@@ -36,6 +39,14 @@ public class DSAdminAccount {
 
     public void setCredentials(Credentials credentials) {
         this.credentials = credentials;
+    }
+
+    public Boolean getActive() {
+        return isActive;
+    }
+
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     public DrivingSchool getDrivingSchool() {

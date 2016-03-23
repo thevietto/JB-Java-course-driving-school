@@ -1,10 +1,11 @@
 package ru.kpfu.driving_school.service;
 
+import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.StudentAccount;
-import org.springframework.web.multipart.MultipartFile;
+
 import java.util.List;
 
 /**
@@ -22,7 +23,8 @@ public interface DSAdminService {
 
     void saveNewStudent(StudentForm form);
 
-    void createDSAccount(DSAccountForm dsAccountForm, Credentials credentials, Long id);
-
     void loadStudentGroupFromExcel(MultipartFile file);
+
+    void createDSAccount(DSAccountForm dsAccountForm);
+
 }
