@@ -33,13 +33,13 @@ public class SystemAdminController {
         dsAdminService.createDSAccount(dsAccountForm);
     }
 
-    @RequestMapping(value = "/driving_school/{id}/subscription", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/ds_admin_accounts/{id}/delete_subscription", method = RequestMethod.DELETE)
     @ResponseStatus(HttpStatus.OK)
     public void removeSubscription(@PathVariable Long id) {
         systemAdminService.removeSubscription(id);
     }
 
-    @RequestMapping(value = "/driving_school/{id}/subscription", method = RequestMethod.PUT)
+    @RequestMapping(value = "/ds_admin_accounts/{id}/add_subscription", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     public void addSubscription(@PathVariable Long id) {
         systemAdminService.addSubscription(id);
