@@ -23,6 +23,7 @@ public class SystemAdminServiceImpl implements SystemAdminService {
     }
 
     @Override
+    @Transactional
     public void removeSubscription(Long id) {
         dsAdminRepository.setActive(id, Boolean.FALSE);
     }

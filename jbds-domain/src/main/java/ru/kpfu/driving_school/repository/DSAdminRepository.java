@@ -18,7 +18,6 @@ public interface DSAdminRepository extends JpaRepository<DSAdminAccount, Long> {
 
     DSAdminAccount findOneByCredentials(Credentials credentials);
 
-    @Transactional
     @Modifying
     @Query(value = "UPDATE DSAdminAccount ds SET ds.isActive = :isActive WHERE ds.id = :id")
     void setActive(@Param("id") Long id, @Param("isActive") Boolean isActive);
