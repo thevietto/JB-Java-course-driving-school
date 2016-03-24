@@ -98,9 +98,12 @@ public class DSAdminServiceImpl implements DSAdminService {
         StudentGroup studentGroup = new StudentGroup();
         studentGroup.setTeacherAccount(teacherRepository.findOneByFio(teacherName));
         try {
+            List<StudentAccount> studentAccounts = studentsTransformer.apply(excelStudentParser.parse(file));
+            studentAccounts.forEach(this::saveNewStudent);//TODO
             studentGroup.setStudentAccountList(
                     studentsTransformer.apply(excelStudentParser.parse(file))
             );
+            studentGroupRepository.save(studentGroup);
         } catch (IOException e) {
             e.printStackTrace();
         }
