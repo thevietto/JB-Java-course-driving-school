@@ -36,4 +36,19 @@
         </loadUpdateData>
     </changeSet>
 
+    <changeSet id="bitches_6" author="GoodBoy">
+        <loadUpdateData tableName="teacher" primaryKey="id" file="db/seeds/teachers.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="bitches_7" author="GoodBoy">
+        <loadUpdateData tableName="student_group_students" primaryKey="id" file="db/seeds/student_group_students.csv"/>
+    </changeSet>
+
+    <changeSet id="bitches_8" author="GoodBoy">
+        <loadUpdateData tableName="student_group" primaryKey="id" file="db/seeds/student_group.csv"/>
+    </changeSet>
+
+
 </databaseChangeLog>

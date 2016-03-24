@@ -3,8 +3,8 @@ package ru.kpfu.driving_school.service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentForm;
-import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.StudentAccount;
+import ru.kpfu.driving_school.model.StudentGroup;
 
 import java.util.List;
 
@@ -27,4 +27,5 @@ public interface DSAdminService {
 
     void createDSAccount(DSAccountForm dsAccountForm);
 
+    List<StudentGroup> getStudentGroups();
 }
