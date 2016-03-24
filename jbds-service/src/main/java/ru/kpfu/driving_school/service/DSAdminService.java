@@ -28,4 +28,6 @@ public interface DSAdminService {
     void createDSAccount(DSAccountForm dsAccountForm);
 
     List<StudentGroup> getStudentGroups();
+
+    void createStudentGroup(String teacherName, MultipartFile file);
 }

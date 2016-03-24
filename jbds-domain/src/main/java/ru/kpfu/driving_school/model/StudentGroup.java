@@ -19,7 +19,7 @@ public class StudentGroup {
     @JoinColumn(name = "driving_school_id")
     private DrivingSchool drivingSchool;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "student_group_students",
             joinColumns = @JoinColumn(name = "student_group_id"),
@@ -28,7 +28,7 @@ public class StudentGroup {
     private List<StudentAccount> studentAccountList;
 
     @OneToOne
-    @JoinColumn(name = "teacher")
+    @JoinColumn(name = "teacher_id")
     private TeacherAccount teacherAccount;
 
     public DrivingSchool getDrivingSchool() {

@@ -6,6 +6,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.service.DSAdminService;
 
@@ -45,4 +47,22 @@ public class DSAdminController {
         model.addAttribute("groups", dsAdminService.getStudentGroups());
         return "student-groups";
     }
+
+    @RequestMapping(value = "creation/students_group", method = RequestMethod.GET)
+    public String getPageForCreatingStudentsGroup() {
+        return "create-students-group";
+    }
+
+    @RequestMapping(value = "creation/students_group", method = RequestMethod.POST)
+    @ResponseBody
+    public String addStudentsGroup(@RequestParam("teacher") String teacherName,
+                                   @RequestParam("file") MultipartFile file) {
+        try {
+            dsAdminService.createStudentGroup(teacherName, file);
+            return ("File " + file.getOriginalFilename() + " has been successfully uploaded");
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+    }
 }
+

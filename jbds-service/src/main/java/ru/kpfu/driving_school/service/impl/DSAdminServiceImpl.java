@@ -9,14 +9,12 @@ import ru.kpfu.driving_school.model.DSAdminAccount;
 import ru.kpfu.driving_school.model.DrivingSchool;
 import ru.kpfu.driving_school.model.StudentAccount;
 import ru.kpfu.driving_school.model.StudentGroup;
-import ru.kpfu.driving_school.repository.DSAdminRepository;
-import ru.kpfu.driving_school.repository.DrivingSchoolRepository;
-import ru.kpfu.driving_school.repository.StudentGroupRepository;
-import ru.kpfu.driving_school.repository.StudentRepository;
+import ru.kpfu.driving_school.repository.*;
 import ru.kpfu.driving_school.service.DSAdminService;
 import ru.kpfu.driving_school.util.ExcelStudentParser;
 import ru.kpfu.driving_school.util.SecurityUtils;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
 
@@ -39,6 +37,9 @@ public class DSAdminServiceImpl implements DSAdminService {
     private StudentGroupRepository studentGroupRepository;
 
     @Autowired
+    private TeacherRepository teacherRepository;
+
+    @Autowired
     private Function<StudentForm, StudentAccount> generator;
 
     @Autowired
@@ -46,6 +47,9 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Autowired
     private ExcelStudentParser excelStudentParser;
+
+    @Autowired
+    private Function<List<StudentForm>, List<StudentAccount>> studentsTransformer;
 
     @Override
     public void addStudents(List<StudentAccount> students) {
@@ -87,6 +91,19 @@ public class DSAdminServiceImpl implements DSAdminService {
     public List<StudentGroup> getStudentGroups() {
         DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()).getDrivingSchool();
         return studentGroupRepository.findByDrivingSchool(drivingSchool);
+    }
+
+    @Override
+    public void createStudentGroup(String teacherName, MultipartFile file) {
+        StudentGroup studentGroup = new StudentGroup();
+        studentGroup.setTeacherAccount(teacherRepository.findOneByFio(teacherName));
+        try {
+            studentGroup.setStudentAccountList(
+                    studentsTransformer.apply(excelStudentParser.parse(file))
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
