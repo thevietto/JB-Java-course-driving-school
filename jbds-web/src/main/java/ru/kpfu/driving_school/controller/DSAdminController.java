@@ -47,12 +47,12 @@ public class DSAdminController {
         return "student-groups";
     }
 
-    @RequestMapping(value = "/student_group/new", method = RequestMethod.GET)
+    @RequestMapping(value = "/student_groups/new", method = RequestMethod.GET)
     public String getPageForCreatingStudentsGroup() {
         return "create-students-group";
     }
 
-    @RequestMapping(value = "/student_group", method = RequestMethod.POST)
+    @RequestMapping(value = "/student_groups", method = RequestMethod.POST)
     public String addStudentsGroup(@RequestParam("teacher") String teacherName,
                                    @RequestParam("file") MultipartFile file) {
         try {
