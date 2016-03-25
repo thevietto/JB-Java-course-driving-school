@@ -88,8 +88,8 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Override
     public List<StudentGroup> getStudentGroups() {
-        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()).getDrivingSchool();
-        return studentGroupRepository.findByDrivingSchool(drivingSchool);
+//        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()).getDrivingSchool();
+        return studentGroupRepository.findByDrivingSchool(SecurityUtils.getCurrentUser().getId());
     }
 
     @Override
