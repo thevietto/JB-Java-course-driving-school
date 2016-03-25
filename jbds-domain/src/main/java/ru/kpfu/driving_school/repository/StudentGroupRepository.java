@@ -30,6 +30,6 @@ public interface StudentGroupRepository extends JpaRepository<StudentGroup, Long
 
 
 //    @Modifying
-//    @Query(value = "select StudentGroup sg from sg inner join DrivingSchool ds on sd.driving_school_id = ds.id inner join DSAdminAccount admin on admin.driving_school_id=ds.id where admin.credentials=:credentials")
+//    @Query(value = "select StudentGroup sg from sg inner join DrivingSchool ds on sd.drivingSchool.id = ds.id inner join DSAdminAccount admin on admin.dribvingSchool.id=ds.id where admin.credentials=:credentials")
 //    List<StudentGroup> getByDrivingSchool(@Param("credentials") Credentials credentials);
 }
