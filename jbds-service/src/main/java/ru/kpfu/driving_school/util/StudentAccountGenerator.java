@@ -23,12 +23,13 @@ public class StudentAccountGenerator implements Function<StudentForm, StudentAcc
 
     private final String[] _alpha = {"a", "b", "v", "g", "d", "e", "yo", "g", "z", "i", "y", "i",
             "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
-            "f", "h", "tz", "ch", "sh", "sh", "'", "e", "yu", "ya"};
+            "f", "h", "tz", "ch", "sh", "sh", "", "e", "yu", "ya", ""};
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
 
-    public StudentAccount generateStudent(StudentForm form) {
+    @Override
+    public StudentAccount apply(StudentForm form) {
         String fio = form.getFirstname() + ' ' + form.getSurname() + ' ' + form.getLastname();
         String login = generateLogin(form.getFirstname(), form.getSurname(), form.getLastname());
         String password = generatePassword();
@@ -93,7 +94,7 @@ public class StudentAccountGenerator implements Function<StudentForm, StudentAcc
         char[] chs = s.toCharArray();
         StringBuilder result = new StringBuilder("");
         for (char ch : chs) {
-            String alpha = "абвгдеёжзиыйклмнопрстуфхцчшщьэюя";
+            String alpha = "абвгдеёжзиыйклмнопрстуфхцчшщьэюяъ";
             int k = alpha.indexOf(ch);
             if (k != -1)
                 result.append(_alpha[k]);
@@ -104,8 +105,4 @@ public class StudentAccountGenerator implements Function<StudentForm, StudentAcc
         return result.substring(0, 1).toUpperCase() + result.substring(1);
     };
 
-    @Override
-    public StudentAccount apply(StudentForm studentForm) {
-        return generateStudent(studentForm);
-    }
 }

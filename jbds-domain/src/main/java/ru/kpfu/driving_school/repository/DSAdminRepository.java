@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.DSAdminAccount;
 
-import javax.transaction.Transactional;
-
 /**
  * Created by aleksandrpliskin on 17.03.16.
  */

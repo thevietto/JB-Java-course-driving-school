@@ -1,3 +1,5 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java"
+         pageEncoding="UTF-8" %>
 <html>
 <head>
     <title>AA</title>
@@ -7,7 +9,8 @@
 
 <p><a href="/logout">logout</a></p>
 
+<p><a href="/admin/student_groups">посмотреть студенческие группы</a></p>
 
-<p><a href="/admin/add_students">add students</a></p>
+<p><a href="/admin/student_groups/new">создать группу</a></p>
 </body>
 </html>

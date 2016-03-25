@@ -1,0 +1,74 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2403234120_1" author="GoodBoy">
+        <createTable tableName="student_group">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="driving_school_id" type="bigint">
+            </column>
+            <column name="teacher_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2403234120_2" author="GoodBoy">
+        <createSequence
+                sequenceName="student_group_id_seq"
+                incrementBy="1"
+                minValue="50"
+                startValue="50"/>
+    </changeSet>
+
+    <changeSet id="2403234120_3" author="GoodBoy">
+        <dropForeignKeyConstraint baseTableName="student"
+                                  constraintName="student_driving_school_fk"/>
+    </changeSet>
+
+    <changeSet id="2403234120_4" author="GoodBoy">
+        <dropColumn tableName="student"
+                    columnName="driving_school_id"/>
+    </changeSet>
+
+    <changeSet id="2403234120_5" author="GoodBoy">
+        <addColumn tableName="student">
+            <column name="student_group_id" type="bigint"/>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="2403234120_6" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="student"
+                                 baseColumnNames="student_group_id"
+                                 constraintName="student_student_group_fk"
+                                 referencedTableName="student_group"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="2403234120_7" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="student_group"
+                                 baseColumnNames="driving_school_id"
+                                 constraintName="student_group_driving_school_fk"
+                                 referencedTableName="driving_school"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="2403234120_8" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="student_group"
+                                 baseColumnNames="teacher_id"
+                                 constraintName="student_group_teacher_fk"
+                                 referencedTableName="teacher"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+
+
+</databaseChangeLog>

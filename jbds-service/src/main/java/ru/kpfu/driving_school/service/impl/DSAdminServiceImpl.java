@@ -2,20 +2,20 @@ package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentForm;
-import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.DSAdminAccount;
 import ru.kpfu.driving_school.model.DrivingSchool;
 import ru.kpfu.driving_school.model.StudentAccount;
-import ru.kpfu.driving_school.repository.DSAdminRepository;
-import ru.kpfu.driving_school.repository.DrivingSchoolRepository;
-import ru.kpfu.driving_school.repository.StudentRepository;
+import ru.kpfu.driving_school.model.StudentGroup;
+import ru.kpfu.driving_school.repository.*;
 import ru.kpfu.driving_school.service.DSAdminService;
 import ru.kpfu.driving_school.util.ExcelStudentParser;
 import ru.kpfu.driving_school.util.SecurityUtils;
-import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
 
@@ -35,6 +35,12 @@ public class DSAdminServiceImpl implements DSAdminService {
     private DrivingSchoolRepository drivingSchoolRepository;
 
     @Autowired
+    private StudentGroupRepository studentGroupRepository;
+
+    @Autowired
+    private TeacherRepository teacherRepository;
+
+    @Autowired
     private Function<StudentForm, StudentAccount> generator;
 
     @Autowired
@@ -42,6 +48,9 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Autowired
     private ExcelStudentParser excelStudentParser;
+
+    @Autowired
+    private Function<List<StudentForm>, List<StudentAccount>> studentsTransformer;
 
     @Override
     public void addStudents(List<StudentAccount> students) {
@@ -66,8 +75,6 @@ public class DSAdminServiceImpl implements DSAdminService {
     @Override
     public void saveNewStudent(StudentForm form) {
         StudentAccount student = generator.apply(form);
-        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()).getDrivingSchool();
-        student.setDrivingSchool(drivingSchool);
         studentRepository.save(student);
     }
 
@@ -80,15 +87,28 @@ public class DSAdminServiceImpl implements DSAdminService {
     }
 
     @Override
-    public void loadStudentGroupFromExcel(MultipartFile file) {
+    public List<StudentGroup> getStudentGroups() {
+//        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()).getDrivingSchool();
+        return studentGroupRepository.findByDrivingSchool(SecurityUtils.getCurrentUser().getId());
+    }
 
-        if (!file.isEmpty()) {
-            try {
-                List<StudentForm> list = excelStudentParser.parse(file);
-                list.forEach(this::saveNewStudent);
-            } catch (Exception e) {
-                e.printStackTrace();
+    @Override
+    @Transactional
+    public void createStudentGroup(String teacherName, MultipartFile file) {
+        StudentGroup studentGroup = new StudentGroup();
+        studentGroup.setTeacherAccount(teacherRepository.findOneByFio(teacherName));
+        studentGroup.setDrivingSchool(teacherRepository.findOneByFio(teacherName).getDrivingSchool());
+        try {
+            List<StudentAccount> list = studentsTransformer.apply(excelStudentParser.parse(file));
+            for (StudentAccount studentAccount : list) {
+                studentAccount.setStudentGroup(studentGroup);
             }
+            studentGroup.setStudentAccountList(list);
+            studentGroupRepository.save(studentGroup);
+            studentRepository.save(list);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
+
 }

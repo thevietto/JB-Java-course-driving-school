@@ -9,4 +9,7 @@ import ru.kpfu.driving_school.model.TeacherAccount;
  */
 @Repository
 public interface TeacherRepository extends JpaRepository<TeacherAccount, Long> {
+
+    TeacherAccount findOneByFio(String fio);
+
 }
