@@ -59,10 +59,10 @@ public class DSAdminController {
                                    @RequestParam("file") MultipartFile file) {
         try {
             dsAdminService.createStudentGroup(teacherName, file);
-            return "redirect:/default";
         } catch (Exception e) {
-            return e.getMessage();
+            e.printStackTrace();
         }
+        return "admin";
     }
 }
 

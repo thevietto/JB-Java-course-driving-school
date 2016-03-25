@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ds_admin")
-@SequenceGenerator(sequenceName = "ds_admin_id_seq", name = "ds_admin_gen")
+@SequenceGenerator(sequenceName = "ds_admin_id_seq", name = "ds_admin_gen", allocationSize = 1)
 public class DSAdminAccount {
 
     @Id

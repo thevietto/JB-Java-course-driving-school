@@ -23,8 +23,6 @@ public interface DSAdminService {
 
     void saveNewStudent(StudentForm form);
 
-    void loadStudentGroupFromExcel(MultipartFile file);
-
     void createDSAccount(DSAccountForm dsAccountForm);
 
     List<StudentGroup> getStudentGroups();

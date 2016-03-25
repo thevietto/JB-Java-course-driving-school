@@ -8,7 +8,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "student_group")
-@SequenceGenerator(sequenceName = "student_group_id_seq", name = "student_group_gen")
+@SequenceGenerator(sequenceName = "student_group_id_seq", name = "student_group_gen", allocationSize = 1)
 public class StudentGroup {
 
     @Id
@@ -19,12 +19,7 @@ public class StudentGroup {
     @JoinColumn(name = "driving_school_id")
     private DrivingSchool drivingSchool;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "student_group_students",
-            joinColumns = @JoinColumn(name = "student_group_id"),
-            inverseJoinColumns = @JoinColumn(name = "student_id")
-    )
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentGroup")
     private List<StudentAccount> studentAccountList;
 
     @OneToOne

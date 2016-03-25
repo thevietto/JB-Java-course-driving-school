@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by aleksandrpliskin on 21.03.16.
  */
 @Entity
-@SequenceGenerator(sequenceName = "driving_school_id_seq", name = "driving_school_gen")
+@SequenceGenerator(sequenceName = "driving_school_id_seq", name = "driving_school_gen", allocationSize = 1)
 @Table(name = "driving_school")
 public class DrivingSchool {
 

@@ -74,8 +74,6 @@ public class DSAdminServiceImpl implements DSAdminService {
     @Override
     public void saveNewStudent(StudentForm form) {
         StudentAccount student = generator.apply(form);
-        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()).getDrivingSchool();
-        student.setDrivingSchool(drivingSchool);
         studentRepository.save(student);
     }
 
@@ -98,24 +96,17 @@ public class DSAdminServiceImpl implements DSAdminService {
         StudentGroup studentGroup = new StudentGroup();
         studentGroup.setTeacherAccount(teacherRepository.findOneByFio(teacherName));
         studentGroup.setDrivingSchool(teacherRepository.findOneByFio(teacherName).getDrivingSchool());
+        studentGroupRepository.save(studentGroup);
         try {
+            List<StudentAccount> list = studentsTransformer.apply(excelStudentParser.parse(file));
+            for (StudentAccount studentAccount : list) {
+                studentAccount.setStudentGroup(studentGroup);
+                studentRepository.save(studentAccount);
+            }
             studentGroup.setStudentAccountList(studentsTransformer.apply(excelStudentParser.parse(file)));
-            studentGroupRepository.save(studentGroup);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    public void loadStudentGroupFromExcel(MultipartFile file) {
-
-        if (!file.isEmpty()) {
-            try {
-                List<StudentForm> list = excelStudentParser.parse(file);
-                list.forEach(this::saveNewStudent);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
 }

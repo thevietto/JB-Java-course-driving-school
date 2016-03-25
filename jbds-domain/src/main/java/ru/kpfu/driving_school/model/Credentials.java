@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "credential")
-@SequenceGenerator(sequenceName = "credential_id_seq", name = "credentials_gen")
+@SequenceGenerator(sequenceName = "credential_id_seq", name = "credentials_gen", allocationSize = 1)
 public class Credentials {
 
     @Id

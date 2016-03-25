@@ -34,8 +34,6 @@ public class StudentFormsToStudentAccountsTransformer implements Function<List<S
 
     private StudentAccount transformStudentFormToStudentAccount(StudentForm form) {
         StudentAccount student = generator.apply(form);
-        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()).getDrivingSchool();
-        student.setDrivingSchool(drivingSchool);
         studentRepository.save(student);
         return student;
     }
