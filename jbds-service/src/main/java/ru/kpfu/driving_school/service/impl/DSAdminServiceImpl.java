@@ -105,9 +105,7 @@ public class DSAdminServiceImpl implements DSAdminService {
             }
             studentGroup.setStudentAccountList(list);
             studentGroupRepository.save(studentGroup);
-            for (StudentAccount studentAccount : list) {
-                studentRepository.save(studentAccount);
-            }
+            studentRepository.save(list);
         } catch (IOException e) {
             e.printStackTrace();
         }
