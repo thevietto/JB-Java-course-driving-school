@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.StudentGroup;
 
 import java.util.List;
