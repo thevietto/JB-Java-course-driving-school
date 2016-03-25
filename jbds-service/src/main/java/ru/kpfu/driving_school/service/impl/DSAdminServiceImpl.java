@@ -2,6 +2,7 @@ package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentForm;
@@ -92,6 +93,7 @@ public class DSAdminServiceImpl implements DSAdminService {
     }
 
     @Override
+    @Transactional
     public void createStudentGroup(String teacherName, MultipartFile file) {
         StudentGroup studentGroup = new StudentGroup();
         studentGroup.setTeacherAccount(teacherRepository.findOneByFio(teacherName));
