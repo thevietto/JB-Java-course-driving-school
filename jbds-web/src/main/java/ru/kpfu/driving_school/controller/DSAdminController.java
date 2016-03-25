@@ -42,18 +42,18 @@ public class DSAdminController {
         return "ds-admin-index";
     }
 
-    @RequestMapping(value = "/students_group", method = RequestMethod.GET)
+    @RequestMapping(value = "/student_groups", method = RequestMethod.GET)
     public String getStudentGroups(Model model) {
         model.addAttribute("groups", dsAdminService.getStudentGroups());
         return "student-groups";
     }
 
-    @RequestMapping(value = "/students_group/new", method = RequestMethod.GET)
+    @RequestMapping(value = "/student_group/new", method = RequestMethod.GET)
     public String getPageForCreatingStudentsGroup() {
         return "create-students-group";
     }
 
-    @RequestMapping(value = "/students_group", method = RequestMethod.POST)
+    @RequestMapping(value = "/student_group", method = RequestMethod.POST)
     @ResponseBody
     public String addStudentsGroup(@RequestParam("teacher") String teacherName,
                                    @RequestParam("file") MultipartFile file) {

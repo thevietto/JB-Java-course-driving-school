@@ -8,7 +8,7 @@
 <h1>добавление потока студентов</h1>
 
 
-<form action="/admin/students_group" method="post" enctype="multipart/form-data">
+<form action="/admin/student_group" method="post" enctype="multipart/form-data">
     <label>Фио преподавателя</label><input name="teacher"><br/>
     File to upload: <input type="file" name="file"><br/>
 
