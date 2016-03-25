@@ -10,6 +10,7 @@
 
 <form action="/admin/student_groups" method="post" enctype="multipart/form-data">
     <label>Фио преподавателя</label><input name="teacher"><br/>
+    <p>/////// В бичах есть только Сидорова Марья Ивановна  из автошколы с id=1 /////</p>
     File to upload: <input type="file" name="file"><br/>
 
     <input type="submit" value="Upload">
