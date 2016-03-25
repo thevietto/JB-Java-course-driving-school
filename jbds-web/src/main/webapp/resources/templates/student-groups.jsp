@@ -8,7 +8,7 @@
 <c:forEach var="group" items="${groups}">
     <c:out value="номер ${group.id}"/><br/>
     <c:out value="преподаватель ${group.teacherAccount.fio}"/><br/>
-    <c:out value="количество ${group.studentAccountList.size()}"/><br/>
+    <c:out value="количество студентов ${group.studentAccountList.size()}"/><br/>
     <br/>
 </c:forEach>
 

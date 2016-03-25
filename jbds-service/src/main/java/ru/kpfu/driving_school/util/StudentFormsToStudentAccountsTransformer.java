@@ -3,7 +3,6 @@ package ru.kpfu.driving_school.util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.kpfu.driving_school.form.StudentForm;
-import ru.kpfu.driving_school.model.DrivingSchool;
 import ru.kpfu.driving_school.model.StudentAccount;
 import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
@@ -34,7 +33,6 @@ public class StudentFormsToStudentAccountsTransformer implements Function<List<S
 
     private StudentAccount transformStudentFormToStudentAccount(StudentForm form) {
         StudentAccount student = generator.apply(form);
-        studentRepository.save(student);
         return student;
     }
 

@@ -96,14 +96,16 @@ public class DSAdminServiceImpl implements DSAdminService {
         StudentGroup studentGroup = new StudentGroup();
         studentGroup.setTeacherAccount(teacherRepository.findOneByFio(teacherName));
         studentGroup.setDrivingSchool(teacherRepository.findOneByFio(teacherName).getDrivingSchool());
-        studentGroupRepository.save(studentGroup);
         try {
             List<StudentAccount> list = studentsTransformer.apply(excelStudentParser.parse(file));
             for (StudentAccount studentAccount : list) {
                 studentAccount.setStudentGroup(studentGroup);
+            }
+            studentGroup.setStudentAccountList(list);
+            studentGroupRepository.save(studentGroup);
+            for (StudentAccount studentAccount : list) {
                 studentRepository.save(studentAccount);
             }
-            studentGroup.setStudentAccountList(studentsTransformer.apply(excelStudentParser.parse(file)));
         } catch (IOException e) {
             e.printStackTrace();
         }

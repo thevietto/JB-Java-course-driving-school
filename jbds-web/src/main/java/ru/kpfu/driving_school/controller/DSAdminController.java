@@ -54,7 +54,6 @@ public class DSAdminController {
     }
 
     @RequestMapping(value = "/student_group", method = RequestMethod.POST)
-    @ResponseBody
     public String addStudentsGroup(@RequestParam("teacher") String teacherName,
                                    @RequestParam("file") MultipartFile file) {
         try {
@@ -62,7 +61,7 @@ public class DSAdminController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "admin";
+        return "ds-admin-index";
     }
 }
 
