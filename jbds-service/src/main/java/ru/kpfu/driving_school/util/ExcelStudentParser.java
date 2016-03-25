@@ -20,18 +20,18 @@ public class ExcelStudentParser {
     public List<StudentForm> parse(MultipartFile file) throws IOException {
         HSSFWorkbook workbook = null;
         List<StudentForm> students = new ArrayList<>();
-            workbook = new HSSFWorkbook(file.getInputStream());
-            HSSFSheet sheet = workbook.getSheetAt(0);
-            for (int i = 0; i <= sheet.getLastRowNum(); i++) {
-                HSSFRow row = sheet.getRow(i);
+        workbook = new HSSFWorkbook(file.getInputStream());
+        HSSFSheet sheet = workbook.getSheetAt(0);
+        for (int i = 0; i <= sheet.getLastRowNum(); i++) {
+            HSSFRow row = sheet.getRow(i);
 
-                StudentForm studentForm = new StudentForm();
+            StudentForm studentForm = new StudentForm();
 
-                studentForm.setLastname(row.getCell(2).getStringCellValue());
-                studentForm.setFirstname(row.getCell(1).getStringCellValue());
-                studentForm.setSurname(row.getCell(0).getStringCellValue());
-                students.add(studentForm);
-            }
+            studentForm.setLastname(row.getCell(2).getStringCellValue());
+            studentForm.setFirstname(row.getCell(1).getStringCellValue());
+            studentForm.setSurname(row.getCell(0).getStringCellValue());
+            students.add(studentForm);
+        }
 
         return students;
     }

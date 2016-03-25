@@ -25,7 +25,7 @@ public class StudentGroup {
             joinColumns = @JoinColumn(name = "student_group_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id")
     )
-    private List<StudentAccount> studentAccountList;//TODO how to save student accounts, when saving studentGroup settering there student accounts
+    private List<StudentAccount> studentAccountList;
 
     @OneToOne
     @JoinColumn(name = "teacher_id")

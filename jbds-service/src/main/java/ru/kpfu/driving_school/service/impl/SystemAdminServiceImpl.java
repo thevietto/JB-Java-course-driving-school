@@ -3,7 +3,6 @@ package ru.kpfu.driving_school.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.kpfu.driving_school.model.DSAdminAccount;
 import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.service.SystemAdminService;
 
