@@ -14,7 +14,6 @@ import java.util.List;
  */
 @Repository
 public interface StudentGroupRepository extends JpaRepository<StudentGroup, Long> {
-    @Modifying
     @Query(
             value = "SELECT\n" +
                     "  student_group.id,\n" +
@@ -28,7 +27,6 @@ public interface StudentGroupRepository extends JpaRepository<StudentGroup, Long
     List<StudentGroup> findByDrivingSchool(@Param("credentialId") Long credentialId);
 
 
-//    @Modifying
 //    @Query(value = "select StudentGroup sg from sg inner join DrivingSchool ds on sd.drivingSchool.id = ds.id inner join DSAdminAccount admin on admin.dribvingSchool.id=ds.id where admin.credentials=:credentials")
 //    List<StudentGroup> getByDrivingSchool(@Param("credentials") Credentials credentials);
 }
