@@ -27,12 +27,12 @@ public class DSAdminController {
         return "ds-admin-index";
     }
 
-    @RequestMapping(value = "/add_students", method = RequestMethod.GET)
+    @RequestMapping(value = "/students/new", method = RequestMethod.GET)
     public String getNewStudentPage() {
         return "ds-admin-adding";
     }
 
-    @RequestMapping(value = "/add_students", method = RequestMethod.POST)
+    @RequestMapping(value = "/students", method = RequestMethod.POST)
     public String getNewStudentPage(@RequestParam String firstname, @RequestParam String surname, @RequestParam String lastname) {
         StudentForm form = new StudentForm();
         form.setFirstname(firstname);
@@ -48,18 +48,18 @@ public class DSAdminController {
         return "student-groups";
     }
 
-    @RequestMapping(value = "creation/students_group", method = RequestMethod.GET)
+    @RequestMapping(value = "/students_group/new", method = RequestMethod.GET)
     public String getPageForCreatingStudentsGroup() {
         return "create-students-group";
     }
 
-    @RequestMapping(value = "creation/students_group", method = RequestMethod.POST)
+    @RequestMapping(value = "/students_group", method = RequestMethod.POST)
     @ResponseBody
     public String addStudentsGroup(@RequestParam("teacher") String teacherName,
                                    @RequestParam("file") MultipartFile file) {
         try {
             dsAdminService.createStudentGroup(teacherName, file);
-            return ("File " + file.getOriginalFilename() + " has been successfully uploaded");
+            return "redirect:/default";
         } catch (Exception e) {
             return e.getMessage();
         }

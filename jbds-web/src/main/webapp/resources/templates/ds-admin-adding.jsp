@@ -11,7 +11,7 @@
     <title></title>
 </head>
 <body>
-<form action="/admin/add_students" method="post">
+<form action="/admin/students" method="post">
     <p><label>Имя</label><input name="firstname"/></p>
     <p><label>Фамилия</label><input name="surname"/></p>
     <p><label>Отчество</label><input name="lastname"/></p>
