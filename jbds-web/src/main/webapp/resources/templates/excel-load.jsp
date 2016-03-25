@@ -18,7 +18,7 @@
     <input type="submit" value="Upload">
     Press here to upload the file!
 </form>
-<div>Испльзуйте файлы формата .xls</div><br/>
+<div>Испльзуйте файлы формата .xls или .xlsx</div><br/>
 <div>Студенты в файле должны быть в виде "Фамилия | Имя | Отчество" без пропусков строк</div>
 </body>
 </html>
