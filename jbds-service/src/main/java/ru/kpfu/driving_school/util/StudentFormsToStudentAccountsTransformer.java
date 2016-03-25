@@ -18,13 +18,7 @@ import java.util.stream.Collectors;
 public class StudentFormsToStudentAccountsTransformer implements Function<List<StudentForm>, List<StudentAccount>> {
 
     @Autowired
-    private DSAdminRepository dsAdminRepository;
-
-    @Autowired
     private StudentAccountGenerator generator;
-
-    @Autowired
-    private StudentRepository studentRepository;
 
     @Override
     public List<StudentAccount> apply(List<StudentForm> studentForms) {
@@ -32,8 +26,7 @@ public class StudentFormsToStudentAccountsTransformer implements Function<List<S
     }
 
     private StudentAccount transformStudentFormToStudentAccount(StudentForm form) {
-        StudentAccount student = generator.apply(form);
-        return student;
+        return generator.apply(form);
     }
 
 }
