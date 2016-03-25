@@ -9,9 +9,6 @@
 
 <p><a href="/logout">logout</a></p>
 
-
-<p><a href="/admin/students/new">add students</a></p>
-
 <p><a href="/admin/student_groups">посмотреть студенческие группы</a></p>
 
 <p><a href="/admin/student_group/new">создать группу</a></p>
