@@ -6,6 +6,7 @@ import ru.kpfu.driving_school.form.StudentForm;
 import ru.kpfu.driving_school.model.DrivingSchool;
 import ru.kpfu.driving_school.model.StudentAccount;
 import ru.kpfu.driving_school.repository.DSAdminRepository;
+import ru.kpfu.driving_school.repository.StudentRepository;
 
 import java.util.List;
 import java.util.function.Function;
@@ -23,6 +24,9 @@ public class StudentFormsToStudentAccountsTransformer implements Function<List<S
     @Autowired
     private StudentAccountGenerator generator;
 
+    @Autowired
+    private StudentRepository studentRepository;
+
     @Override
     public List<StudentAccount> apply(List<StudentForm> studentForms) {
         return studentForms.stream().map(this::transformStudentFormToStudentAccount).collect(Collectors.toList());
@@ -32,6 +36,7 @@ public class StudentFormsToStudentAccountsTransformer implements Function<List<S
         StudentAccount student = generator.apply(form);
         DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()).getDrivingSchool();
         student.setDrivingSchool(drivingSchool);
+        studentRepository.save(student);
         return student;
     }
 

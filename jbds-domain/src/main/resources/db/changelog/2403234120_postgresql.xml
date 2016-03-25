@@ -33,20 +33,26 @@
     </changeSet>
 
     <changeSet id="2403234120_4" author="GoodBoy">
-        <addColumn tableName="student_group_students">
-            <column name="id" type="bigint">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
-        </addColumn>
+        <addPrimaryKey tableName="student_group_students"
+                       columnNames="student_group_id, student_id"/>
     </changeSet>
+    
 
-    <changeSet id="2403234120_5" author="GoodBoy">
-        <createSequence
-                sequenceName="student_group_student_id_seq"
-                incrementBy="1"
-                minValue="50"
-                startValue="50"/>
-    </changeSet>
+    <!--<changeSet id="2403234120_4" author="GoodBoy">-->
+        <!--<addColumn tableName="student_group_students">-->
+            <!--<column name="id" type="bigint">-->
+                <!--<constraints primaryKey="true" nullable="false"/>-->
+            <!--</column>-->
+        <!--</addColumn>-->
+    <!--</changeSet>-->
+
+    <!--<changeSet id="2403234120_5" author="GoodBoy">-->
+        <!--<createSequence-->
+                <!--sequenceName="student_group_student_id_seq"-->
+                <!--incrementBy="1"-->
+                <!--minValue="50"-->
+                <!--startValue="50"/>-->
+    <!--</changeSet>-->
 
 
 </databaseChangeLog>
