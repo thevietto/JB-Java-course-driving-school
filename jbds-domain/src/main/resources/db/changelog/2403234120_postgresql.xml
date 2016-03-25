@@ -49,5 +49,26 @@
                                  referencedColumnNames="id"/>
     </changeSet>
 
+    <changeSet id="2403234120_7" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="student_group"
+                                 baseColumnNames="driving_school_id"
+                                 constraintName="student_group_driving_school_fk"
+                                 referencedTableName="driving_school"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="2403234120_8" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="student_group"
+                                 baseColumnNames="teacher_id"
+                                 constraintName="student_group_teacher_fk"
+                                 referencedTableName="teacher"
+                                 onDelete="CASCADE"
+                                 onUpdate="CASCADE"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+
 
 </databaseChangeLog>
