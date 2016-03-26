@@ -18,6 +18,7 @@ import ru.kpfu.driving_school.util.SecurityUtils;
 import java.io.IOException;
 import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * Created by aleksandrpliskin on 18.03.16.
@@ -48,9 +49,6 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Autowired
     private ExcelStudentParser excelStudentParser;
-
-    @Autowired
-    private Function<List<StudentForm>, List<StudentAccount>> studentsTransformer;
 
     @Override
     public void addStudents(List<StudentAccount> students) {
@@ -88,7 +86,6 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Override
     public List<StudentGroup> getStudentGroups() {
-//        DrivingSchool drivingSchool = dsAdminRepository.findOneByCredentials(SecurityUtils.getCurrentUser()).getDrivingSchool();
         return studentGroupRepository.findByDrivingSchool(SecurityUtils.getCurrentUser().getId());
     }
 
@@ -99,13 +96,13 @@ public class DSAdminServiceImpl implements DSAdminService {
         studentGroup.setTeacherAccount(teacherRepository.findOneByFio(teacherName));
         studentGroup.setDrivingSchool(teacherRepository.findOneByFio(teacherName).getDrivingSchool());
         try {
-            List<StudentAccount> list = studentsTransformer.apply(excelStudentParser.parse(file));
-            for (StudentAccount studentAccount : list) {
+            List<StudentAccount> students = excelStudentParser.parse(file).stream().map(generator).collect(Collectors.toList());
+            for (StudentAccount studentAccount : students) {
                 studentAccount.setStudentGroup(studentGroup);
             }
-            studentGroup.setStudentAccountList(list);
+            studentGroup.setStudentAccountList(students);
             studentGroupRepository.save(studentGroup);
-            studentRepository.save(list);
+            studentRepository.save(students);
         } catch (IOException e) {
             e.printStackTrace();
         }

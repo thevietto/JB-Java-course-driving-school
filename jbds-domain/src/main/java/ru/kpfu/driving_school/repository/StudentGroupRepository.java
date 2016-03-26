@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.model.StudentGroup;
 
 import java.util.List;
@@ -27,6 +28,6 @@ public interface StudentGroupRepository extends JpaRepository<StudentGroup, Long
     List<StudentGroup> findByDrivingSchool(@Param("credentialId") Long credentialId);
 
 
-//    @Query(value = "select StudentGroup sg from sg inner join DrivingSchool ds on sd.drivingSchool.id = ds.id inner join DSAdminAccount admin on admin.dribvingSchool.id=ds.id where admin.credentials=:credentials")
-//    List<StudentGroup> getByDrivingSchool(@Param("credentials") Credentials credentials);
+    @Query(value = "select sGroup from StudentGroup sGroup join sGroup.drivingSchool dSchool where dSchool = (select admin.drivingSchool from DSAdminAccount admin where admin.credentials = :credentials)")
+    List<StudentGroup> getByDrivingSchool(@Param("credentials") Credentials credentials);
 }
