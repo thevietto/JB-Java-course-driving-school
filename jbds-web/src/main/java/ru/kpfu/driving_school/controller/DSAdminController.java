@@ -1,14 +1,17 @@
 package ru.kpfu.driving_school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.kpfu.driving_school.form.StudentChangeForm;
 import ru.kpfu.driving_school.form.StudentForm;
+import ru.kpfu.driving_school.model.StudentAccount;
 import ru.kpfu.driving_school.service.DSAdminService;
+import ru.kpfu.driving_school.service.StudentService;
+import ru.kpfu.driving_school.util.StudentAccountIsBelongsTeacher;
 
 
 /**
@@ -20,6 +23,11 @@ public class DSAdminController {
 
     @Autowired
     DSAdminService dsAdminService;
+
+    @Autowired
+    StudentService studentService;
+
+    StudentAccountIsBelongsTeacher belongsTeacher = new StudentAccountIsBelongsTeacher();
 
     @RequestMapping(value = "")
     public String getIndex() {
@@ -59,6 +67,39 @@ public class DSAdminController {
             dsAdminService.createStudentGroup(teacherName, file);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+        return "ds-admin-index";
+    }
+
+    @RequestMapping(value = "/student/{id}/change", method = RequestMethod.GET)
+    public String getChangeStudentPage(@PathVariable Long id, Model model) {
+        StudentAccount student = studentService.findOneById(id);
+        if (belongsTeacher.isBelong(student, dsAdminService.getStudentGroups())) {
+            model.addAttribute("student", student);
+            return "ds-admin-change";
+        }
+        return "ds-admin-index";
+    }
+
+    @RequestMapping(value = "/student/save", method = RequestMethod.POST)
+    public String saveStudentChange(@ModelAttribute StudentChangeForm changeForm, Model model) {
+        StudentAccount oldStudent = studentService.findOneById(changeForm.getId());
+        if (belongsTeacher.isBelong(oldStudent, dsAdminService.getStudentGroups())) {
+            oldStudent.setFio(changeForm.getFio());
+            oldStudent.getCredentials().setLogin(changeForm.getLogin());
+            if (changeForm.getPassword().length() != 0) {
+                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                oldStudent.getCredentials().setPassword(encoder.encode(changeForm.getPassword()));
+            }
+            studentService.saveStundet(oldStudent);
+        }
+        return "ds-admin-index";
+    }
+    @RequestMapping(value = "/student/{id}/delete", method = RequestMethod.GET)
+    public String deleteStudent(@PathVariable Long id){
+        StudentAccount student = studentService.findOneById(id);
+        if (belongsTeacher.isBelong(student, dsAdminService.getStudentGroups())){
+            studentService.deleteStudent(student);
         }
         return "ds-admin-index";
     }
