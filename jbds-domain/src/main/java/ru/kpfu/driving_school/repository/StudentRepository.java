@@ -13,5 +13,4 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<StudentAccount, Long> {
 
     StudentAccount findOneByFio(String fio);
-
 }
