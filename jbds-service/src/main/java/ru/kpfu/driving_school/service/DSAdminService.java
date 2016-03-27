@@ -28,4 +28,9 @@ public interface DSAdminService {
     List<StudentGroup> getStudentGroups();
 
     void createStudentGroup(String teacherName, MultipartFile file);
+
+    void saveStundetChange(StudentAccount student);
+
+    boolean isBelong(Long studentId);
+
 }

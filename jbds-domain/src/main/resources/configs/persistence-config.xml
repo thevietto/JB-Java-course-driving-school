@@ -9,7 +9,7 @@
 
     <jpa:repositories base-package="ru.kpfu.driving_school.repository"/>
 
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <bean id="dataSource" class="com.mchange.v2.c3p0.DriverManagerDataSource">
         <property name="driverClass" value="${jdbc.driverClassName}"/>
         <property name="jdbcUrl" value="${jdbc.url}"/>
         <property name="user" value="${jdbc.username}"/>
@@ -19,7 +19,7 @@
     <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
         <property name="database" value="POSTGRESQL"/>
         <property name="showSql" value="true"/>
-        <property name="generateDdl" value="false"/>
+        <property name="generateDdl" value="true"/>
         <property name="databasePlatform" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
     </bean>
 

@@ -3,6 +3,7 @@ package ru.kpfu.driving_school.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.driving_school.model.StudentAccount;
+import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.StudentService;
 
@@ -15,20 +16,14 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     StudentRepository studentRepository;
 
+    @Autowired
+    DSAdminRepository dsAdminRepository;
+
     @Override
     public StudentAccount findOneById(Long id) {
         return studentRepository.findOne(id);
     }
 
-    @Override
-    public void deleteStudent(StudentAccount student) {
-        studentRepository.delete(student);
-    }
-
-    @Override
-    public void saveStundet(StudentAccount student) {
-        studentRepository.save(student);
-    }
 
 
 }

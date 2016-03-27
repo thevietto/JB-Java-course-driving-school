@@ -11,7 +11,7 @@
     <c:out value="количество студентов ${group.studentAccountList.size()}"/><br/>
     <c:forEach var="student" items="${group.studentAccountList}">
         <b></b><c:out value="${student.fio}"/></b>
-        <a href="/admin/student/<c:out value="${student.id}"/>/change">изменить</a>
+        <a href="/admin/ds_admin_accounts/<c:out value="${student.id}"/>/change_student_account">изменить</a>
         <br/>
     </c:forEach>
     <br/>

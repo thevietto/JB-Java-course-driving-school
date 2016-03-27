@@ -8,6 +8,5 @@ import ru.kpfu.driving_school.model.StudentAccount;
 
 public interface StudentService {
     StudentAccount findOneById(Long id);
-    void deleteStudent(StudentAccount student);
-    void saveStundet(StudentAccount student);
+
 }

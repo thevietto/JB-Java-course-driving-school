@@ -1,15 +1,14 @@
 package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentForm;
-import ru.kpfu.driving_school.model.DSAdminAccount;
-import ru.kpfu.driving_school.model.DrivingSchool;
-import ru.kpfu.driving_school.model.StudentAccount;
-import ru.kpfu.driving_school.model.StudentGroup;
+import ru.kpfu.driving_school.model.*;
 import ru.kpfu.driving_school.repository.*;
 import ru.kpfu.driving_school.service.DSAdminService;
 import ru.kpfu.driving_school.util.ExcelStudentParser;
@@ -107,5 +106,30 @@ public class DSAdminServiceImpl implements DSAdminService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void saveStundetChange(StudentAccount student) {
+        StudentAccount oldStudent = studentRepository.findOne(student.getId());
+        if (isBelong(student.getId())) {
+            oldStudent.setFio(student.getFio());
+            oldStudent.getCredentials().setLogin(student.getCredentials().getLogin());
+            if (student.getCredentials().getPassword().trim().length() != 0) {
+                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+                oldStudent.getCredentials().setPassword(encoder.encode(student.getCredentials().getPassword()));
+            }
+        }
+        studentRepository.save(oldStudent);
+    }
+
+    @Override
+    public boolean isBelong(Long studentId) {
+        Credentials credentials = (Credentials) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        DSAdminAccount DSAdmin = dsAdminRepository.findOneByCredentials(credentials);
+        if (studentRepository.isBelong(studentId, DSAdmin.getId()).size() > 0) {
+            return true;
+        }
+        return false;
+    }
+
 
 }
