@@ -149,7 +149,7 @@
     </changeSet>
 
     <changeSet id="2903105120_16" author="GoodBoy">
-        <addForeignKeyConstraint baseColumnNames="test_id"
+        <addForeignKeyConstraint baseColumnNames="question_id"
                                  baseTableName="student_question_answers"
                                  constraintName="student_question_answers_questions_fk"
                                  referencedColumnNames="id"
