@@ -3,7 +3,7 @@ package ru.kpfu.driving_school.service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentForm;
-import ru.kpfu.driving_school.model.StudentAccount;
+import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.StudentGroup;
 
 import java.util.List;
@@ -13,13 +13,13 @@ import java.util.List;
  */
 public interface DSAdminService {
 
-    void addStudents(List<StudentAccount> students);
+    void addStudents(List<Student> students);
 
     void deleteStudent(Long id);
 
     void deleteStudent(String fio);
 
-    void deleteStudent(StudentAccount student);
+    void deleteStudent(Student student);
 
     void saveNewStudent(StudentForm form);
 

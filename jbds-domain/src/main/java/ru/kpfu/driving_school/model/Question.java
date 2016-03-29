@@ -22,8 +22,6 @@ public class Question {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    private Long point;
-
     public Long getId() {
         return id;
     }
@@ -46,14 +44,6 @@ public class Question {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public Long getPoint() {
-        return point;
-    }
-
-    public void setPoint(Long point) {
-        this.point = point;
     }
 
     public Category getCategory() {

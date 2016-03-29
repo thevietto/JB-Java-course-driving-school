@@ -17,7 +17,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="category_id" type="bigint"/>
-            <column name="point" type="bigint"/>
         </createTable>
     </changeSet>
 

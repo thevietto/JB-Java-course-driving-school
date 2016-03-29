@@ -10,8 +10,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import ru.kpfu.driving_school.model.Credentials;
-import ru.kpfu.driving_school.repository.CredentialsRepository;
+import ru.kpfu.driving_school.model.Credential;
+import ru.kpfu.driving_school.repository.CredentialRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.List;
 public class AuthProviderImpl implements AuthenticationProvider {
 
     @Autowired
-    CredentialsRepository credentialsRepository;
+    CredentialRepository credentialRepository;
 
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
@@ -27,7 +27,7 @@ public class AuthProviderImpl implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String login = authentication.getName();
 
-        Credentials user = credentialsRepository.findOneByLogin(login);
+        Credential user = credentialRepository.findOneByLogin(login);
         if (user == null) {
             throw new UsernameNotFoundException("user not found");
         }

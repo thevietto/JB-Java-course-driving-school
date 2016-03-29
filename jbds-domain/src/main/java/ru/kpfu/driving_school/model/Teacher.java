@@ -4,17 +4,17 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name = "teacher")
-@SequenceGenerator(sequenceName = "teacher_id_seq", name = "teacher_gen", allocationSize = 1)
-public class TeacherAccount {
+@Table(name = "teachers")
+@SequenceGenerator(sequenceName = "teachers_id_seq", name = "teachers_gen", allocationSize = 1)
+public class Teacher {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teacher_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "teachers_gen")
     private long id;
 
     @OneToOne
     @JoinColumn(name = "credential_id")
-    private Credentials credentials;
+    private Credential credential;
 
     @ManyToOne
     @JoinColumn(name = "driving_school_id")
@@ -22,7 +22,7 @@ public class TeacherAccount {
 
     private String fio;
 
-    public TeacherAccount() {
+    public Teacher() {
     }
 
     public long getId() {
@@ -33,12 +33,12 @@ public class TeacherAccount {
         this.id = id;
     }
 
-    public Credentials getCredentials() {
-        return credentials;
+    public Credential getCredentials() {
+        return credential;
     }
 
-    public void setCredentials(Credentials credentials) {
-        this.credentials = credentials;
+    public void setCredentials(Credential credential) {
+        this.credential = credential;
     }
 
     public DrivingSchool getDrivingSchool() {

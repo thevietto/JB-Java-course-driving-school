@@ -7,41 +7,41 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="bitches_1" author="GoodBoy">
-        <loadUpdateData tableName="credential" primaryKey="id" file="db/seeds/credentials.csv">
+        <loadUpdateData tableName="credentials" primaryKey="id" file="db/seeds/credentials.csv">
             <column name="id" type="numeric"/>
         </loadUpdateData>
     </changeSet>
 
     <changeSet id="bitches_2" author="GoodBoy">
-        <loadUpdateData tableName="system_admin" primaryKey="id" file="db/seeds/sysadmin.csv">
+        <loadUpdateData tableName="system_admins" primaryKey="id" file="db/seeds/sysadmin.csv">
             <column name="id" type="numeric"/>
         </loadUpdateData>
     </changeSet>
 
     <changeSet id="bitches_3" author="GoodBoy">
-        <loadUpdateData tableName="driving_school" primaryKey="id" file="db/seeds/driving_school.csv">
+        <loadUpdateData tableName="driving_schools" primaryKey="id" file="db/seeds/driving_school.csv">
             <column name="id" type="numeric"/>
         </loadUpdateData>
     </changeSet>
 
     <changeSet id="bitches_4" author="GoodBoy">
-        <loadUpdateData tableName="ds_admin" primaryKey="id" file="db/seeds/ds-admin.csv">
+        <loadUpdateData tableName="ds_admins" primaryKey="id" file="db/seeds/ds-admin.csv">
             <column name="id" type="numeric"/>
         </loadUpdateData>
     </changeSet>
 
     <changeSet id="bitches_5" author="GoodBoy">
-        <loadUpdateData tableName="teacher" primaryKey="id" file="db/seeds/teachers.csv">
+        <loadUpdateData tableName="teachers" primaryKey="id" file="db/seeds/teachers.csv">
             <column name="id" type="numeric"/>
         </loadUpdateData>
     </changeSet>
 
     <changeSet id="bitches_6" author="GoodBoy">
-        <loadUpdateData tableName="student_group" primaryKey="id" file="db/seeds/student_group.csv"/>
+        <loadUpdateData tableName="student_groups" primaryKey="id" file="db/seeds/student_group.csv"/>
     </changeSet>
 
     <changeSet id="bitches_7" author="GoodBoy">
-        <loadUpdateData tableName="student" primaryKey="id" file="db/seeds/students.csv">
+        <loadUpdateData tableName="students" primaryKey="id" file="db/seeds/students.csv">
             <column name="id" type="numeric"/>
         </loadUpdateData>
     </changeSet>
