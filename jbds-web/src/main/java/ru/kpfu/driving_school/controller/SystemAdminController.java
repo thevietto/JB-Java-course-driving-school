@@ -2,10 +2,8 @@ package ru.kpfu.driving_school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.driving_school.form.DSAccountForm;
-import ru.kpfu.driving_school.model.Credentials;
 import ru.kpfu.driving_school.service.DSAdminService;
 import ru.kpfu.driving_school.service.SystemAdminService;
 

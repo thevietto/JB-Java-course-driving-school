@@ -3,17 +3,17 @@ package ru.kpfu.driving_school.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "ds_admin")
-@SequenceGenerator(sequenceName = "ds_admin_id_seq", name = "ds_admin_gen", allocationSize = 1)
-public class DSAdminAccount {
+@Table(name = "ds_admins")
+@SequenceGenerator(sequenceName = "ds_admins_id_seq", name = "ds_admins_gen", allocationSize = 1)
+public class DSAdmin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ds_admin_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "ds_admins_gen")
     private long id;
 
     @OneToOne
     @JoinColumn(name = "credential_id")
-    private Credentials credentials;
+    private Credential credential;
 
     @Column(name = "is_active")
     private Boolean isActive;
@@ -22,7 +22,7 @@ public class DSAdminAccount {
     @JoinColumn(name = "driving_school_id")
     private DrivingSchool drivingSchool;
 
-    public DSAdminAccount() {
+    public DSAdmin() {
     }
 
     public long getId() {
@@ -33,12 +33,12 @@ public class DSAdminAccount {
         this.id = id;
     }
 
-    public Credentials getCredentials() {
-        return credentials;
+    public Credential getCredentials() {
+        return credential;
     }
 
-    public void setCredentials(Credentials credentials) {
-        this.credentials = credentials;
+    public void setCredentials(Credential credential) {
+        this.credential = credential;
     }
 
     public Boolean getActive() {

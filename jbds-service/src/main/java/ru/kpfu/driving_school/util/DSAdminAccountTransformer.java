@@ -5,10 +5,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.kpfu.driving_school.exception.LoginAlreadyExistsException;
 import ru.kpfu.driving_school.form.DSAccountForm;
-import ru.kpfu.driving_school.model.Credentials;
-import ru.kpfu.driving_school.model.DSAdminAccount;
+import ru.kpfu.driving_school.model.Credential;
+import ru.kpfu.driving_school.model.DSAdmin;
 import ru.kpfu.driving_school.model.enums.UserRole;
-import ru.kpfu.driving_school.repository.CredentialsRepository;
+import ru.kpfu.driving_school.repository.CredentialRepository;
 
 import java.util.function.Function;
 
@@ -16,25 +16,25 @@ import java.util.function.Function;
  * Created by etovladislav on 19.03.16.
  */
 @Component
-public class DSAdminAccountTransformer implements Function<DSAccountForm, DSAdminAccount> {
+public class DSAdminAccountTransformer implements Function<DSAccountForm, DSAdmin> {
 
     @Autowired
-    CredentialsRepository credentialsRepository;
+    CredentialRepository credentialRepository;
 
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
-    public DSAdminAccount apply(DSAccountForm dsAccountForm) {
-        if (credentialsRepository.findOneByLogin(dsAccountForm.getLogin()) != null) {
+    public DSAdmin apply(DSAccountForm dsAccountForm) {
+        if (credentialRepository.findOneByLogin(dsAccountForm.getLogin()) != null) {
             throw new LoginAlreadyExistsException();
         }
-        Credentials credentials = new Credentials();
+        Credential credentials = new Credential();
         credentials.setLogin(dsAccountForm.getLogin());
         credentials.setPassword(encoder.encode(dsAccountForm.getPassword()));
         credentials.setRole(UserRole.ROLE_ADMIN);
-        credentialsRepository.save(credentials);
-        DSAdminAccount dsAdminAccount = new DSAdminAccount();
-        dsAdminAccount.setCredentials(credentials);
-        return dsAdminAccount;
+        credentialRepository.save(credentials);
+        DSAdmin dsAdmin = new DSAdmin();
+        dsAdmin.setCredentials(credentials);
+        return dsAdmin;
     }
 }

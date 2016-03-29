@@ -1,0 +1,216 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+    <changeSet id="2903105120_1" author="GoodBoy">
+        <createTable tableName="questions">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="text" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="image" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="category_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2903105120_2" author="GoodBoy">
+        <createTable tableName="categories">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2903105120_3" author="GoodBoy">
+        <createTable tableName="answer_variants">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="text" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="question_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2903105120_4" author="GoodBoy">
+        <createTable tableName="right_answers">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="answer_variant_id" type="bigint"/>
+            <column name="question_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2903105120_5" author="GoodBoy">
+        <createTable tableName="tests">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)"/>
+            <column name="deadline" type="date"/>
+        </createTable>
+    </changeSet>
+
+
+    <changeSet id="2903105120_6" author="GoodBoy">
+        <createTable tableName="test_questions">
+            <column name="test_id" type="bigint"/>
+            <column name="question_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2903105120_7" author="GoodBoy">
+        <createTable tableName="student_question_answers">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="student_id" type="bigint"/>
+            <column name="test_id" type="bigint"/>
+            <column name="question_id" type="bigint"/>
+            <column name="answer_variant_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2903105120_8" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="category_id"
+                                 baseTableName="questions"
+                                 constraintName="questions_categories_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="categories"/>
+    </changeSet>
+
+    <changeSet id="2903105120_9" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="question_id"
+                                 baseTableName="answer_variants"
+                                 constraintName="answer_variants_questions_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="questions"/>
+    </changeSet>
+
+    <changeSet id="2903105120_10" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="question_id"
+                                 baseTableName="right_answers"
+                                 constraintName="right_answers_questions_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="questions"/>
+    </changeSet>
+
+    <changeSet id="2903105120_11" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="answer_variant_id"
+                                 baseTableName="right_answers"
+                                 constraintName="right_answers_answer_variants_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="answer_variants"/>
+    </changeSet>
+
+
+    <changeSet id="2903105120_12" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="test_id"
+                                 baseTableName="test_questions"
+                                 constraintName="test_questions_tests_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tests"/>
+    </changeSet>
+
+    <changeSet id="2903105120_13" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="question_id"
+                                 baseTableName="test_questions"
+                                 constraintName="test_questions_questions_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="questions"/>
+    </changeSet>
+
+    <changeSet id="2903105120_14" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="student_id"
+                                 baseTableName="student_question_answers"
+                                 constraintName="student_question_answers_students_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="student"/>
+    </changeSet>
+
+    <changeSet id="2903105120_15" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="test_id"
+                                 baseTableName="student_question_answers"
+                                 constraintName="student_question_answers_tests_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tests"/>
+    </changeSet>
+
+    <changeSet id="2903105120_16" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="test_id"
+                                 baseTableName="student_question_answers"
+                                 constraintName="student_question_answers_questions_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="questions"/>
+    </changeSet>
+
+    <changeSet id="2903105120_17" author="GoodBoy">
+        <addForeignKeyConstraint baseColumnNames="answer_variant_id"
+                                 baseTableName="student_question_answers"
+                                 constraintName="student_question_answers_answer_variants_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="answer_variants"/>
+    </changeSet>
+
+
+    <changeSet id="2903105120_18" author="GoodBoy">
+        <createSequence
+                sequenceName="tests_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"/>
+    </changeSet>
+
+    <changeSet id="2903105120_19" author="GoodBoy">
+        <createSequence
+                sequenceName="categories_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"/>
+    </changeSet>
+
+    <changeSet id="2903105120_20" author="GoodBoy">
+        <createSequence
+                sequenceName="questions_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"/>
+    </changeSet>
+
+    <changeSet id="2903105120_21" author="GoodBoy">
+        <createSequence
+                sequenceName="right_answers_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"/>
+    </changeSet>
+
+    <changeSet id="2903105120_22" author="GoodBoy">
+        <createSequence
+                sequenceName="answer_variants_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"/>
+    </changeSet>
+
+    <changeSet id="2903105120_23" author="GoodBoy">
+        <createSequence
+                sequenceName="student_question_answers_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"/>
+    </changeSet>
+
+</databaseChangeLog>
