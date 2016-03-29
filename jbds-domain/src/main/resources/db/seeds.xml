@@ -46,5 +46,31 @@
         </loadUpdateData>
     </changeSet>
 
+    <changeSet id="bitches_8" author="GoodBoy">
+        <loadUpdateData tableName="task" primaryKey="id" file="db/seeds/task.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="bitches_9" author="GoodBoy">
+        <loadUpdateData tableName="question" primaryKey="id" file="db/seeds/question.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="bitches_10" author="GoodBoy">
+        <loadUpdateData tableName="answer" primaryKey="id" file="db/seeds/answer.csv">
+            <column name="id" type="numeric"/>
+            <column name="right" type="boolean"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="bitches_11" author="GoodBoy">
+        <loadUpdateData tableName="student_task" primaryKey="id" file="db/seeds/student_task.csv">
+            <column name="id" type="numeric"/>
+            <column name="deadline" type="date"/>
+            <column name="is_done" type="boolean"/>
+        </loadUpdateData>
+    </changeSet>
 
 </databaseChangeLog>

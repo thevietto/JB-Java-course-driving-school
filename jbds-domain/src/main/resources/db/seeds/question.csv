@@ -1,0 +1,6 @@
+ID,NAME,IMAGE,TASK_ID,POINT
+1,question1,question_images/question1.jpeg,1,5
+2,question2,question_images/question2.jpg,1,10
+3,question3,question_images/question1.jpeg,1,6
+4,question4,question_images/question2.jpg,1,7
+5,question5,question_images/question1.jpeg,1,8
