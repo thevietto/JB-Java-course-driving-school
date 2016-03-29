@@ -6,21 +6,21 @@ import javax.persistence.*;
  * Created by aleksandrpliskin on 29.03.16.
  */
 @Entity
-@SequenceGenerator(sequenceName = "question_id_seq", name = "question_seq", allocationSize = 1)
-@Table(name = "question")
+@SequenceGenerator(sequenceName = "questions_id_seq", name = "questions_gen", allocationSize = 1)
+@Table(name = "questions")
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "question_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "questions_gen")
     private Long id;
 
-    private String name;
+    private String text;
 
     private String image;
 
     @ManyToOne
-    @JoinColumn(name = "task_id")
-    private Task task;
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     private Long point;
 
@@ -40,12 +40,12 @@ public class Question {
         this.image = image;
     }
 
-    public String getName() {
-        return name;
+    public String getText() {
+        return text;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setText(String text) {
+        this.text = text;
     }
 
     public Long getPoint() {
@@ -56,11 +56,11 @@ public class Question {
         this.point = point;
     }
 
-    public Task getTask() {
-        return task;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setTask(Task task) {
-        this.task = task;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

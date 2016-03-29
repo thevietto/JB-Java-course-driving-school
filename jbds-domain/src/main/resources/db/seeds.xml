@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <databaseChangeLog
-        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
@@ -47,30 +47,47 @@
     </changeSet>
 
     <changeSet id="bitches_8" author="GoodBoy">
-        <loadUpdateData tableName="task" primaryKey="id" file="db/seeds/task.csv">
+        <loadUpdateData tableName="categories" primaryKey="id" file="db/seeds/categories.csv">
             <column name="id" type="numeric"/>
         </loadUpdateData>
     </changeSet>
 
     <changeSet id="bitches_9" author="GoodBoy">
-        <loadUpdateData tableName="question" primaryKey="id" file="db/seeds/question.csv">
+        <loadUpdateData tableName="questions" primaryKey="id" file="db/seeds/questions.csv">
             <column name="id" type="numeric"/>
         </loadUpdateData>
     </changeSet>
 
     <changeSet id="bitches_10" author="GoodBoy">
-        <loadUpdateData tableName="answer" primaryKey="id" file="db/seeds/answer.csv">
+        <loadUpdateData tableName="answer_variants" primaryKey="id" file="db/seeds/answer_variants.csv">
             <column name="id" type="numeric"/>
-            <column name="right" type="boolean"/>
         </loadUpdateData>
     </changeSet>
 
     <changeSet id="bitches_11" author="GoodBoy">
-        <loadUpdateData tableName="student_task" primaryKey="id" file="db/seeds/student_task.csv">
+        <loadUpdateData tableName="right_answers" primaryKey="id" file="db/seeds/right_answers.csv">
             <column name="id" type="numeric"/>
-            <column name="deadline" type="date"/>
-            <column name="is_done" type="boolean"/>
         </loadUpdateData>
     </changeSet>
+
+    <changeSet id="bitches_12" author="GoodBoy">
+        <loadUpdateData tableName="tests" primaryKey="id" file="db/seeds/tests.csv">
+            <column name="id" type="numeric"/>
+            <column name="deadline" type="date"/>
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="bitches_13" author="GoodBoy">
+        <loadUpdateData tableName="test_questions" primaryKey="test_id, question_id" file="db/seeds/test_questions.csv">
+        </loadUpdateData>
+    </changeSet>
+
+    <changeSet id="bitches_14" author="GoodBoy">
+        <loadUpdateData tableName="student_question_answers" primaryKey="id"
+                        file="db/seeds/student_question_answers.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
 
 </databaseChangeLog>
