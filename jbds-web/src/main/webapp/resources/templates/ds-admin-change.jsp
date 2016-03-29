@@ -13,14 +13,15 @@
 <body>
 <h1>Профиль студента</h1>
 
-<form action="/admin/ds_admin_accounts/save_student_account/" method="post">
-    <input type="hidden" name="id" value='<ch:out value='${student.id}'/>'>
+<form action="/admin/ds_admin_accounts/student/<ch:out value='${student.id}'/>" method="post">
     ФИО <input type="text" name="fio" value="<ch:out value='${student.fio}'/>"><br/>
     ЛОГИН <input type="text" name="login" value="<ch:out value='${student.credentials.login}'/>"/><br/>
     НВЫЙ ПАРОЛЬ<input type="text" name="password" value=""/><br/>
-    <input type="submit" value="Сохранить"><a href="/admin/ds_admin_accounts/<ch:out value='${student.id}'/>/delete_student_account">Удалить студента</a>
+    <input type="submit" value="Сохранить">
 </form>
-
+<form action="/admin/ds_admin_accounts/student/<ch:out value='${student.id}'/>" method="post">
+    <input type="submit" value="Удалить студента">
+</form>
 
 </body>
 </html>

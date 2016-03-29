@@ -29,8 +29,8 @@ public interface DSAdminService {
 
     void createStudentGroup(String teacherName, MultipartFile file);
 
-    void saveStundetChange(StudentAccount student);
+    void updateStudent(StudentAccount student);
 
-    boolean isBelong(Long studentId);
+    boolean dsAdminSuccessEditStudent(Long studentId);
 
 }

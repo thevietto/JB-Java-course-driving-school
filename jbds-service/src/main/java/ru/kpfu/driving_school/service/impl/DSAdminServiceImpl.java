@@ -2,7 +2,6 @@ package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -108,24 +107,15 @@ public class DSAdminServiceImpl implements DSAdminService {
     }
 
     @Override
-    public void saveStundetChange(StudentAccount student) {
-        StudentAccount oldStudent = studentRepository.findOne(student.getId());
-        if (isBelong(student.getId())) {
-            oldStudent.setFio(student.getFio());
-            oldStudent.getCredentials().setLogin(student.getCredentials().getLogin());
-            if (student.getCredentials().getPassword().trim().length() != 0) {
-                BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-                oldStudent.getCredentials().setPassword(encoder.encode(student.getCredentials().getPassword()));
-            }
-        }
-        studentRepository.save(oldStudent);
+    public void updateStudent(StudentAccount student) {
+            studentRepository.save(student);
     }
 
     @Override
-    public boolean isBelong(Long studentId) {
+    public boolean dsAdminSuccessEditStudent(Long studentId) {
         Credentials credentials = (Credentials) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         DSAdminAccount DSAdmin = dsAdminRepository.findOneByCredentials(credentials);
-        if (studentRepository.isBelong(studentId, DSAdmin.getId()).size() > 0) {
+        if (studentRepository.dsAdminSuccessEditStudent(studentId, DSAdmin.getId()).size() > 0) {
             return true;
         }
         return false;

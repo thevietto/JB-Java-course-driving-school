@@ -3,7 +3,7 @@ package ru.kpfu.driving_school.form;
 /**
  * Created by mikl on 27.03.2016.
  */
-public class StudentChangeForm {
+public class StudentEditForm {
     private Long id;
     private String fio;
     private String login;
