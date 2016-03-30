@@ -9,7 +9,7 @@
 <h1>${student.fio}</h1>
 
 <c:forEach var="mark" items="${marks}">
-    <p>${mark.description} : ${mark.marks}     дата: ${mark.date}</p>
+    <p>${mark.description} : ${mark.mark}     дата: ${mark.createdAt}</p>
     <br/>
 </c:forEach>
 
