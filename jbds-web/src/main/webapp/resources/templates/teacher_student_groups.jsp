@@ -7,7 +7,6 @@
 
 <c:forEach var="group" items="${groups}">
     <a href="/teacher/student_groups/${group.id}"><c:out value="номер ${group.id}"/><br/></a>
-    <c:out value="количество студентов ${group.students.size()}"/><br/>
     <br/>
 </c:forEach>
 

@@ -5,7 +5,7 @@
 <body>
 <h1>Student group</h1>
 
-<a href="/teacher/student_groups/${group.id}/students"><c:out value="состав группы"/></a>
-
+<c:out value="${student.fio}"/>
+<a href="/teacher/student_groups/${student.studentGroup.id}/students/${student.id}/student_points">оценки</a>
 </body>
 </html>

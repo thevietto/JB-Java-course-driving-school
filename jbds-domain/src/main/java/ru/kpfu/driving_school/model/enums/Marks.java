@@ -5,10 +5,10 @@ package ru.kpfu.driving_school.model.enums;
  */
 public enum Marks {
 
-    FIVE,
-    FOUR,
-    THREE,
+    ONE,
     TWO,
-    ONE
+    THREE,
+    FOUR,
+    FIVE
 
 }
