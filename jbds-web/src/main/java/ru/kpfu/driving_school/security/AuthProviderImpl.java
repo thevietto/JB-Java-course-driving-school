@@ -19,9 +19,9 @@ import java.util.List;
 public class AuthProviderImpl implements AuthenticationProvider {
 
     @Autowired
-    CredentialRepository credentialRepository;
+    private CredentialRepository credentialRepository;
 
-    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+    private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

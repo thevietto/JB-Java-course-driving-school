@@ -9,12 +9,12 @@ import java.util.Date;
  * Created by aleksandrpliskin on 30.03.16.
  */
 @Entity
-@SequenceGenerator(sequenceName = "student_points_id_seq", name = "student_points_gen", allocationSize = 1)
-@Table(name = "student_points")
-public class StudentPoint {
+@SequenceGenerator(sequenceName = "student_marks_id_seq", name = "student_marks_gen", allocationSize = 1)
+@Table(name = "student_marks")
+public class StudentMark {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_points_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_marks_gen")
     private Long id;
 
     private String description;
@@ -27,10 +27,10 @@ public class StudentPoint {
     @JoinColumn(name = "student_id")
     private Student student;
 
-    @Column(name = "date")
-    private Date date;
+    @Column(name = "created_at")
+    private Date createdAt;
 
-    public StudentPoint() {
+    public StudentMark() {
     }
 
     public String getDescription() {
@@ -65,11 +65,11 @@ public class StudentPoint {
         this.student = student;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }

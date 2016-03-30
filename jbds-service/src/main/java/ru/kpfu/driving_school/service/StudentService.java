@@ -1,8 +1,7 @@
 package ru.kpfu.driving_school.service;
 
 import ru.kpfu.driving_school.model.Student;
-import ru.kpfu.driving_school.model.StudentPoint;
-import ru.kpfu.driving_school.model.enums.Marks;
+import ru.kpfu.driving_school.model.StudentMark;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ public interface StudentService {
 
     Student getStudent(Long id);
 
-    List<StudentPoint> getStudentPoints(Long studentId);
+    List<StudentMark> getStudentPoints(Long studentId);
 
     void setStudentPoints(Long studentId, String description, String mark);
 }

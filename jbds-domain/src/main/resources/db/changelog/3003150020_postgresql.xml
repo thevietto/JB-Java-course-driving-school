@@ -5,7 +5,7 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="3003150020_1" author="GoodBoy">
-        <createTable tableName="student_points">
+        <createTable tableName="student_marks">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
@@ -16,16 +16,16 @@
     </changeSet>
 
     <changeSet id="3003150020_2" author="GoodBoy">
-        <addForeignKeyConstraint baseTableName="student_points"
+        <addForeignKeyConstraint baseTableName="student_marks"
                                  baseColumnNames="student_id"
-                                 constraintName="student_points_students_fk"
+                                 constraintName="student_marks_students_fk"
                                  referencedTableName="students"
                                  referencedColumnNames="id"/>
     </changeSet>
 
     <changeSet id="3003150020_3" author="GoodBoy">
         <createSequence
-                sequenceName="student_points_id_seq"
+                sequenceName="student_marks_id_seq"
                 startValue="50"
                 incrementBy="1"
                 minValue="50"
