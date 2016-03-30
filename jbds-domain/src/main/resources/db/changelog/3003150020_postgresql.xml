@@ -1,0 +1,36 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="3003150020_1" author="GoodBoy">
+        <createTable tableName="student_points">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="description" type="varchar(255)"/>
+            <column name="mark" type="varchar(255)"/>
+            <column name="student_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3003150020_2" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="student_points"
+                                 baseColumnNames="student_id"
+                                 constraintName="student_points_students_fk"
+                                 referencedTableName="students"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="3003150020_3" author="GoodBoy">
+        <createSequence
+                sequenceName="student_points_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+
+</databaseChangeLog>
