@@ -1,7 +1,5 @@
 package ru.kpfu.driving_school.model;
 
-import ru.kpfu.driving_school.model.enums.Marks;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -19,9 +17,8 @@ public class StudentMark {
 
     private String description;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "mark")
-    private Marks marks;
+    private Integer mark;
 
     @ManyToOne
     @JoinColumn(name = "student_id")
@@ -49,12 +46,12 @@ public class StudentMark {
         this.id = id;
     }
 
-    public Marks getMarks() {
-        return marks;
+    public Integer getMark() {
+        return mark;
     }
 
-    public void setMarks(Marks marks) {
-        this.marks = marks;
+    public void setMark(Integer mark) {
+        this.mark = mark;
     }
 
     public Student getStudent() {

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import ru.kpfu.driving_school.exception.NoSuchStudentException;
 import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.StudentMark;
-import ru.kpfu.driving_school.model.enums.Marks;
 import ru.kpfu.driving_school.repository.StudentMarkRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.StudentService;
@@ -49,7 +48,7 @@ public class StudentServiceImpl implements StudentService {
             StudentMark studentPoint = new StudentMark();
             studentPoint.setStudent(studentRepository.findOne(studentId));
             studentPoint.setDescription(description);
-            studentPoint.setMarks(Marks.valueOf(mark.toUpperCase()));
+            studentPoint.setMark(Integer.parseInt(mark));
             studentPoint.setCreatedAt(new Date());
             studentMarkRepository.save(studentPoint);
         } catch (NullPointerException e) {

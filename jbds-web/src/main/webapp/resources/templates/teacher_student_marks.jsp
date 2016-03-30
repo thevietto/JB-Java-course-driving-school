@@ -17,11 +17,11 @@
     <textarea name="description"></textarea>
     <br/>
     <select name="student_point">
-        <option value="five">5</option>
-        <option value="four">4</option>
-        <option value="three">3</option>
-        <option value="two">2</option>
-        <option value="one">1</option>
+        <option value="5">5</option>
+        <option value="4">4</option>
+        <option value="3">3</option>
+        <option value="2">2</option>
+        <option value="1">1</option>
     </select>
     <br/>
     <button type="submit">поставить оценку</button>
