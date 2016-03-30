@@ -9,6 +9,7 @@ import ru.kpfu.driving_school.repository.StudentPointRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.StudentService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,11 +35,12 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void setStudentPoints(Long studentId, String description, Integer mark) {
+    public void setStudentPoints(Long studentId, String description, String mark) {
         StudentPoint studentPoint = new StudentPoint();
         studentPoint.setStudent(studentRepository.findOne(studentId));
         studentPoint.setDescription(description);
-        studentPoint.setMarks(Marks.values()[mark - 1]);
+        studentPoint.setMarks(Marks.valueOf(mark.toUpperCase()));
+        studentPoint.setDate(new Date());
         studentPointRepository.save(studentPoint);
     }
 

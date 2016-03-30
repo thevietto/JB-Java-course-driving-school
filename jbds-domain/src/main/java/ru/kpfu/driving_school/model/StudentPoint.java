@@ -3,6 +3,7 @@ package ru.kpfu.driving_school.model;
 import ru.kpfu.driving_school.model.enums.Marks;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Created by aleksandrpliskin on 30.03.16.
@@ -25,6 +26,12 @@ public class StudentPoint {
     @ManyToOne
     @JoinColumn(name = "student_id")
     private Student student;
+
+    @Column(name = "date")
+    private Date date;
+
+    public StudentPoint() {
+    }
 
     public String getDescription() {
         return description;
@@ -56,5 +63,13 @@ public class StudentPoint {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

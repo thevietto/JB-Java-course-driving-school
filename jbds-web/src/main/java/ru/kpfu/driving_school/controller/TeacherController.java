@@ -75,9 +75,9 @@ public class TeacherController {
     public String setStudentPoints(@PathVariable("id") Long id,
                                    @PathVariable("studentId") Long studentId,
                                    @RequestParam("description") String description,
-                                   @RequestParam("student_point") Integer studentPoint) {
+                                   @RequestParam("student_point") String studentPoint) {
         studentService.setStudentPoints(studentId, description, studentPoint);
-        return "redirect:/student_groups/" + id + "/students/" + studentId + "/student_points";
+        return "redirect:/teacher/student_groups/" + id + "/students/" + studentId + "/student_points";
     }
 
 }

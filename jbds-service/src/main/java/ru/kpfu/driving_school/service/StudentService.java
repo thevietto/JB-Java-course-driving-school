@@ -15,5 +15,5 @@ public interface StudentService {
 
     List<StudentPoint> getStudentPoints(Long studentId);
 
-    void setStudentPoints(Long studentId, String description, Integer mark);
+    void setStudentPoints(Long studentId, String description, String mark);
 }
