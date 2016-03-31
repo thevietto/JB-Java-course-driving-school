@@ -56,7 +56,7 @@ public class TeacherController {
     public String getStudent(Model model,
                              @PathVariable("id") Long id,
                              @PathVariable("studentId") Long studentId) {
-        model.addAttribute("student", studentService.getStudent(studentId));
+        model.addAttribute("student", studentService.getStudent(studentId, id));
         return "teacher_student";
     }
 
@@ -65,8 +65,8 @@ public class TeacherController {
     public String getStudentPoints(Model model,
                                    @PathVariable("id") Long id,
                                    @PathVariable("studentId") Long studentId) {
-        model.addAttribute("marks", studentService.getStudentMarks(studentId));
-        model.addAttribute("student", studentService.getStudent(studentId));
+        model.addAttribute("marks", studentService.getStudentMarks(studentId, id));
+        model.addAttribute("student", studentService.getStudent(studentId, id));
         return "teacher_student_marks";
     }
 
@@ -76,7 +76,7 @@ public class TeacherController {
                                    @PathVariable("studentId") Long studentId,
                                    @RequestParam("description") String description,
                                    @RequestParam("student_point") String studentPoint) {
-        studentService.setStudentMarks(studentId, description, studentPoint);
+        studentService.setStudentMarks(studentId, description, studentPoint, id);
         return "redirect:/teacher/student_groups/" + id + "/students/" + studentId + "/student_points";
     }
 

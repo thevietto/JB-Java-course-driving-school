@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface StudentService {
 
-    Student getStudent(Long id);
+    Student getStudent(Long id, Long groupId);
 
-    List<StudentMark> getStudentMarks(Long studentId);
+    List<StudentMark> getStudentMarks(Long studentId, Long groupId);
 
-    void setStudentMarks(Long studentId, String description, String mark);
+    void setStudentMarks(Long studentId, String description, String mark, Long groupId);
 }
