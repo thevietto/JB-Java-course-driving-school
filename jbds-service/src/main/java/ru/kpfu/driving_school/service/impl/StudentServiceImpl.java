@@ -2,7 +2,6 @@ package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.kpfu.driving_school.exception.NoMarksForSuchStudentException;
 import ru.kpfu.driving_school.exception.NoSuchStudentException;
 import ru.kpfu.driving_school.exception.NoSuchStudentGroupException;
 import ru.kpfu.driving_school.model.Student;
