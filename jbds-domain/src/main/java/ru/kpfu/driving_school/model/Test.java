@@ -27,6 +27,13 @@ public class Test {
     )
     private List<Question> questions;
 
+    @ManyToOne
+            @JoinTable(name = "ds_tests",
+                    joinColumns = @JoinColumn(name = "test_id"),
+                    inverseJoinColumns = @JoinColumn(name = "ds_id")
+            )
+    DrivingSchool drivingSchool;
+
     public Date getDeadline() {
         return deadline;
     }

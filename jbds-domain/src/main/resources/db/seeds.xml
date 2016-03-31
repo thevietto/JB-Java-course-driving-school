@@ -97,5 +97,9 @@
 
 
 
+    <changeSet id="bitches_16" author="etovladislav">
+        <loadUpdateData tableName="ds_tests" primaryKey="test_id, ds_id" file="db/seeds/ds_tests.csv">
+        </loadUpdateData>
+    </changeSet>
 
 </databaseChangeLog>

@@ -80,4 +80,9 @@ public class TeacherController {
         return "redirect:/teacher/student_groups/" + id + "/students/" + studentId + "/student_points";
     }
 
+    @RequestMapping(value = "/test/new", method = RequestMethod.GET)
+    public String createTest() {
+        return "create-test";
+    }
+
 }

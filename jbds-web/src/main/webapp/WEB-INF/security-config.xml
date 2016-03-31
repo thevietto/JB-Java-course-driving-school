@@ -27,7 +27,5 @@
     <security:authentication-manager>
         <security:authentication-provider ref="authProvider"/>
     </security:authentication-manager>
-
     <bean id="authProvider" class="ru.kpfu.driving_school.security.AuthProviderImpl"/>
-
 </beans>
