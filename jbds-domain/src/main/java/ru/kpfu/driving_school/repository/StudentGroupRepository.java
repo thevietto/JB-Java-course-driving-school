@@ -29,4 +29,7 @@ public interface StudentGroupRepository extends JpaRepository<StudentGroup, Long
 
     @Query(value = "select sGroup from StudentGroup sGroup join sGroup.drivingSchool dSchool where dSchool = (select admin.drivingSchool from DSAdmin admin where admin.credential = :credential)")
     List<StudentGroup> getByDrivingSchool(@Param("credential") Credential credential);
+
+    @Query(value = "select sGroup from StudentGroup sGroup where sGroup.teacher = (select t from Teacher t where t.credential = :credential)")
+    List<StudentGroup> findByTeacher(@Param("credential") Credential credential);
 }

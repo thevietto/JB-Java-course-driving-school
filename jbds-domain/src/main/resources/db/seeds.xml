@@ -89,7 +89,15 @@
         </loadUpdateData>
     </changeSet>
 
-    <changeSet id="bitches_15" author="etovladislav">
+    <changeSet id="bitches_15" author="GoodBoy">
+        <loadUpdateData tableName="student_marks" primaryKey="id" file="db/seeds/student_marks.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+
+
+    <changeSet id="bitches_16" author="etovladislav">
         <loadUpdateData tableName="ds_tests" primaryKey="test_id, ds_id" file="db/seeds/ds_tests.csv">
         </loadUpdateData>
     </changeSet>
