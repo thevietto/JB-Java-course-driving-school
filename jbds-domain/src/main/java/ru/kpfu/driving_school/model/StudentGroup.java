@@ -19,7 +19,7 @@ public class StudentGroup {
     @JoinColumn(name = "driving_school_id")
     private DrivingSchool drivingSchool;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentGroup", fetch = FetchType.EAGER)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentGroup", fetch = FetchType.LAZY)
     private List<Student> students;
 
     @OneToOne

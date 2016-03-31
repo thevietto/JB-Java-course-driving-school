@@ -6,8 +6,7 @@
 <h1>Student groups</h1>
 
 <c:forEach var="group" items="${groups}">
-    <c:out value="номер ${group.id}"/><br/>
-    <c:out value="преподаватель ${group.teacher.fio}"/><br/>
+    <a href="/teacher/student_groups/${group.id}"><c:out value="номер ${group.id}"/><br/></a>
     <br/>
 </c:forEach>
 

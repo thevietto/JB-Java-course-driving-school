@@ -89,5 +89,13 @@
         </loadUpdateData>
     </changeSet>
 
+    <changeSet id="bitches_15" author="GoodBoy">
+        <loadUpdateData tableName="student_marks" primaryKey="id" file="db/seeds/student_marks.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
+
+
 
 </databaseChangeLog>
