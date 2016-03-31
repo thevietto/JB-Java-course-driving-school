@@ -27,11 +27,7 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public List<StudentGroup> getStudentGroups() {
-        List<StudentGroup> groupList = studentGroupRepository.findByTeacher(SecurityUtils.getCurrentUser());
-        if (groupList == null) {
-            throw new NoGroupForTeacherException();
-        }
-        return groupList;
+        return studentGroupRepository.findByTeacher(SecurityUtils.getCurrentUser());
     }
 
 

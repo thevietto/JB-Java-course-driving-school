@@ -45,11 +45,7 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<StudentMark> getStudentMarks(Long studentId, Long groupId) {
         Student student = getStudent(studentId, groupId);
-        List<StudentMark> studentMarks = studentMarkRepository.findByStudent(student);
-        if (studentMarks == null) {
-            throw new NoMarksForSuchStudentException();
-        }
-        return studentMarks;
+        return studentMarkRepository.findByStudent(student);
     }
 
     @Override
