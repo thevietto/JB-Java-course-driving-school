@@ -63,10 +63,5 @@ public class DSAdminController {
         return "ds-admin-index";
     }
 
-    @RequestMapping(value = "/test/create", method = RequestMethod.GET)
-    public String createTest() {
-
-        return "create-test";
-    }
 }
 
