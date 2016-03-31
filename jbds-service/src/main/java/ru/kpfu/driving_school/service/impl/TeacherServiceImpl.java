@@ -27,31 +27,32 @@ public class TeacherServiceImpl implements TeacherService {
 
     @Override
     public List<StudentGroup> getStudentGroups() {
-        try {
-            return studentGroupRepository.findByTeacher(SecurityUtils.getCurrentUser());
-        } catch (NullPointerException e) {
+        List<StudentGroup> groupList = studentGroupRepository.findByTeacher(SecurityUtils.getCurrentUser());
+        if (groupList == null) {
             throw new NoGroupForTeacherException();
         }
+        return groupList;
     }
 
 
     @Override
     public StudentGroup getStudentGroup(Long id) {
-        try {
-            return studentGroupRepository.findOne(id);
-        } catch (NullPointerException e) {
+        StudentGroup studentGroup = studentGroupRepository.findOne(id);
+        if (studentGroup == null) {
             throw new NoSuchStudentGroupException();
         }
+        return studentGroup;
     }
+
 
     @Override
     public List<Student> getStudentsOfStudentGroup(Long id) {
-        try {
-            StudentGroup studentGroup = studentGroupRepository.findOne(id);
-            return studentRepository.findByStudentGroup(studentGroup);
-        } catch (NullPointerException e) {
+        StudentGroup studentGroup = studentGroupRepository.findOne(id);
+        if (studentGroup == null) {
             throw new NoSuchStudentGroupException();
         }
+        return studentRepository.findByStudentGroup(studentGroup);
     }
 }
+
 

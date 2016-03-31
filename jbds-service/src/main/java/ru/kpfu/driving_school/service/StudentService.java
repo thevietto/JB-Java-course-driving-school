@@ -12,7 +12,7 @@ public interface StudentService {
 
     Student getStudent(Long id);
 
-    List<StudentMark> getStudentPoints(Long studentId);
+    List<StudentMark> getStudentMarks(Long studentId);
 
-    void setStudentPoints(Long studentId, String description, String mark);
+    void setStudentMarks(Long studentId, String description, String mark);
 }

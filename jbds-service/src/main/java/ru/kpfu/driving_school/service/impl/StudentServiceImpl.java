@@ -2,6 +2,7 @@ package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.kpfu.driving_school.exception.NoMarksForSuchStudentException;
 import ru.kpfu.driving_school.exception.NoSuchStudentException;
 import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.StudentMark;
@@ -26,35 +27,31 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student getStudent(Long id) {
-        try {
-            return studentRepository.findOne(id);
-        } catch (NullPointerException e) {
+        Student student = studentRepository.findOne(id);
+        if (student == null) {
             throw new NoSuchStudentException();
         }
+        return student;
     }
 
     @Override
-    public List<StudentMark> getStudentPoints(Long studentId) {
-        try {
-            return studentMarkRepository.findByStudent(studentRepository.findOne(studentId));
-        } catch (NullPointerException e) {
-            throw new NoSuchStudentException();
+    public List<StudentMark> getStudentMarks(Long studentId) {
+        Student student = getStudent(studentId);
+        List<StudentMark> studentMarks = studentMarkRepository.findByStudent(student);
+        if (studentMarks == null) {
+            throw new NoMarksForSuchStudentException();
         }
+        return studentMarks;
     }
 
     @Override
-    public void setStudentPoints(Long studentId, String description, String mark) {
-        try {
-            StudentMark studentPoint = new StudentMark();
-            studentPoint.setStudent(studentRepository.findOne(studentId));
-            studentPoint.setDescription(description);
-            studentPoint.setMark(Integer.parseInt(mark));
-            studentPoint.setCreatedAt(new Date());
-            studentMarkRepository.save(studentPoint);
-        } catch (NullPointerException e) {
-            throw new NoSuchStudentException();
-        }
+    public void setStudentMarks(Long studentId, String description, String mark) {
+        StudentMark studentPoint = new StudentMark();
+        studentPoint.setStudent(getStudent(studentId));
+        studentPoint.setDescription(description);
+        studentPoint.setMark(Integer.parseInt(mark));
+        studentPoint.setCreatedAt(new Date());
+        studentMarkRepository.save(studentPoint);
     }
-
-
 }
+

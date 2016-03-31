@@ -30,11 +30,12 @@ public class ExceptionHandlingController {
         return new ExceptionDto(400, "Required parameter missing");
     }
 
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+    @ResponseStatus(value = HttpStatus.NOT_FOUND)
     @ExceptionHandler(ResourceNotFoundException.class)
     @ResponseBody
-    public ExceptionDto noSuchStudentGroup() {
-        return new ExceptionDto(400, "resource wasn't find");
+    public ExceptionDto resourceNorExists(Exception e) {
+        System.out.println(e.getMessage());
+        return new ExceptionDto(404, e.getMessage());
     }
 
 }
