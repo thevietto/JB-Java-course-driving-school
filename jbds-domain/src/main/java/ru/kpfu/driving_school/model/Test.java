@@ -34,6 +34,22 @@ public class Test {
             )
     DrivingSchool drivingSchool;
 
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    public DrivingSchool getDrivingSchool() {
+        return drivingSchool;
+    }
+
+    public void setDrivingSchool(DrivingSchool drivingSchool) {
+        this.drivingSchool = drivingSchool;
+    }
+
     public Date getDeadline() {
         return deadline;
     }
