@@ -33,8 +33,8 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public void createGroupTest(Long id, String name, String description) {
-        Test test = testRepository.findOneByDescription(name);
+    public void createGroupTest(Long id, String testName, String description) {
+        Test test = testRepository.findOneByDescription(testName);
         StudentGroup studentGroup = studentGroupRepository.findOne(id);
         GroupTest groupTest = new GroupTest();
         groupTest.setDescription(description);

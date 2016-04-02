@@ -58,8 +58,7 @@ public class TeacherController {
 
     @RequestMapping(value = "/student_groups/{id}/task",
             method = RequestMethod.POST)
-    public String addTaskForStudentGroup(Model model,
-                                         @PathVariable("id") Long id,
+    public String addTaskForStudentGroup(@PathVariable("id") Long id,
                                          @RequestParam("test_name") String name,
                                          @RequestParam("description") String description
     ) {
