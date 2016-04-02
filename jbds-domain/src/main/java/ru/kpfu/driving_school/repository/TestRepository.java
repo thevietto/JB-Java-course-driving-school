@@ -26,4 +26,5 @@ public interface TestRepository extends JpaRepository<Test, Long> {
     @Query(value = "select t from Test t join t.drivingSchool ds where ds.id = (select sGroup.id from StudentGroup sGroup where sGroup.id = :groupId)")
     List<Test> findByGroupId(@Param("groupId") Long groupId);
 
+    Test findOneByDescription(String description);
 }

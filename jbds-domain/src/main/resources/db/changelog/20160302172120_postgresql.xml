@@ -26,7 +26,7 @@
 
     <changeSet id="20160302172120_3" author="GoodBoy">
         <addForeignKeyConstraint baseTableName="group_tests"
-                                 baseColumnNames="test_id"
+                                 baseColumnNames="student_group_id"
                                  constraintName="group_tests_student_groups_fk"
                                  referencedTableName="student_groups"
                                  referencedColumnNames="id"

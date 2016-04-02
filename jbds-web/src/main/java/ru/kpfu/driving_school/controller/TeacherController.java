@@ -56,6 +56,18 @@ public class TeacherController {
         return "teacher_student_group_add_task";
     }
 
+    @RequestMapping(value = "/student_groups/{id}/task",
+            method = RequestMethod.POST)
+    public String addTaskForStudentGroup(Model model,
+                                         @PathVariable("id") Long id,
+                                         @RequestParam("test_name") String name,
+                                         @RequestParam("description") String description
+    ) {
+        testService.createGroupTest(id, name, description);
+        return "redirect:/teacher/student_groups/" + id;
+    }
+
+
     @RequestMapping(value = "/student_groups/{id}/students",
             method = RequestMethod.GET)
     public String getStudents(Model model,

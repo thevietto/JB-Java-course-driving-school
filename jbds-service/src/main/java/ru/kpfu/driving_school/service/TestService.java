@@ -11,4 +11,6 @@ public interface TestService {
 
     List<Test> getTests(Long groupId);
 
+    void createGroupTest(Long id, String name, String description);
+
 }
