@@ -109,8 +109,7 @@ public class TeacherController {
     @RequestMapping(value = "/test/create", method = RequestMethod.POST)
     @ResponseStatus(value = HttpStatus.SEE_OTHER)
     public String saveTest(@RequestParam("description") String description) {
-        Long credentialId = SecurityUtils.getCurrentUser().getId();
-        Long testId = testService.save(description, credentialId);
+        Long testId = testService.save(description);
         return "redirect:/teacher/test/" + testId + "/questions";
     }
 

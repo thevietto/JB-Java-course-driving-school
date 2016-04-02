@@ -6,5 +6,5 @@ package ru.kpfu.driving_school.service;
  */
 public interface TestService {
 
-    Long save(String description, Long credentialId);
+    Long save(String description);
 }
