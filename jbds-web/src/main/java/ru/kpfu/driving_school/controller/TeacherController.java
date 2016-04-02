@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ru.kpfu.driving_school.service.StudentService;
 import ru.kpfu.driving_school.service.TeacherService;
+import ru.kpfu.driving_school.service.TestService;
 
 /**
  * Created by aleksandrpliskin on 30.03.16.
@@ -22,6 +23,9 @@ public class TeacherController {
 
     @Autowired
     StudentService studentService;
+
+    @Autowired
+    TestService testService;
 
     @RequestMapping(value = "")
     public String getTeacherIndex() {
@@ -41,6 +45,15 @@ public class TeacherController {
                                   @PathVariable("id") Long id) {
         model.addAttribute("group", teacherService.getStudentGroup(id));
         return "teacher_student_group";
+    }
+
+    @RequestMapping(value = "/student_groups/{id}/task/new",
+            method = RequestMethod.GET)
+    public String getFormToAddTaskForStudentGroup(Model model,
+                                                  @PathVariable("id") Long id) {
+        model.addAttribute("group", teacherService.getStudentGroup(id));
+        model.addAttribute("tests", testService.getTests(id));
+        return "teacher_student_group_add_task";
     }
 
     @RequestMapping(value = "/student_groups/{id}/students",

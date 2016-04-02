@@ -95,11 +95,16 @@
         </loadUpdateData>
     </changeSet>
 
-
-
     <changeSet id="bitches_16" author="etovladislav">
         <loadUpdateData tableName="ds_tests" primaryKey="test_id, ds_id" file="db/seeds/ds_tests.csv">
         </loadUpdateData>
     </changeSet>
+
+    <changeSet id="bitches_17" author="GoodBoy">
+        <loadUpdateData tableName="group_tests" primaryKey="id" file="db/seeds/group_tests.csv">
+            <column name="id" type="numeric"/>
+        </loadUpdateData>
+    </changeSet>
+
 
 </databaseChangeLog>
