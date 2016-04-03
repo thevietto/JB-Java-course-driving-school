@@ -18,17 +18,20 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tasks_gen")
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "test_id")
+    @ManyToOne
+    @JoinTable(name = "tasks_tests",
+                joinColumns = @JoinColumn(name = "task_id"),
+            inverseJoinColumns = @JoinColumn(name = "test_id")
+    )
     private Test test;
 
-    @ManyToMany
+    @ManyToOne
     @JoinTable(
             name = "tasks_students",
             joinColumns = @JoinColumn(name = "task_id"),
             inverseJoinColumns = @JoinColumn(name = "student_id")
     )
-    private List<Student> students;
+    private Student student;
 
     private String description;
 
@@ -69,12 +72,12 @@ public class Task {
         this.id = id;
     }
 
-    public List<Student> getStudents() {
-        return students;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
     public Test getTest() {

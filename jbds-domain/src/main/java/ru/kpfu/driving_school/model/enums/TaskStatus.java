@@ -6,7 +6,7 @@ package ru.kpfu.driving_school.model.enums;
 public enum TaskStatus {
 
     PASSED,
-    NOT_DONE,
+    NEW,
     FAILED
 
 }

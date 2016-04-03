@@ -111,4 +111,8 @@
         <loadUpdateData tableName="tasks_students" primaryKey="task_id, student_id" file="db/seeds/tasks_students.csv"/>
     </changeSet>
 
+    <changeSet id="bitches_19" author="GoodBoy">
+        <loadUpdateData tableName="tasks_tests" primaryKey="task_id, test_id" file="db/seeds/tasks_tests.csv"/>
+    </changeSet>
+
 </databaseChangeLog>

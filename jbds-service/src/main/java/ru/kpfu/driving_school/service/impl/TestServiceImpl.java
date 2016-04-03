@@ -2,6 +2,7 @@ package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.StudentGroup;
 import ru.kpfu.driving_school.model.Task;
 import ru.kpfu.driving_school.model.Test;
@@ -42,12 +43,15 @@ public class TestServiceImpl implements TestService {
     public void createTaskForGroup(Long id, String testName, String description, Date deadline) {
         Test test = testRepository.findOneByDescription(testName);
         StudentGroup studentGroup = studentGroupRepository.findOne(id);
-        Task task = new Task();
-        task.setDeadline(deadline);
-        task.setDescription(description);
-        task.setTest(test);
-        task.setStatus(TaskStatus.NOT_DONE);
-        task.setStudents(studentRepository.findByStudentGroup(studentGroup));
-        taskRepository.save(task);
+        List<Student> students = studentRepository.findByStudentGroup(studentGroup);
+        for (Student student : students) {
+            Task task = new Task();
+            task.setDeadline(deadline);
+            task.setDescription(description);
+            task.setTest(test);
+            task.setStatus(TaskStatus.NEW);
+            task.setStudent(student);
+            taskRepository.save(task);
+        }
     }
 }
