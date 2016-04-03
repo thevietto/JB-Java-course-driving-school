@@ -2,6 +2,7 @@ package ru.kpfu.driving_school.service;
 
 import ru.kpfu.driving_school.model.Test;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -11,6 +12,6 @@ public interface TestService {
 
     List<Test> getTests(Long groupId);
 
-    void createGroupTest(Long id, String testName, String description);
+    void createTaskForGroup(Long id, String testName, String description, Date deadline);
 
 }

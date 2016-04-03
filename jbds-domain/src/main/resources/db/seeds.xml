@@ -101,10 +101,14 @@
     </changeSet>
 
     <changeSet id="bitches_17" author="GoodBoy">
-        <loadUpdateData tableName="group_tests" primaryKey="id" file="db/seeds/group_tests.csv">
+        <loadUpdateData tableName="tasks" primaryKey="id" file="db/seeds/tasks.csv">
             <column name="id" type="numeric"/>
+            <column name="deadline" type="date"/>
         </loadUpdateData>
     </changeSet>
 
+    <changeSet id="bitches_18" author="GoodBoy">
+        <loadUpdateData tableName="tasks_students" primaryKey="task_id, student_id" file="db/seeds/tasks_students.csv"/>
+    </changeSet>
 
 </databaseChangeLog>

@@ -2,14 +2,17 @@ package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.kpfu.driving_school.model.GroupTest;
 import ru.kpfu.driving_school.model.StudentGroup;
+import ru.kpfu.driving_school.model.Task;
 import ru.kpfu.driving_school.model.Test;
-import ru.kpfu.driving_school.repository.GroupTestRepository;
+import ru.kpfu.driving_school.model.enums.TaskStatus;
 import ru.kpfu.driving_school.repository.StudentGroupRepository;
+import ru.kpfu.driving_school.repository.StudentRepository;
+import ru.kpfu.driving_school.repository.TaskRepository;
 import ru.kpfu.driving_school.repository.TestRepository;
 import ru.kpfu.driving_school.service.TestService;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -25,7 +28,10 @@ public class TestServiceImpl implements TestService {
     StudentGroupRepository studentGroupRepository;
 
     @Autowired
-    GroupTestRepository groupTestRepository;
+    TaskRepository taskRepository;
+
+    @Autowired
+    StudentRepository studentRepository;
 
     @Override
     public List<Test> getTests(Long groupId) {
@@ -33,13 +39,15 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    public void createGroupTest(Long id, String testName, String description) {
+    public void createTaskForGroup(Long id, String testName, String description, Date deadline) {
         Test test = testRepository.findOneByDescription(testName);
         StudentGroup studentGroup = studentGroupRepository.findOne(id);
-        GroupTest groupTest = new GroupTest();
-        groupTest.setDescription(description);
-        groupTest.setTest(test);
-        groupTest.setStudentGroup(studentGroup);
-        groupTestRepository.save(groupTest);
+        Task task = new Task();
+        task.setDeadline(deadline);
+        task.setDescription(description);
+        task.setTest(test);
+        task.setStatus(TaskStatus.NOT_DONE);
+        task.setStudents(studentRepository.findByStudentGroup(studentGroup));
+        taskRepository.save(task);
     }
 }

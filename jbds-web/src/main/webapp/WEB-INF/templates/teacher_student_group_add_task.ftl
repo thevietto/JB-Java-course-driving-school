@@ -6,6 +6,9 @@
         <option> ${test.description}</option>
     </#list>
     </select><br/>
-    <p><textarea name="description"></textarea></p><br/>
+    <p><label>
+        <textarea name="description"></textarea>
+    </label></p><br/>
+    <p><input type="date" name="deadline"/></p>
     <button type="submit">Добавить</button>
 </form>

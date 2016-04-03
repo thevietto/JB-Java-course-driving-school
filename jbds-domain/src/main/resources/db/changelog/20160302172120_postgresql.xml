@@ -5,36 +5,57 @@
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
     <changeSet id="20160302172120_1" author="GoodBoy">
-        <createTable tableName="group_tests">
+        <createTable tableName="tasks">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="test_id" type="bigint"/>
-            <column name="student_group_id" type="bigint"/>
             <column name="description" type="varchar(255)"/>
+            <column name="deadline" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="varchar(255)" defaultValue="not_done">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 
     <changeSet id="20160302172120_2" author="GoodBoy">
-        <addForeignKeyConstraint baseTableName="group_tests"
+        <createTable tableName="tasks_students">
+            <column name="task_id" type="bigint"/>
+            <column name="student_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20160302172120_3" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="tasks"
                                  baseColumnNames="test_id"
-                                 constraintName="group_tests_tests_fk"
+                                 constraintName="tasks_tests_fk"
                                  referencedTableName="tests"
                                  referencedColumnNames="id"
         />
     </changeSet>
 
-    <changeSet id="20160302172120_3" author="GoodBoy">
-        <addForeignKeyConstraint baseTableName="group_tests"
-                                 baseColumnNames="student_group_id"
-                                 constraintName="group_tests_student_groups_fk"
-                                 referencedTableName="student_groups"
+    <changeSet id="20160302172120_4" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="tasks_students"
+                                 baseColumnNames="task_id"
+                                 constraintName="tasks_students_tasks_fk"
+                                 referencedTableName="tasks"
                                  referencedColumnNames="id"
         />
     </changeSet>
 
-    <changeSet id="20160302172120_4" author="GoodBoy">
-        <createSequence sequenceName="group_tests_id_seq"
+    <changeSet id="20160302172120_5" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="tasks_students"
+                                 baseColumnNames="student_id"
+                                 constraintName="tasks_students_students_fk"
+                                 referencedTableName="students"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="20160302172120_6" author="GoodBoy">
+        <createSequence sequenceName="tasks_id_seq"
                         startValue="50"
                         incrementBy="1"
                         minValue="50"

@@ -11,6 +11,9 @@ import ru.kpfu.driving_school.service.StudentService;
 import ru.kpfu.driving_school.service.TeacherService;
 import ru.kpfu.driving_school.service.TestService;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 /**
  * Created by aleksandrpliskin on 30.03.16.
  */
@@ -60,9 +63,10 @@ public class TeacherController {
             method = RequestMethod.POST)
     public String addTaskForStudentGroup(@PathVariable("id") Long id,
                                          @RequestParam("test_name") String name,
-                                         @RequestParam("description") String description
-    ) {
-        testService.createGroupTest(id, name, description);
+                                         @RequestParam("description") String description,
+                                         @RequestParam("deadline") String deadline
+    ) throws ParseException {
+        testService.createTaskForGroup(id, name, description, new SimpleDateFormat("yyyy-MM-dd").parse(deadline));
         return "redirect:/teacher/student_groups/" + id;
     }
 
