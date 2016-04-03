@@ -115,4 +115,18 @@
         <loadUpdateData tableName="tasks_tests" primaryKey="task_id, test_id" file="db/seeds/tasks_tests.csv"/>
     </changeSet>
 
+    <changeSet id="bitches_20" author="GoodBoy">
+        <update tableName="tasks">
+            <column name="status" value="NOT_DONE" type="varchar(255)"/>
+            <where>status = 'NEW'</where>
+        </update>
+    </changeSet>
+
+    <changeSet id="bitches_21" author="GoodBoy">
+        <update tableName="tasks">
+            <column name="status" value="NEW" type="varchar(255)"/>
+            <where>status = 'NOT_DONE'</where>
+        </update>
+    </changeSet>
+
 </databaseChangeLog>
