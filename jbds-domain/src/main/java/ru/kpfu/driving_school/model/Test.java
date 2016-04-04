@@ -1,7 +1,6 @@
 package ru.kpfu.driving_school.model;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -18,8 +17,6 @@ public class Test {
 
     private String description;
 
-    private Date deadline;
-
     @OneToMany
     @JoinTable(name = "test_questions",
             joinColumns = @JoinColumn(name = "test_id"),
@@ -28,19 +25,11 @@ public class Test {
     private List<Question> questions;
 
     @ManyToOne
-            @JoinTable(name = "ds_tests",
-                    joinColumns = @JoinColumn(name = "test_id"),
-                    inverseJoinColumns = @JoinColumn(name = "ds_id")
-            )
-    DrivingSchool drivingSchool;
-
-    public Date getDeadline() {
-        return deadline;
-    }
-
-    public void setDeadline(Date deadline) {
-        this.deadline = deadline;
-    }
+    @JoinTable(name = "ds_tests",
+            joinColumns = @JoinColumn(name = "test_id"),
+            inverseJoinColumns = @JoinColumn(name = "ds_id")
+    )
+    private DrivingSchool drivingSchool;
 
     public String getDescription() {
         return description;
@@ -58,4 +47,19 @@ public class Test {
         this.id = id;
     }
 
+    public DrivingSchool getDrivingSchool() {
+        return drivingSchool;
+    }
+
+    public void setDrivingSchool(DrivingSchool drivingSchool) {
+        this.drivingSchool = drivingSchool;
+    }
+
+    public List<Question> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
 }

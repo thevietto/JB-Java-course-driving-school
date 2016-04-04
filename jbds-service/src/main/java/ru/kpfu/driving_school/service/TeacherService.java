@@ -15,4 +15,5 @@ public interface TeacherService {
     StudentGroup getStudentGroup(Long id);
 
     List<Student> getStudentsOfStudentGroup(Long id);
+
 }

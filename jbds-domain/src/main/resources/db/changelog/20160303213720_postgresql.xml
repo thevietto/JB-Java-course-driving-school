@@ -1,0 +1,42 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="20160303213720_1" author="GoodBoy">
+        <dropForeignKeyConstraint baseTableName="tasks" constraintName="tasks_tests_fk"/>
+    </changeSet>
+
+    <changeSet id="20160303213720_2" author="GoodBoy">
+        <dropColumn tableName="tasks"
+                    columnName="test_id"
+        />
+    </changeSet>
+
+    <changeSet id="20160303213720_3" author="GoodBoy">
+        <createTable tableName="tasks_tests">
+            <column name="task_id" type="bigint"/>
+            <column name="test_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20160303213720_4" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="tasks_tests"
+                                 baseColumnNames="task_id"
+                                 constraintName="tasks_tests_tasks_fk"
+                                 referencedTableName="tasks"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="20160303213720_5" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="tasks_tests"
+                                 baseColumnNames="test_id"
+                                 constraintName="tasks_tests_tests_fk"
+                                 referencedTableName="tests"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+</databaseChangeLog>

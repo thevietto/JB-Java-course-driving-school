@@ -26,7 +26,7 @@ public class ExceptionHandlingController {
     @ResponseStatus(value = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseBody
-    public ExceptionDto missingParamterHandler(Exception exception) {
+    public ExceptionDto missingParamterHandler() {
         return new ExceptionDto(400, "Required parameter missing");
     }
 
