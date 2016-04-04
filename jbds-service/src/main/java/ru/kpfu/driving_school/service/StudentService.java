@@ -2,6 +2,7 @@ package ru.kpfu.driving_school.service;
 
 import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.StudentMark;
+import ru.kpfu.driving_school.model.Task;
 
 import java.util.List;
 
@@ -15,4 +16,6 @@ public interface StudentService {
     List<StudentMark> getStudentMarks(Long studentId, Long groupId);
 
     void setStudentMarks(Long studentId, String description, String mark, Long groupId);
+
+    List<Task> getTasks();
 }
