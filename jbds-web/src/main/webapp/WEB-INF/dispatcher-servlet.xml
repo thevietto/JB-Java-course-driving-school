@@ -13,8 +13,12 @@
     <context:component-scan base-package="ru.kpfu.driving_school.controller"/>
 
     <mvc:resources mapping="/images/**" location="file:${img.dir}"/>
-    <mvc:resources mapping="**" location="/resources"/>
 
+    <bean id="userHome" class="ru.kpfu.driving_school.util.PropertyPath">
+        <property name="path" value="${img.dir}"/>
+    </bean>
+
+    <mvc:resources mapping="**" location="/resources"/>
     <mvc:annotation-driven/>
 
     <bean id="freemarkerConfig" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">

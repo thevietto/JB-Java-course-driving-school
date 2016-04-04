@@ -1,7 +1,6 @@
 package ru.kpfu.driving_school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -11,6 +10,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.kpfu.driving_school.form.QuestionForm;
 import ru.kpfu.driving_school.repository.CategoryRepository;
 import ru.kpfu.driving_school.service.QuestionService;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.kpfu.driving_school.service.StudentService;
 import ru.kpfu.driving_school.service.TeacherService;
 import ru.kpfu.driving_school.service.TestService;
@@ -21,6 +26,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.UUID;
+import ru.kpfu.driving_school.service.TestService;
+import ru.kpfu.driving_school.util.PropertyPath;
+
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.UUID;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 /**
  * Created by aleksandrpliskin on 30.03.16.
@@ -63,6 +80,27 @@ public class TeacherController {
         model.addAttribute("group", teacherService.getStudentGroup(id));
         return "teacher_student_group";
     }
+
+    @RequestMapping(value = "/student_groups/{id}/task/new",
+            method = RequestMethod.GET)
+    public String getFormToAddTaskForStudentGroup(Model model,
+                                                  @PathVariable("id") Long id) {
+        model.addAttribute("group", teacherService.getStudentGroup(id));
+        model.addAttribute("tests", testService.getTests(id));
+        return "teacher_student_group_add_task";
+    }
+
+    @RequestMapping(value = "/student_groups/{id}/task",
+            method = RequestMethod.POST)
+    public String addTaskForStudentGroup(@PathVariable("id") Long id,
+                                         @RequestParam("test_name") String name,
+                                         @RequestParam("description") String description,
+                                         @RequestParam("deadline") String deadline
+    ) throws ParseException {
+        testService.createTaskForGroup(id, name, description, new SimpleDateFormat("yyyy-MM-dd").parse(deadline));
+        return "redirect:/teacher/student_groups/" + id;
+    }
+
 
     @RequestMapping(value = "/student_groups/{id}/students",
             method = RequestMethod.GET)
@@ -160,6 +198,57 @@ public class TeacherController {
                 stream.close();
             } catch (IOException e) {
                 //тут тож пока ничего нет
+            }
+        }
+    }
+
+}
+    @RequestMapping(value = "/test/{id}/questions", method = RequestMethod.GET)
+    public String getQuestionsPage(@PathVariable Long id, Model model) {
+        model.addAttribute("questions", questionService.getQuestions(id));
+        model.addAttribute("testId", id);
+        return "questions";
+    }
+
+    @RequestMapping(value = "/test/{id}/questions/create", method = RequestMethod.GET)
+    public String createQuestionPage(@PathVariable Long id, Model model) {
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("testId", id);
+        return "create_question";
+    }
+
+    @RequestMapping(value = "/test/{id}/questions/create", method = RequestMethod.POST)
+    public String saveQuestion(@PathVariable Long id, @ModelAttribute QuestionForm form) {
+
+        return "redirect:/teacher/test/" + id + "/questions";
+    }
+
+    @RequestMapping(value = "/test/upload", method = RequestMethod.GET)
+    public String getUploadPage() {
+        return "upload";
+    }
+
+    //Метод сделан для теста загрузки, есть моменты которые надо поправить
+    @RequestMapping(method = RequestMethod.POST, value = "/upload")
+    @ResponseStatus(HttpStatus.OK)
+    public void handleFileUpload(@RequestParam("name") String name,
+                                 @RequestParam("file") MultipartFile file) {
+        if (!file.isEmpty()) {
+            try {
+                byte[] bytes = file.getBytes();
+                File dir = new File(PropertyPath.getPath() + File.separator + "question_images");
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                String newFileName = UUID.randomUUID().toString() + "."
+                        + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
+                File serverFile = new File(dir.getAbsolutePath()
+                        + File.separator + newFileName);
+                try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile))) {
+                    stream.write(bytes);
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
     }
