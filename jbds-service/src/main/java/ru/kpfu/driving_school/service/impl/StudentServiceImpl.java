@@ -64,7 +64,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public List<Task> getTasks() {
+    public List<Task> getStudentTasks() {
         Student student = studentRepository.findByCredential(SecurityUtils.getCurrentUser());
         return taskRepository.findByStudent(student);
     }

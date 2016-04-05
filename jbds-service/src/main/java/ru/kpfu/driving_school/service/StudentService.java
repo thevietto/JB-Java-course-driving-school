@@ -17,5 +17,5 @@ public interface StudentService {
 
     void setStudentMarks(Long studentId, String description, String mark, Long groupId);
 
-    List<Task> getTasks();
+    List<Task> getStudentTasks();
 }

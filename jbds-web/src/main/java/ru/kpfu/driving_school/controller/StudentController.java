@@ -24,7 +24,7 @@ public class StudentController {
 
     @RequestMapping(value = "/tasks", method = RequestMethod.GET)
     public String getTasks(Model model) {
-        model.addAttribute("tasks",studentService.getTasks());
+        model.addAttribute("tasks",studentService.getStudentTasks());
         return "student_tasks";
     }
 
