@@ -6,10 +6,13 @@ import ru.kpfu.driving_school.exception.NoSuchStudentException;
 import ru.kpfu.driving_school.exception.NoSuchStudentGroupException;
 import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.StudentMark;
+import ru.kpfu.driving_school.model.Task;
 import ru.kpfu.driving_school.repository.StudentGroupRepository;
 import ru.kpfu.driving_school.repository.StudentMarkRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
+import ru.kpfu.driving_school.repository.TaskRepository;
 import ru.kpfu.driving_school.service.StudentService;
+import ru.kpfu.driving_school.util.SecurityUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -28,6 +31,9 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     StudentGroupRepository studentGroupRepository;
+
+    @Autowired
+    TaskRepository taskRepository;
 
     @Override
     public Student getStudent(Long id, Long groupId) {
@@ -55,6 +61,12 @@ public class StudentServiceImpl implements StudentService {
         studentPoint.setMark(Integer.parseInt(mark));
         studentPoint.setCreatedAt(new Date());
         studentMarkRepository.save(studentPoint);
+    }
+
+    @Override
+    public List<Task> getStudentTasks() {
+        Student student = studentRepository.findByCredential(SecurityUtils.getCurrentUser());
+        return taskRepository.findByStudent(student);
     }
 }
 
