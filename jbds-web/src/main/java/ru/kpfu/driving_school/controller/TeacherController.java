@@ -1,17 +1,14 @@
 package ru.kpfu.driving_school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ru.kpfu.driving_school.form.QuestionForm;
 import ru.kpfu.driving_school.repository.CategoryRepository;
 import ru.kpfu.driving_school.service.QuestionService;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,23 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.kpfu.driving_school.service.StudentService;
 import ru.kpfu.driving_school.service.TeacherService;
 import ru.kpfu.driving_school.service.TestService;
-import ru.kpfu.driving_school.util.SecurityUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.UUID;
-import ru.kpfu.driving_school.service.TestService;
+
 import ru.kpfu.driving_school.util.PropertyPath;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.UUID;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -139,118 +128,40 @@ public class TeacherController {
         return "redirect:/teacher/student_groups/" + id + "/students/" + studentId + "/student_points";
     }
 
-    @RequestMapping(value = "/test/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/tests/create", method = RequestMethod.GET)
     public String getCreateTestPage(Model model) {
         return "create_test";
     }
 
-    @RequestMapping(value = "/test/create", method = RequestMethod.POST)
-    @ResponseStatus(value = HttpStatus.SEE_OTHER)
-    public String saveTest(@RequestParam("description") String description) {
-        Long testId = testService.save(description);
-        return "redirect:/teacher/test/" + testId + "/questions";
+    @RequestMapping(value = "/tests/new", method = RequestMethod.POST)
+    public String createTest(@RequestParam String description) {
+        Long id = testService.save(description);
+        return "redirect:/teacher/tests/" + id + "/questions";
     }
 
-    @RequestMapping(value = "/test/{id}/questions", method = RequestMethod.GET)
+    @RequestMapping(value = "/tests")
+    public String getTests(Model model) {
+        model.addAttribute("tests", testService.getDSTests());
+        return "tests";
+    }
+
+    @RequestMapping(value = "/tests/{id}/questions", method = RequestMethod.GET)
     public String getQuestionsPage(@PathVariable Long id, Model model) {
         model.addAttribute("questions", questionService.getQuestions(id));
         model.addAttribute("testId", id);
         return "questions";
     }
 
-    @RequestMapping(value = "/test/{id}/questions/create", method = RequestMethod.GET)
+    @RequestMapping(value = "/tests/{id}/questions/create", method = RequestMethod.GET)
     public String createQuestionPage(@PathVariable Long id, Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
         model.addAttribute("testId", id);
         return "create_question";
     }
 
-    @RequestMapping(value = "/test/{id}/questions/create", method = RequestMethod.POST)
-    public String saveQuestion(@PathVariable Long id, @ModelAttribute QuestionForm form) {
-        return "redirect:/teacher/test/" + id + "/questions";
+    @RequestMapping(value = "/tests/{id}/questions/create", method = RequestMethod.POST)
+    public String saveQuestion(@PathVariable Long id, @ModelAttribute QuestionForm questionForm) {
+        questionService.saveQuestion(questionForm, id);
+        return "redirect:/teacher/tests/" + id + "/questions";
     }
-
-    @RequestMapping(value = "/test/upload", method = RequestMethod.GET)
-    public String getUploadPage() {
-        return "upload";
-    }
-
-    //Метод сделан для теста загрузки, есть моменты которые надо поправить
-    @RequestMapping(method = RequestMethod.POST, value = "/upload")
-    @ResponseStatus(HttpStatus.OK)
-    public void handleFileUpload(@RequestParam("name") String name,
-                                   @RequestParam("file") MultipartFile file) {
-
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                //Берет твой путь и создает папку tmpFiles, тож пока для теста
-                File dir = new File(System.getProperty("user.home") + File.separator + "tmpFiles");
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                String newFileName = UUID.randomUUID().toString() + "." //название картинки пока так
-                        + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
-                File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + newFileName);
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile));
-                stream.write(bytes);
-                stream.close();
-            } catch (IOException e) {
-                //тут тож пока ничего нет
-            }
-        }
-    }
-
-}
-    @RequestMapping(value = "/test/{id}/questions", method = RequestMethod.GET)
-    public String getQuestionsPage(@PathVariable Long id, Model model) {
-        model.addAttribute("questions", questionService.getQuestions(id));
-        model.addAttribute("testId", id);
-        return "questions";
-    }
-
-    @RequestMapping(value = "/test/{id}/questions/create", method = RequestMethod.GET)
-    public String createQuestionPage(@PathVariable Long id, Model model) {
-        model.addAttribute("categories", categoryRepository.findAll());
-        model.addAttribute("testId", id);
-        return "create_question";
-    }
-
-    @RequestMapping(value = "/test/{id}/questions/create", method = RequestMethod.POST)
-    public String saveQuestion(@PathVariable Long id, @ModelAttribute QuestionForm form) {
-
-        return "redirect:/teacher/test/" + id + "/questions";
-    }
-
-    @RequestMapping(value = "/test/upload", method = RequestMethod.GET)
-    public String getUploadPage() {
-        return "upload";
-    }
-
-    //Метод сделан для теста загрузки, есть моменты которые надо поправить
-    @RequestMapping(method = RequestMethod.POST, value = "/upload")
-    @ResponseStatus(HttpStatus.OK)
-    public void handleFileUpload(@RequestParam("name") String name,
-                                 @RequestParam("file") MultipartFile file) {
-        if (!file.isEmpty()) {
-            try {
-                byte[] bytes = file.getBytes();
-                File dir = new File(PropertyPath.getPath() + File.separator + "question_images");
-                if (!dir.exists()) {
-                    dir.mkdirs();
-                }
-                String newFileName = UUID.randomUUID().toString() + "."
-                        + file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".") + 1);
-                File serverFile = new File(dir.getAbsolutePath()
-                        + File.separator + newFileName);
-                try (BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile))) {
-                    stream.write(bytes);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
 }

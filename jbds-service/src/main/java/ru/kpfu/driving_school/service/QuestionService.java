@@ -1,5 +1,6 @@
 package ru.kpfu.driving_school.service;
 
+import ru.kpfu.driving_school.form.QuestionForm;
 import ru.kpfu.driving_school.model.Question;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface QuestionService {
 
-    void saveQuestion();
+    void saveQuestion(QuestionForm questionForm, Long testId);
 
     List<Question> getQuestions(Long testId);
 }

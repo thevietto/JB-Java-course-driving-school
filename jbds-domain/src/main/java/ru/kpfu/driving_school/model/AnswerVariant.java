@@ -16,7 +16,7 @@ public class AnswerVariant {
 
     private String text;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "question_id")
     private Question question;
 

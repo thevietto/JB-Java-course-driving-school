@@ -16,4 +16,6 @@ public interface TestService {
 
     void createTaskForGroup(Long id, String testName, String description, Date deadline);
 
+    List<Test> getDSTests();
+
 }
