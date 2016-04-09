@@ -1,15 +1,14 @@
 package ru.kpfu.driving_school.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentForm;
-import ru.kpfu.driving_school.model.DSAdminAccount;
+import ru.kpfu.driving_school.model.DSAdmin;
 import ru.kpfu.driving_school.model.DrivingSchool;
-import ru.kpfu.driving_school.model.StudentAccount;
+import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.StudentGroup;
 import ru.kpfu.driving_school.repository.*;
 import ru.kpfu.driving_school.service.DSAdminService;
@@ -43,16 +42,16 @@ public class DSAdminServiceImpl implements DSAdminService {
     private TeacherRepository teacherRepository;
 
     @Autowired
-    private Function<StudentForm, StudentAccount> generator;
+    private Function<StudentForm, Student> generator;
 
     @Autowired
-    private Function<DSAccountForm, DSAdminAccount> transformer;
+    private Function<DSAccountForm, DSAdmin> transformer;
 
     @Autowired
     private ExcelStudentParser excelStudentParser;
 
     @Override
-    public void addStudents(List<StudentAccount> students) {
+    public void addStudents(List<Student> students) {
         studentRepository.save(students);
     }
 
@@ -67,19 +66,19 @@ public class DSAdminServiceImpl implements DSAdminService {
     }
 
     @Override
-    public void deleteStudent(StudentAccount student) {
+    public void deleteStudent(Student student) {
         studentRepository.delete(student);
     }
 
     @Override
     public void saveNewStudent(StudentForm form) {
-        StudentAccount student = generator.apply(form);
+        Student student = generator.apply(form);
         studentRepository.save(student);
     }
 
     @Override
     public void createDSAccount(DSAccountForm dsAccountForm) {
-        DSAdminAccount dsAdmin = transformer.apply(dsAccountForm);
+        DSAdmin dsAdmin = transformer.apply(dsAccountForm);
         DrivingSchool drivingSchool = drivingSchoolRepository.findOne(dsAccountForm.getDrivingSchoolId());
         dsAdmin.setDrivingSchool(drivingSchool);
         dsAdminRepository.save(dsAdmin);
@@ -94,14 +93,14 @@ public class DSAdminServiceImpl implements DSAdminService {
     @Transactional
     public void createStudentGroup(String teacherName, MultipartFile file) {
         StudentGroup studentGroup = new StudentGroup();
-        studentGroup.setTeacherAccount(teacherRepository.findOneByFio(teacherName));
+        studentGroup.setTeacher(teacherRepository.findOneByFio(teacherName));
         studentGroup.setDrivingSchool(teacherRepository.findOneByFio(teacherName).getDrivingSchool());
         try {
-            List<StudentAccount> students = excelStudentParser.parse(file).stream().map(generator).collect(Collectors.toList());
-            for (StudentAccount studentAccount : students) {
+            List<Student> students = excelStudentParser.parse(file).stream().map(generator).collect(Collectors.toList());
+            for (Student studentAccount : students) {
                 studentAccount.setStudentGroup(studentGroup);
             }
-            studentGroup.setStudentAccountList(students);
+            studentGroup.setStudents(students);
             studentGroupRepository.save(studentGroup);
             studentRepository.save(students);
         } catch (IOException e) {
@@ -110,11 +109,15 @@ public class DSAdminServiceImpl implements DSAdminService {
     }
 
     @Override
-    public void updateStudent(StudentAccount student) {
-
-            studentRepository.save(student);
+    @Transactional
+    public void updateStudent(Student student) {
+        Student oldStudent = studentRepository.findOne(student.getId());
+        oldStudent.setFio(student.getFio());
+        if (student.getCredentials().getPassword() != null) {
+            oldStudent.getCredentials().setPassword(student.getCredentials().getPassword());
+        }
+        studentRepository.save(oldStudent);
     }
-
 
 
 }

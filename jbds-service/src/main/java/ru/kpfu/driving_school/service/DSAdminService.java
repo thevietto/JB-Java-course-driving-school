@@ -29,7 +29,7 @@ public interface DSAdminService {
 
     void createStudentGroup(String teacherName, MultipartFile file);
 
-    void updateStudent(StudentAccount student);
+    void updateStudent(Student student);
 
 
 }

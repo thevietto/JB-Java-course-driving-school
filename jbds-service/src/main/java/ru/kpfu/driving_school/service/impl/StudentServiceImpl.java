@@ -1,12 +1,5 @@
 package ru.kpfu.driving_school.service.impl;
 
-<<<<<<< HEAD
-import org.springframework.stereotype.Service;
-import ru.kpfu.driving_school.service.StudentService;
-
-/**
- * Created by mikl on 27.03.2016.
-=======
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.driving_school.exception.NoSuchStudentException;
@@ -26,13 +19,10 @@ import java.util.List;
 
 /**
  * Created by aleksandrpliskin on 30.03.16.
->>>>>>> master
  */
 @Service
 public class StudentServiceImpl implements StudentService {
 
-<<<<<<< HEAD
-=======
     @Autowired
     StudentRepository studentRepository;
 
@@ -78,6 +68,4 @@ public class StudentServiceImpl implements StudentService {
         Student student = studentRepository.findByCredential(SecurityUtils.getCurrentUser());
         return taskRepository.findByStudent(student);
     }
->>>>>>> master
 }
-

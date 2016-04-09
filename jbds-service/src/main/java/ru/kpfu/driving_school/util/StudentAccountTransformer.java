@@ -6,20 +6,19 @@ import org.springframework.stereotype.Component;
 import ru.kpfu.driving_school.exception.LoginAlreadyExistsException;
 import ru.kpfu.driving_school.form.DSAccountForm;
 import ru.kpfu.driving_school.form.StudentEditForm;
-import ru.kpfu.driving_school.model.Credentials;
-import ru.kpfu.driving_school.model.DSAdminAccount;
-import ru.kpfu.driving_school.model.StudentAccount;
+import ru.kpfu.driving_school.model.Credential;
+import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.enums.UserRole;
-import ru.kpfu.driving_school.repository.CredentialsRepository;
+import ru.kpfu.driving_school.repository.CredentialRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 
 import java.util.function.Function;
 
 @Component
-public class StudentAccountTransformer implements Function<StudentEditForm, StudentAccount> {
+public class StudentAccountTransformer implements Function<StudentEditForm, Student> {
 
     @Autowired
-    CredentialsRepository credentialsRepository;
+    CredentialRepository credentialsRepository;
 
     @Autowired
     StudentRepository studentRepository;
@@ -27,12 +26,12 @@ public class StudentAccountTransformer implements Function<StudentEditForm, Stud
     private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
-    public StudentAccount apply(StudentEditForm editForm) {
-        Credentials credentials = new Credentials();
+    public Student apply(StudentEditForm editForm) {
+        Credential credentials = new Credential();
         if (editForm.getPassword().length() > 0) {
             credentials.setPassword(encoder.encode(editForm.getPassword()));
         }
-        StudentAccount studentAccount = new StudentAccount();
+        Student studentAccount = new Student();
         studentAccount.setCredentials(credentials);
         studentAccount.setFio(editForm.getFio());
         return studentAccount;

@@ -1,13 +1,5 @@
 package ru.kpfu.driving_school.service;
 
-<<<<<<< HEAD
-/**
- * Created by mikl on 27.03.2016.
- */
-
-public interface StudentService {
-
-=======
 import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.StudentMark;
 import ru.kpfu.driving_school.model.Task;
@@ -26,5 +18,4 @@ public interface StudentService {
     void setStudentMarks(Long studentId, String description, String mark, Long groupId);
 
     List<Task> getStudentTasks();
->>>>>>> master
 }
