@@ -12,7 +12,9 @@ import ru.kpfu.driving_school.repository.DSAdminRepository;
 import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.DSAdminService;
 import ru.kpfu.driving_school.service.StudentService;
-import ru.kpfu.driving_school.util.StudentEditFormTransformStudentAccount;
+import ru.kpfu.driving_school.util.StudentAccountTransformer;
+
+import java.util.function.Function;
 
 
 /**
@@ -33,6 +35,10 @@ public class DSAdminController {
 
     @Autowired
     DSAdminRepository dsRepository;
+
+    @Autowired
+    Function<StudentEditForm, StudentAccount> studentAccountTransformer;
+
 
     @RequestMapping(value = "")
     public String getIndex() {
@@ -78,29 +84,22 @@ public class DSAdminController {
 
     @RequestMapping(value = "/ds_admin_accounts/student/{id}", method = RequestMethod.GET)
     public String getChangeStudentPage(@PathVariable Long id, Model model) {
-        if (dsAdminService.dsAdminSuccessEditStudent(studentRepository.findOne(id).getId())) {
-            StudentAccount student = studentRepository.findOne(id);
-            model.addAttribute("student", student);
-            return "ds-admin-change";
-        }
-        return "ds-admin-index";
+        StudentAccount student = studentRepository.findOne(id);
+        model.addAttribute("student", student);
+        return "ds-admin-change";
     }
 
-    @RequestMapping(value = "/ds_admin_accounts/student/{id}", method = RequestMethod.PUT)
+    @RequestMapping(value = "/ds_admin_accounts/student/{id}", method = RequestMethod.POST)
     public String saveStudentChange(@PathVariable("id") Long id, @ModelAttribute StudentEditForm changeForm, Model model) {
-        changeForm.setId(id);
-        if (dsAdminService.dsAdminSuccessEditStudent(id)) {
-            dsAdminService.updateStudent(StudentEditFormTransformStudentAccount.transform(changeForm));
-        }
-        return "ds-admin-index";
+        StudentAccount student = studentAccountTransformer.apply(changeForm);
+        dsAdminService.updateStudent(student);
+        model.addAttribute("student", student);
+        return "ds-admin-change";
     }
 
     @RequestMapping(value = "/ds_admin_accounts/student/{id}", method = RequestMethod.DELETE)
     public String deleteStudent(@PathVariable Long id) {
-        StudentAccount student = studentRepository.findOne(id);
-        if (dsAdminService.dsAdminSuccessEditStudent(student.getId())) {
-            dsRepository.delete(student.getId());
-        }
+        dsRepository.delete(id);
         return "ds-admin-index";
     }
 }

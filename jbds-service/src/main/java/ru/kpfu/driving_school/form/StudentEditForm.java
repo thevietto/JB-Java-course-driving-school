@@ -6,7 +6,6 @@ package ru.kpfu.driving_school.form;
 public class StudentEditForm {
     private Long id;
     private String fio;
-    private String login;
     private String password;
 
     public Long getId() {
@@ -23,14 +22,6 @@ public class StudentEditForm {
 
     public void setFio(String fio) {
         this.fio = fio;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getPassword() {

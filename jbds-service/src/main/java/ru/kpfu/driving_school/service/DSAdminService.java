@@ -31,6 +31,5 @@ public interface DSAdminService {
 
     void updateStudent(StudentAccount student);
 
-    boolean dsAdminSuccessEditStudent(Long studentId);
 
 }

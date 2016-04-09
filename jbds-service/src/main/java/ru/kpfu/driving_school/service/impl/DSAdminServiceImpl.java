@@ -108,18 +108,10 @@ public class DSAdminServiceImpl implements DSAdminService {
 
     @Override
     public void updateStudent(StudentAccount student) {
+
             studentRepository.save(student);
     }
 
-    @Override
-    public boolean dsAdminSuccessEditStudent(Long studentId) {
-        Credentials credentials = (Credentials) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        DSAdminAccount DSAdmin = dsAdminRepository.findOneByCredentials(credentials);
-        if (studentRepository.dsAdminSuccessEditStudent(studentId, DSAdmin.getId()).size() > 0) {
-            return true;
-        }
-        return false;
-    }
 
 
 }

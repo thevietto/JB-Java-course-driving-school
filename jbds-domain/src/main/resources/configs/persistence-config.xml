@@ -10,10 +10,10 @@
     <jpa:repositories base-package="ru.kpfu.driving_school.repository"/>
 
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-        <property name="driverClass" value="${jdbc.driver}"/>
-        <property name="jdbcUrl" value="${jdbc.url}"/>
-        <property name="user" value="${jdbc.username}"/>
-        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClass" value="${jdbs.driver}"/>
+        <property name="jdbcUrl" value="${jdbs.url}"/>
+        <property name="user" value="${jdbs.username}"/>
+        <property name="password" value="${jdbs.password}"/>
     </bean>
 
     <bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">

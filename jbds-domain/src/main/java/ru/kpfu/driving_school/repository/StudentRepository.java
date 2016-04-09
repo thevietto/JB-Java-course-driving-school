@@ -15,10 +15,5 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends JpaRepository<StudentAccount, Long> {
 
-    @Query(value = "SELECT s.id FROM student s JOIN student_group sg ON s.student_group_id = sg.id JOIN " +
-            " teacher t ON sg.teacher_id = t.id JOIN  driving_school ds ON t.driving_school_id = ds.id" +
-            " JOIN ds_admin dsa ON dsa.driving_school_id = ds.id  WHERE s.id = :studentId and dsa.id = :dsadminId ", nativeQuery = true)
-    List<Long> dsAdminSuccessEditStudent(@Param("studentId") Long studentId, @Param("dsadminId")Long dsAdminId);
-
     StudentAccount findOneByFio(String fio);
 }
