@@ -69,4 +69,3 @@ public class StudentServiceImpl implements StudentService {
         return taskRepository.findByStudent(student);
     }
 }
-

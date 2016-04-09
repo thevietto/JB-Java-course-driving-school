@@ -1,4 +1,4 @@
-driver=org.postgresql.Driver
-url=jdbc:postgresql://localhost:5432/driving-school
-username=postgres
-password=postgres
+jdbc.driver=org.postgresql.Driver
+jdbc.url=jdbc:postgresql://localhost:5432/driving-school
+jdbc.username=postgres
+jdbc.password=postgres

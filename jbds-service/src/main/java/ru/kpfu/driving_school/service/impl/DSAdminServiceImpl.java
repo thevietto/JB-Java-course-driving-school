@@ -108,4 +108,16 @@ public class DSAdminServiceImpl implements DSAdminService {
         }
     }
 
+    @Override
+    @Transactional
+    public void updateStudent(Student student) {
+        Student oldStudent = studentRepository.findOne(student.getId());
+        oldStudent.setFio(student.getFio());
+        if (student.getCredentials().getPassword() != null) {
+            oldStudent.getCredentials().setPassword(student.getCredentials().getPassword());
+        }
+        studentRepository.save(oldStudent);
+    }
+
+
 }

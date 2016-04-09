@@ -28,4 +28,8 @@ public interface DSAdminService {
     List<StudentGroup> getStudentGroups();
 
     void createStudentGroup(String teacherName, MultipartFile file);
+
+    void updateStudent(Student student);
+
+
 }

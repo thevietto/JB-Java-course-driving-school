@@ -3,12 +3,19 @@ package ru.kpfu.driving_school.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.kpfu.driving_school.form.StudentEditForm;
 import ru.kpfu.driving_school.form.StudentForm;
+import ru.kpfu.driving_school.model.Student;
+import ru.kpfu.driving_school.model.StudentGroup;
+import ru.kpfu.driving_school.repository.StudentGroupRepository;
+import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.DSAdminService;
+import ru.kpfu.driving_school.service.StudentService;
+import ru.kpfu.driving_school.util.StudentAccountTransformer;
+
+import java.util.List;
 
 
 /**
@@ -20,6 +27,15 @@ public class DSAdminController {
 
     @Autowired
     DSAdminService dsAdminService;
+
+    @Autowired
+    StudentRepository studentRepository;
+
+    @Autowired
+    StudentGroupRepository studentGroupRepository;
+
+    @Autowired
+    StudentAccountTransformer studentAccountTransformer;
 
     @RequestMapping(value = "")
     public String getIndex() {
@@ -47,6 +63,14 @@ public class DSAdminController {
         return "student-groups";
     }
 
+    @RequestMapping(value = "/student_group/{id}/students", method = RequestMethod.GET)
+    public String getGroupStudents(@PathVariable("id") Long id, Model model) {
+        StudentGroup group = studentGroupRepository.findOne(id);
+        List<Student> listStudent = studentRepository.findByStudentGroup(group);
+        model.addAttribute("students", listStudent);
+        return "group-students";
+    }
+
     @RequestMapping(value = "/student_groups/new", method = RequestMethod.GET)
     public String getPageForCreatingStudentsGroup() {
         return "create-students-group";
@@ -63,5 +87,28 @@ public class DSAdminController {
         return "ds-admin-index";
     }
 
+
+
+    @RequestMapping(value = "/ds_admin_accounts/student/{id}", method = RequestMethod.GET)
+    public String getChangeStudentPage(@PathVariable Long id, Model model) {
+        Student student = studentRepository.findOne(id);
+        model.addAttribute("student", student);
+        return "ds-admin-change";
+    }
+
+    @RequestMapping(value = "/ds_admin_accounts/student/{id}", method = RequestMethod.PUT)
+    public String saveStudentChange(@PathVariable("id") Long id, @ModelAttribute StudentEditForm changeForm, Model model) {
+        Student student = studentAccountTransformer.apply(changeForm);
+        student.setId(id);
+        dsAdminService.updateStudent(student);
+        model.addAttribute("student", student);
+        return "ds-admin-change";
+    }
+
+    @RequestMapping(value = "/ds_admin_accounts/student/{id}", method = RequestMethod.DELETE)
+    public String deleteStudent(@PathVariable Long id) {
+        studentRepository.delete(id);
+        return "ds-admin-index";
+    }
 }
 
