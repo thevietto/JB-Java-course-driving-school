@@ -1,30 +1,18 @@
 package ru.kpfu.driving_school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import ru.kpfu.driving_school.form.QuestionForm;
 import ru.kpfu.driving_school.repository.CategoryRepository;
 import ru.kpfu.driving_school.service.QuestionService;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import ru.kpfu.driving_school.service.StudentService;
 import ru.kpfu.driving_school.service.TeacherService;
 import ru.kpfu.driving_school.service.TestService;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.util.UUID;
-
-import ru.kpfu.driving_school.util.PropertyPath;
-
+import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -160,8 +148,13 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "/tests/{id}/questions/create", method = RequestMethod.POST)
-    public String saveQuestion(@PathVariable Long id, @ModelAttribute QuestionForm questionForm) {
-        questionService.saveQuestion(questionForm, id);
+    public String saveQuestion(@PathVariable Long id, @Valid @ModelAttribute QuestionForm questionForm, BindingResult bindingResult, Model model) {
+        if (!bindingResult.hasErrors()) {
+            questionService.saveQuestion(questionForm, id);
+        } else {
+            model.addAttribute("error", "Заполните все поля");
+            return "create_question";
+        }
         return "redirect:/teacher/tests/" + id + "/questions";
     }
 }

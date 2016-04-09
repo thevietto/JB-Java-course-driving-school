@@ -5,13 +5,14 @@ package ru.kpfu.driving_school.util;
  */
 public final class PropertyPath {
 
-    private static String path;
+    //Имя папки, где будут хранится картинки вопросов
+    public static final String questionImageDir = "question_images";
 
-    public static String getPath() {
-        return path;
-    }
+    //Корневая директория хранения файлов, загружаемых на сервер, задается в applications.properties
+    public static String userDirectory;
 
-    public void setPath(String path) {
-        this.path = path;
+
+    public void setUserDirectory(String userDirectory) {
+        this.userDirectory = userDirectory;
     }
 }
