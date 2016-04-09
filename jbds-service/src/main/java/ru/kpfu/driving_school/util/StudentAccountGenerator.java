@@ -4,10 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 import ru.kpfu.driving_school.form.StudentForm;
-import ru.kpfu.driving_school.model.Credentials;
-import ru.kpfu.driving_school.model.StudentAccount;
+import ru.kpfu.driving_school.model.Credential;
+import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.enums.UserRole;
-import ru.kpfu.driving_school.repository.CredentialsRepository;
+import ru.kpfu.driving_school.repository.CredentialRepository;
 
 import java.util.Random;
 import java.util.function.Function;
@@ -16,10 +16,10 @@ import java.util.function.Function;
  * Created by aleksandrpliskin on 18.03.16.
  */
 @Component
-public class StudentAccountGenerator implements Function<StudentForm, StudentAccount> {
+public class StudentAccountGenerator implements Function<StudentForm, Student> {
 
     @Autowired
-    private CredentialsRepository credentialsRepository;
+    private CredentialRepository credentialRepository;
 
     private final String[] _alpha = {"a", "b", "v", "g", "d", "e", "yo", "g", "z", "i", "y", "i",
             "k", "l", "m", "n", "o", "p", "r", "s", "t", "u",
@@ -29,16 +29,16 @@ public class StudentAccountGenerator implements Function<StudentForm, StudentAcc
 
 
     @Override
-    public StudentAccount apply(StudentForm form) {
+    public Student apply(StudentForm form) {
         String fio = form.getFirstname() + ' ' + form.getSurname() + ' ' + form.getLastname();
         String login = generateLogin(form.getFirstname(), form.getSurname(), form.getLastname());
         String password = generatePassword();
-        Credentials credentials = new Credentials();
+        Credential credentials = new Credential();
         credentials.setLogin(login);
         credentials.setPassword(encoder.encode(password));
         credentials.setRole(UserRole.ROLE_STUDENT);
-        credentialsRepository.save(credentials);
-        StudentAccount student = new StudentAccount();
+        credentialRepository.save(credentials);
+        Student student = new Student();
         student.setFio(fio);
         student.setCredentials(credentials);
         return student;
@@ -66,7 +66,7 @@ public class StudentAccountGenerator implements Function<StudentForm, StudentAcc
         int firstnameIs = 1;
         int lastnameIs = 1;
         while (!unique) {
-            if (credentialsRepository.findOneByLogin(login) == null) {
+            if (credentialRepository.findOneByLogin(login) == null) {
                 unique = true;
             } else {
                 if (!firstCharName) {

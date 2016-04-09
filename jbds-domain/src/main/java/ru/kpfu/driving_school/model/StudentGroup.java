@@ -7,24 +7,24 @@ import java.util.List;
  * Created by aleksandrpliskin on 24.03.16.
  */
 @Entity
-@Table(name = "student_group")
-@SequenceGenerator(sequenceName = "student_group_id_seq", name = "student_group_gen", allocationSize = 1)
+@Table(name = "student_groups")
+@SequenceGenerator(sequenceName = "student_groups_id_seq", name = "student_groups_gen", allocationSize = 1)
 public class StudentGroup {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_group_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_groups_gen")
     private Long id;
 
     @ManyToOne
     @JoinColumn(name = "driving_school_id")
     private DrivingSchool drivingSchool;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentGroup", fetch = FetchType.EAGER)
-    private List<StudentAccount> studentAccountList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentGroup", fetch = FetchType.LAZY)
+    private List<Student> students;
 
     @OneToOne
     @JoinColumn(name = "teacher_id")
-    private TeacherAccount teacherAccount;
+    private Teacher teacher;
 
     public DrivingSchool getDrivingSchool() {
         return drivingSchool;
@@ -42,19 +42,19 @@ public class StudentGroup {
         this.id = id;
     }
 
-    public List<StudentAccount> getStudentAccountList() {
-        return studentAccountList;
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public void setStudentAccountList(List<StudentAccount> studentAccountList) {
-        this.studentAccountList = studentAccountList;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
-    public TeacherAccount getTeacherAccount() {
-        return teacherAccount;
+    public Teacher getTeacher() {
+        return teacher;
     }
 
-    public void setTeacherAccount(TeacherAccount teacherAccount) {
-        this.teacherAccount = teacherAccount;
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }

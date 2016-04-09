@@ -1,0 +1,130 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="2903225420_1" author="GoodBoy">
+        <renameTable oldTableName="credential"
+                     newTableName="credentials"/>
+    </changeSet>
+
+    <changeSet id="2903225420_2" author="GoodBoy">
+        <renameTable oldTableName="driving_school"
+                     newTableName="driving_schools"/>
+    </changeSet>
+
+    <changeSet id="2903225420_3" author="GoodBoy">
+        <renameTable oldTableName="teacher"
+                     newTableName="teachers"/>
+    </changeSet>
+
+    <changeSet id="2903225420_4" author="GoodBoy">
+        <renameTable oldTableName="ds_admin"
+                     newTableName="ds_admins"/>
+    </changeSet>
+
+    <changeSet id="2903225420_5" author="GoodBoy">
+        <renameTable oldTableName="student"
+                     newTableName="students"/>
+    </changeSet>
+
+    <changeSet id="2903225420_6" author="GoodBoy">
+        <renameTable oldTableName="system_admin"
+                     newTableName="system_admins"/>
+    </changeSet>
+
+    <changeSet id="2903225420_7" author="GoodBoy">
+        <renameTable oldTableName="student_group"
+                     newTableName="student_groups"/>
+    </changeSet>
+
+    <changeSet id="2903225420_8" author="GoodBoy">
+        <dropSequence sequenceName="credential_id_seq"/>
+    </changeSet>
+
+    <changeSet id="2903225420_9" author="GoodBoy">
+        <createSequence
+                sequenceName="credentials_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="2903225420_10" author="GoodBoy">
+        <dropSequence sequenceName="driving_school_id_seq"/>
+    </changeSet>
+
+    <changeSet id="2903225420_11" author="GoodBoy">
+        <createSequence
+                sequenceName="driving_schools_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="2903225420_12" author="GoodBoy">
+        <dropSequence sequenceName="ds_admin_id_seq"/>
+    </changeSet>
+
+    <changeSet id="2903225420_13" author="GoodBoy">
+        <createSequence
+                sequenceName="ds_admins_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="2903225420_14" author="GoodBoy">
+        <dropSequence sequenceName="student_group_id_seq"/>
+    </changeSet>
+
+    <changeSet id="2903225420_15" author="GoodBoy">
+        <createSequence
+                sequenceName="student_groups_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="2903225420_16" author="GoodBoy">
+        <dropSequence sequenceName="student_id_seq"/>
+    </changeSet>
+
+    <changeSet id="2903225420_17" author="GoodBoy">
+        <createSequence
+                sequenceName="students_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="2903225420_18" author="GoodBoy">
+        <dropSequence sequenceName="system_admin_id_seq"/>
+    </changeSet>
+
+    <changeSet id="2903225420_19" author="GoodBoy">
+        <createSequence
+                sequenceName="system_admins_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="2903225420_20" author="GoodBoy">
+        <createSequence
+                sequenceName="teachers_id_seq"
+                startValue="50"
+                incrementBy="1"
+                minValue="50"
+        />
+    </changeSet>
+
+
+</databaseChangeLog>

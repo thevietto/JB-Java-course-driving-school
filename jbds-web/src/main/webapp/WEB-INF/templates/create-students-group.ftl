@@ -1,13 +1,7 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java"
-         pageEncoding="UTF-8" %>
-
 <html>
 
 <body>
-
 <h1>добавление потока студентов</h1>
-
-
 <form action="/admin/student_groups" method="post" enctype="multipart/form-data">
     <label>Фио преподавателя</label><input name="teacher"><br/>
     <p>/////// В бичах есть только Сидорова Марья Ивановна  из автошколы с id=1 /////</p>
@@ -20,6 +14,5 @@
 <br/>
 <div>Студенты в файле должны быть в виде "Фамилия | Имя | Отчество" без пропусков строк</div>
 </form>
-
 </body>
 </html>

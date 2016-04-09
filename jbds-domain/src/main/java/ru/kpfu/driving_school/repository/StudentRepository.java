@@ -4,8 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import ru.kpfu.driving_school.model.DSAdminAccount;
-import ru.kpfu.driving_school.model.StudentAccount;
+import ru.kpfu.driving_school.model.Credential;
+import ru.kpfu.driving_school.model.Student;
+import ru.kpfu.driving_school.model.StudentGroup;
 
 import java.util.List;
 
@@ -13,7 +14,11 @@ import java.util.List;
  * Created by aleksandrpliskin on 18.03.16.
  */
 @Repository
-public interface StudentRepository extends JpaRepository<StudentAccount, Long> {
+public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    StudentAccount findOneByFio(String fio);
+    Student findOneByFio(String fio);
+
+    List<Student> findByStudentGroup(StudentGroup studentGroup);
+
+    Student findByCredential(Credential currentUser);
 }

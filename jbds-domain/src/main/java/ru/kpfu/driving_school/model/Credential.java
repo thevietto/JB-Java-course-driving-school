@@ -8,9 +8,9 @@ import javax.persistence.*;
  * Created by aleksandrpliskin on 16.03.16.
  */
 @Entity
-@Table(name = "credential")
-@SequenceGenerator(sequenceName = "credential_id_seq", name = "credentials_gen", allocationSize = 1)
-public class Credentials {
+@Table(name = "credentials")
+@SequenceGenerator(sequenceName = "credentials_id_seq", name = "credentials_gen", allocationSize = 1)
+public class Credential {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "credentials_gen")
@@ -25,7 +25,7 @@ public class Credentials {
     @Column(nullable = false)
     private String password;
 
-    public Credentials() {
+    public Credential() {
     }
 
     public Long getId() {

@@ -3,17 +3,17 @@ package ru.kpfu.driving_school.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "student")
-@SequenceGenerator(sequenceName = "student_id_seq", name = "student_gen", allocationSize = 1)
-public class StudentAccount {
+@Table(name = "students")
+@SequenceGenerator(sequenceName = "students_id_seq", name = "students_gen", allocationSize = 1)
+public class Student {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "students_gen")
     private long id;
 
     @OneToOne
     @JoinColumn(name = "credential_id")
-    private Credentials credentials;
+    private Credential credential;
 
     @Column
     private String fio;
@@ -22,7 +22,7 @@ public class StudentAccount {
     @JoinColumn(name = "student_group_id", nullable = false)
     private StudentGroup studentGroup;
 
-    public StudentAccount() {
+    public Student() {
     }
 
     public long getId() {
@@ -33,12 +33,12 @@ public class StudentAccount {
         this.id = id;
     }
 
-    public Credentials getCredentials() {
-        return credentials;
+    public Credential getCredentials() {
+        return credential;
     }
 
-    public void setCredentials(Credentials credentials) {
-        this.credentials = credentials;
+    public void setCredentials(Credential credential) {
+        this.credential = credential;
     }
 
     public String getFio() {

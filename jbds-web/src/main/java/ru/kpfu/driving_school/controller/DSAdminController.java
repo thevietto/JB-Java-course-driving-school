@@ -3,18 +3,12 @@ package ru.kpfu.driving_school.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import ru.kpfu.driving_school.form.StudentEditForm;
 import ru.kpfu.driving_school.form.StudentForm;
-import ru.kpfu.driving_school.model.StudentAccount;
-import ru.kpfu.driving_school.repository.DSAdminRepository;
-import ru.kpfu.driving_school.repository.StudentRepository;
 import ru.kpfu.driving_school.service.DSAdminService;
-import ru.kpfu.driving_school.service.StudentService;
-import ru.kpfu.driving_school.util.StudentAccountTransformer;
-
-import java.util.function.Function;
 
 
 /**
@@ -26,19 +20,6 @@ public class DSAdminController {
 
     @Autowired
     DSAdminService dsAdminService;
-
-    @Autowired
-    StudentService studentService;
-
-    @Autowired
-    StudentRepository studentRepository;
-
-    @Autowired
-    DSAdminRepository dsRepository;
-
-    @Autowired
-    Function<StudentEditForm, StudentAccount> studentAccountTransformer;
-
 
     @RequestMapping(value = "")
     public String getIndex() {

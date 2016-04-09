@@ -1,0 +1,32 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+
+
+    <changeSet id="3003190000_1" author="etovladislav">
+        <createTable tableName="ds_tests">
+            <column name="test_id" type="bigint"/>
+            <column name="ds_id" type="bigint"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3003190000_2" author="etovladislav">
+        <addForeignKeyConstraint baseColumnNames="test_id"
+                                 baseTableName="ds_tests"
+                                 constraintName="ds_tests_tests_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tests"/>
+    </changeSet>
+
+    <changeSet id="3003190000_3" author="etovladislav">
+        <addForeignKeyConstraint baseColumnNames="ds_id"
+                                 baseTableName="ds_tests"
+                                 constraintName="ds_tests_driving_schools_fk"
+                                 referencedColumnNames="id"
+                                 referencedTableName="driving_schools"/>
+    </changeSet>
+
+</databaseChangeLog>

@@ -30,8 +30,11 @@ public class AuthController {
             return "redirect:/student";
         } else if (request.isUserInRole("ROLE_SYSTEM_ADMIN")) {
             return "redirect:/system";
+        } else if (request.isUserInRole("ROLE_TEACHER")) {
+            return "redirect:/teacher";
         } else {
             return "login";
         }
     }
+
 }

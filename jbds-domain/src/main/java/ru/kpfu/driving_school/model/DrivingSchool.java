@@ -6,12 +6,12 @@ import javax.persistence.*;
  * Created by aleksandrpliskin on 21.03.16.
  */
 @Entity
-@SequenceGenerator(sequenceName = "driving_school_id_seq", name = "driving_school_gen", allocationSize = 1)
-@Table(name = "driving_school")
+@SequenceGenerator(sequenceName = "driving_schools_id_seq", name = "driving_schools_gen", allocationSize = 1)
+@Table(name = "driving_schools")
 public class DrivingSchool {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "driving_school_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "driving_schools_gen")
     private Long id;
 
     private String name;
