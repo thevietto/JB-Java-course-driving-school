@@ -13,4 +13,6 @@ public interface QuestionService {
     void saveQuestion(QuestionForm questionForm, Long testId);
 
     List<Question> getQuestions(Long testId);
+
+    Question findQuestionById(Long questionId);
 }

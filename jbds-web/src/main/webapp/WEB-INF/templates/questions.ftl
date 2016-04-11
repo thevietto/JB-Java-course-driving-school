@@ -7,8 +7,7 @@
 <#if questions?has_content>
 <ul>
     <#list questions as question>
-        <li>${question.text}</li>
-        <li><img src="${question.image}" alt=""></li>
+        <li><a href="/teacher/tests/${testId}/questions/${question.id}">${question.text}</a></li>
     </#list>
 </ul>
 </#if>

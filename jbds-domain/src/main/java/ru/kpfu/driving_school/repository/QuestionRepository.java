@@ -9,4 +9,5 @@ import ru.kpfu.driving_school.model.Question;
  */
 @Repository
 public interface QuestionRepository extends JpaRepository<Question, Long> {
+    Question findQuestionById(Long questionId);
 }

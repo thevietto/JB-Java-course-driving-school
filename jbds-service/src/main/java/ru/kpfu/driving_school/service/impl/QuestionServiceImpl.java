@@ -43,4 +43,12 @@ public class QuestionServiceImpl implements QuestionService {
         List<Question> questions = test.getQuestions();
         return questions;
     }
+
+    @Override
+    @Transactional
+    public Question findQuestionById(Long questionId) {
+        Question question = questionRepository.findQuestionById(questionId);
+        question.getAnswerVariants().size();
+        return question;
+    }
 }

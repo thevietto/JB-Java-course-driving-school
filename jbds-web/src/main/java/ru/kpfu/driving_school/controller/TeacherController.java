@@ -157,4 +157,12 @@ public class TeacherController {
         }
         return "redirect:/teacher/tests/" + id + "/questions";
     }
+
+    @RequestMapping(value = "/tests/{testId}/questions/{questionId}", method = RequestMethod.GET)
+    public String getQuestionDetail(@PathVariable("testId") Long testId,
+                                    @PathVariable("questionId") Long questionId, Model model) {
+
+        model.addAttribute("question", questionService.findQuestionById(questionId));
+        return "question_details";
+    }
 }
