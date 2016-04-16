@@ -1,5 +1,6 @@
 package ru.kpfu.driving_school.service;
 
+import ru.kpfu.driving_school.model.Credential;
 import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.StudentMark;
 import ru.kpfu.driving_school.model.Task;
@@ -18,4 +19,6 @@ public interface StudentService {
     void setStudentMarks(Long studentId, String description, String mark, Long groupId);
 
     List<Task> getStudentTasks();
+
+    Student findByCredential(Credential credential);
 }

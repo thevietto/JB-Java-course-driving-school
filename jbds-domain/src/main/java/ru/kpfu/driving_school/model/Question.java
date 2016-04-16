@@ -1,6 +1,7 @@
 package ru.kpfu.driving_school.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by aleksandrpliskin on 29.03.16.
@@ -21,6 +22,13 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
+
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "question_variants",
+            joinColumns = @JoinColumn(name = "question_id"),
+            inverseJoinColumns = @JoinColumn(name = "answer_variant_id"))
+    private List<AnswerVariant> answerVariants;
+
 
     public Long getId() {
         return id;
@@ -53,4 +61,13 @@ public class Question {
     public void setCategory(Category category) {
         this.category = category;
     }
+
+    public List<AnswerVariant> getAnswerVariants() {
+        return answerVariants;
+    }
+
+    public void setAnswerVariants(List<AnswerVariant> answerVariants) {
+        this.answerVariants = answerVariants;
+    }
+
 }

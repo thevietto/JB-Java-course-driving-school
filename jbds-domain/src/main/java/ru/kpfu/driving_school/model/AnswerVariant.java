@@ -16,8 +16,14 @@ public class AnswerVariant {
 
     private String text;
 
+//    @ManyToOne
+//    @JoinColumn(name = "question_id")
+//    private Question question;
+
     @ManyToOne
-    @JoinColumn(name = "question_id")
+    @JoinTable(name="question_variants",
+            joinColumns = @JoinColumn(name="answer_variant_id"),
+            inverseJoinColumns = @JoinColumn(name="question_id"))
     private Question question;
 
     public Long getId() {

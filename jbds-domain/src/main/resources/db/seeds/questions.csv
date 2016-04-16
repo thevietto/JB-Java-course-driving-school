@@ -1,6 +1,6 @@
 ID,TEXT,IMAGE,CATEGORY_ID
-1,question1,question_images/question1.jpeg,1
-2,question2,question_images/question2.jpg,2
-3,question3,question_images/question1.jpeg,3
-4,question4,question_images/question2.jpg,4
-5,question5,question_images/question1.jpeg,5
+1,question1,questions_images/question1.jpeg,1
+2,question2,questions_images/question2.jpg,2
+3,question3,questions_images/question1.jpeg,3
+4,question4,questions_images/question2.jpg,4
+5,question5,questions_images/question1.jpeg,5
