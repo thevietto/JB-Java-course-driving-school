@@ -149,12 +149,11 @@ public class TeacherController {
 
     @RequestMapping(value = "/tests/{id}/questions/create", method = RequestMethod.POST)
     public String saveQuestion(@PathVariable Long id, @Valid @ModelAttribute QuestionForm questionForm, BindingResult bindingResult, Model model) {
-        if (!bindingResult.hasErrors()) {
-            questionService.saveQuestion(questionForm, id);
-        } else {
-            model.addAttribute("error", "Заполните все поля");
+        if (bindingResult.hasErrors()) {
             return "create_question";
         }
+        questionService.saveQuestion(questionForm, id);
+
         return "redirect:/teacher/tests/" + id + "/questions";
     }
 

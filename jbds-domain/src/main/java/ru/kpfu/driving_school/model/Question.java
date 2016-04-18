@@ -23,18 +23,11 @@ public class Question {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @ManyToOne
-    @JoinTable(name = "test_questions",
-            inverseJoinColumns = @JoinColumn(name = "test_id"),
-            joinColumns = @JoinColumn(name = "question_id")
-    )
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "test_id")
     private Test test;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "questions_answer_variants",
-            joinColumns = @JoinColumn(name = "question_id"),
-            inverseJoinColumns = @JoinColumn(name = "answer_variant_id")
-    )
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<AnswerVariant> answerVariants;
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -16,6 +16,7 @@
 
     <bean id="userHome" class="ru.kpfu.driving_school.util.PropertyPath">
         <property name="userDirectory" value="${img.dir}"/>
+        <property name="questionImageDir" value="${img.questionDir}"/>
     </bean>
 
     <mvc:resources mapping="**" location="/resources"/>

@@ -11,7 +11,7 @@ import java.util.UUID;
 /**
  * Created by etovladislav on 09.04.16.
  */
-public class ImageUpload {
+public class ImageUploadProvider {
 
     public String upload(MultipartFile file, String dirName) {
         File dir = null;

@@ -26,6 +26,7 @@ public class QuestionTransformer implements BiFunction<QuestionForm, Long, Quest
     @Autowired
     TestRepository testRepository;
 
+    private static final String QUESTION_IMAGE_DIR = "/images/question_images/";
 
     @Override
     public Question apply(QuestionForm questionForm, Long testId) {
@@ -46,9 +47,9 @@ public class QuestionTransformer implements BiFunction<QuestionForm, Long, Quest
         question.setAnswerVariants(answerVariants);
 
         MultipartFile file = questionForm.getMultipartFile();
-        ImageUpload imageUpload = new ImageUpload();
+        ImageUploadProvider imageUpload = new ImageUploadProvider();
         String newFileName = imageUpload.upload(file, PropertyPath.questionImageDir);
-        question.setImage("/images/question_images/" + newFileName);
+        question.setImage(QUESTION_IMAGE_DIR + newFileName);
 
         rightAnswer.setQuestion(question);
         question.setRightAnswer(rightAnswer);

@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.driving_school.form.QuestionForm;
 import ru.kpfu.driving_school.model.Question;
-import ru.kpfu.driving_school.model.Test;
 import ru.kpfu.driving_school.repository.QuestionRepository;
 import ru.kpfu.driving_school.repository.TestRepository;
 import ru.kpfu.driving_school.service.QuestionService;
@@ -38,9 +37,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     @Transactional
     public List<Question> getQuestions(Long testId) {
-        Test test = testRepository.findOne(testId);
-        test.getQuestions().size();
-        List<Question> questions = test.getQuestions();
+        List<Question> questions = questionRepository.findAllByTestId(testId);
         return questions;
     }
 

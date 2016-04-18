@@ -38,39 +38,38 @@
                                  referencedColumnNames="id"
         />
     </changeSet>
+
+
     <changeSet id="20160303213720_6" author="etovladislav">
-        <createTable tableName="questions_answer_variants">
-            <column name="question_id" type="bigint"/>
-            <column name="answer_variant_id" type="bigint"/>
-        </createTable>
-    </changeSet>
-    <changeSet id="20160303213720_7" author="etovladislav">
-        <addForeignKeyConstraint baseTableName="questions_answer_variants"
-                                 baseColumnNames="question_id"
-                                 constraintName="questions_answer_variants_question_fk"
-                                 referencedTableName="questions"
-                                 referencedColumnNames="id"
-        />
-    </changeSet>
-    <changeSet id="20160303213720_8" author="etovladislav">
-        <addForeignKeyConstraint baseTableName="questions_answer_variants"
-                                 baseColumnNames="answer_variant_id"
-                                 constraintName="questions_answer_variants_answer_variant_fk"
-                                 referencedTableName="answer_variants"
-                                 referencedColumnNames="id"
-        />
-    </changeSet>
-    <changeSet id="20160303213720_9" author="etovladislav">
         <addColumn tableName="questions">
             <column name="right_answer_id" type="bigint"></column>
         </addColumn>
     </changeSet>
+
+
+    <changeSet id="20160303213720_7" author="etovladislav">
+        <dropUniqueConstraint catalogName="public"
+                              constraintName="questions_text_key"
+                              schemaName="public"
+                              tableName="questions"
+                              uniqueColumns="text"/>
+    </changeSet>
+
+    <changeSet id="20160303213720_8" author="etovladislav">
+        <dropNotNullConstraint tableName="questions" columnName="image"/>
+    </changeSet>
+
+    <changeSet id="20160303213720_9" author="etovladislav">
+        <addColumn tableName="questions">
+            <column name="test_id" type="bigint"></column>
+        </addColumn>
+    </changeSet>
+
     <changeSet id="20160303213720_10" author="etovladislav">
         <addForeignKeyConstraint baseTableName="questions"
-                                 baseColumnNames="right_answer_id"
-                                 constraintName="question_right_answer_fk"
-                                 referencedTableName="right_answers"
-                                 referencedColumnNames="id"
-        />
+                                 baseColumnNames="test_id"
+                                 constraintName="questions_test_id_fk"
+                                 referencedTableName="tests"
+                                 referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>
