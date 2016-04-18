@@ -25,12 +25,12 @@ public class QuestionServiceImpl implements QuestionService {
     TestRepository testRepository;
 
     @Autowired
-    BiFunction<QuestionForm, Long, Question> questionBiFunction;
+    BiFunction<QuestionForm, Long, Question> questionFormTransformer;
 
     @Override
     @Transactional
     public void saveQuestion(QuestionForm questionForm, Long testId) {
-        Question question = questionBiFunction.apply(questionForm, testId);
+        Question question = questionFormTransformer.apply(questionForm, testId);
         questionRepository.save(question);
     }
 
