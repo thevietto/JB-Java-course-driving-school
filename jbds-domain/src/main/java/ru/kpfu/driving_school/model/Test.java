@@ -17,11 +17,7 @@ public class Test {
 
     private String description;
 
-    @OneToMany
-    @JoinTable(name = "test_questions",
-            joinColumns = @JoinColumn(name = "test_id"),
-            inverseJoinColumns = @JoinColumn(name = "question_id")
-    )
+    @OneToMany(mappedBy = "test")
     private List<Question> questions;
 
     @ManyToOne

@@ -3,14 +3,16 @@ package ru.kpfu.driving_school.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import ru.kpfu.driving_school.form.QuestionForm;
+import ru.kpfu.driving_school.repository.CategoryRepository;
+import ru.kpfu.driving_school.service.QuestionService;
 import ru.kpfu.driving_school.service.StudentService;
 import ru.kpfu.driving_school.service.TeacherService;
 import ru.kpfu.driving_school.service.TestService;
 
+import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -29,6 +31,12 @@ public class TeacherController {
 
     @Autowired
     TestService testService;
+
+    @Autowired
+    QuestionService questionService;
+
+    @Autowired
+    CategoryRepository categoryRepository;
 
     @RequestMapping(value = "")
     public String getTeacherIndex() {
@@ -108,9 +116,52 @@ public class TeacherController {
         return "redirect:/teacher/student_groups/" + id + "/students/" + studentId + "/student_points";
     }
 
-    @RequestMapping(value = "/test/new", method = RequestMethod.GET)
-    public String createTest() {
-        return "create-test";
+    @RequestMapping(value = "/tests/create", method = RequestMethod.GET)
+    public String getCreateTestPage(Model model) {
+        return "create_test";
     }
 
+    @RequestMapping(value = "/tests/new", method = RequestMethod.POST)
+    public String createTest(@RequestParam String description) {
+        Long id = testService.save(description);
+        return "redirect:/teacher/tests/" + id + "/questions";
+    }
+
+    @RequestMapping(value = "/tests")
+    public String getTests(Model model) {
+        model.addAttribute("tests", testService.getDSTests());
+        return "tests";
+    }
+
+    @RequestMapping(value = "/tests/{id}/questions", method = RequestMethod.GET)
+    public String getQuestionsPage(@PathVariable Long id, Model model) {
+        model.addAttribute("questions", questionService.getQuestions(id));
+        model.addAttribute("testId", id);
+        return "questions";
+    }
+
+    @RequestMapping(value = "/tests/{id}/questions/create", method = RequestMethod.GET)
+    public String createQuestionPage(@PathVariable Long id, Model model) {
+        model.addAttribute("categories", categoryRepository.findAll());
+        model.addAttribute("testId", id);
+        return "create_question";
+    }
+
+    @RequestMapping(value = "/tests/{id}/questions/create", method = RequestMethod.POST)
+    public String saveQuestion(@PathVariable Long id, @Valid @ModelAttribute QuestionForm questionForm, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "create_question";
+        }
+        questionService.saveQuestion(questionForm, id);
+
+        return "redirect:/teacher/tests/" + id + "/questions";
+    }
+
+    @RequestMapping(value = "/tests/{testId}/questions/{questionId}", method = RequestMethod.GET)
+    public String getQuestionDetail(@PathVariable("testId") Long testId,
+                                    @PathVariable("questionId") Long questionId, Model model) {
+
+        model.addAttribute("question", questionService.findQuestionById(questionId));
+        return "question_details";
+    }
 }

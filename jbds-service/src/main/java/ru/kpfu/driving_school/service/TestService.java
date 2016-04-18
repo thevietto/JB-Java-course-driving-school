@@ -6,12 +6,16 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * Created by aleksandrpliskin on 02.04.16.
+ * Created by etovladislav on 31.03.16.
  */
 public interface TestService {
+
+    Long save(String description);
 
     List<Test> getTests(Long groupId);
 
     void createTaskForGroup(Long id, String testName, String description, Date deadline);
+
+    List<Test> getDSTests();
 
 }

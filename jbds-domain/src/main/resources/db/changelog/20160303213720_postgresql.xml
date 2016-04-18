@@ -39,4 +39,37 @@
         />
     </changeSet>
 
+
+    <changeSet id="20160303213720_6" author="etovladislav">
+        <addColumn tableName="questions">
+            <column name="right_answer_id" type="bigint"></column>
+        </addColumn>
+    </changeSet>
+
+
+    <changeSet id="20160303213720_7" author="etovladislav">
+        <dropUniqueConstraint catalogName="public"
+                              constraintName="questions_text_key"
+                              schemaName="public"
+                              tableName="questions"
+                              uniqueColumns="text"/>
+    </changeSet>
+
+    <changeSet id="20160303213720_8" author="etovladislav">
+        <dropNotNullConstraint tableName="questions" columnName="image"/>
+    </changeSet>
+
+    <changeSet id="20160303213720_9" author="etovladislav">
+        <addColumn tableName="questions">
+            <column name="test_id" type="bigint"></column>
+        </addColumn>
+    </changeSet>
+
+    <changeSet id="20160303213720_10" author="etovladislav">
+        <addForeignKeyConstraint baseTableName="questions"
+                                 baseColumnNames="test_id"
+                                 constraintName="questions_test_id_fk"
+                                 referencedTableName="tests"
+                                 referencedColumnNames="id"/>
+    </changeSet>
 </databaseChangeLog>

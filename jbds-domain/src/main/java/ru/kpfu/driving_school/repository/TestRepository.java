@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+import ru.kpfu.driving_school.model.DrivingSchool;
 import ru.kpfu.driving_school.model.Test;
 
 import java.util.List;
@@ -27,4 +28,6 @@ public interface TestRepository extends JpaRepository<Test, Long> {
     List<Test> findByGroupId(@Param("groupId") Long groupId);
 
     Test findOneByDescription(String description);
+
+    List<Test> findByDrivingSchool(DrivingSchool drivingSchool);
 }

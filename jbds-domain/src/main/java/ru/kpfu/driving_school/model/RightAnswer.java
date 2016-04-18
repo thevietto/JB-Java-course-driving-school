@@ -14,11 +14,11 @@ public class RightAnswer {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "right_answers_gen")
     private Long id;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "answer_variant_id")
     private AnswerVariant answerVariant;
 
-    @ManyToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "question_id")
     private Question question;
 
