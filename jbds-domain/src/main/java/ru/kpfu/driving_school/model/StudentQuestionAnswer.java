@@ -3,39 +3,41 @@ package ru.kpfu.driving_school.model;
 import javax.persistence.*;
 
 /**
- * Created by aleksandrpliskin on 29.03.16.
+ * Created by aleksandrpliskin on 21.04.16.
  */
+@Table(name = "student_question_dialog_answers")
 @Entity
-@Table(name = "student_questions_answers")
-@SequenceGenerator(sequenceName = "student_questions_answers_id_seq", name = "student_questions_answers_gen")
+@SequenceGenerator(sequenceName = "student_question_dialog_answers_id_seq", name = "student_question_dialog_answers_gen", allocationSize = 1)
 public class StudentQuestionAnswer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_questions_answers_gen")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_question_dialog_answers_gen")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @JoinColumn(name = "student_question_id")
+    private StudentQuestion studentQuestion;
 
-    @ManyToOne
-    @JoinColumn(name = "test_id")
-    private Test test;
+    private String answer;
 
     @OneToOne
-    @JoinColumn(name = "question_id")
-    private Question question;
+    @JoinColumn(name = "answerer_credential_id")
+    private Credential credential;
 
-    @OneToOne
-    @JoinColumn(name = "answer_variant_id")
-    private AnswerVariant answerVariant;
-
-    public AnswerVariant getAnswerVariant() {
-        return answerVariant;
+    public String getAnswer() {
+        return answer;
     }
 
-    public void setAnswerVariant(AnswerVariant answerVariant) {
-        this.answerVariant = answerVariant;
+    public void setAnswer(String answer) {
+        this.answer = answer;
+    }
+
+    public Credential getCredential() {
+        return credential;
+    }
+
+    public void setCredential(Credential credential) {
+        this.credential = credential;
     }
 
     public Long getId() {
@@ -46,27 +48,21 @@ public class StudentQuestionAnswer {
         this.id = id;
     }
 
-    public Question getQuestion() {
-        return question;
+    public StudentQuestion getStudentQuestion() {
+        return studentQuestion;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
+    public void setStudentQuestion(StudentQuestion studentQuestion) {
+        this.studentQuestion = studentQuestion;
     }
 
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
-    }
-
-    public Test getTest() {
-        return test;
-    }
-
-    public void setTest(Test test) {
-        this.test = test;
+    @Override
+    public String toString() {
+        return "StudentQuestionAnswer{" +
+                "answer='" + answer + '\'' +
+                ", id=" + id +
+                ", studentQuestion=" + studentQuestion +
+                ", credential=" + credential +
+                '}';
     }
 }
