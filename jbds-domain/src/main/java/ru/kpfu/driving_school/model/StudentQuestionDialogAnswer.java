@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Table(name = "student_question_dialog_answers")
 @Entity
 @SequenceGenerator(sequenceName = "student_question_dialog_answers_id_seq", name = "student_question_dialog_answers_gen", allocationSize = 1)
-public class StudentQuestionAnswer {
+public class StudentQuestionDialogAnswer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_question_dialog_answers_gen")

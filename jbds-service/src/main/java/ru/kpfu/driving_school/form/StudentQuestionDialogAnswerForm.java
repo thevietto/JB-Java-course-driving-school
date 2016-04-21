@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 /**
  * Created by aleksandrpliskin on 21.04.16.
  */
-public class StudentQuestionAnswerForm {
+public class StudentQuestionDialogAnswerForm {
 
     @NotNull
     private String answer;

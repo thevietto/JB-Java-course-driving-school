@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import ru.kpfu.driving_school.form.StudentQuestionAnswerForm;
+import ru.kpfu.driving_school.form.StudentQuestionDialogAnswerForm;
 import ru.kpfu.driving_school.form.StudentQuestionForm;
-import ru.kpfu.driving_school.service.StudentQuestionAnswerService;
+import ru.kpfu.driving_school.service.StudentQuestionDialogAnswerService;
 import ru.kpfu.driving_school.service.StudentQuestionService;
 import ru.kpfu.driving_school.service.StudentService;
 
@@ -29,7 +29,7 @@ public class StudentController {
     StudentQuestionService studentQuestionService;
 
     @Autowired
-    StudentQuestionAnswerService studentQuestionAnswerService;
+    StudentQuestionDialogAnswerService studentQuestionDialogAnswerService;
 
     @RequestMapping("")
     public String getStudentPage() {
@@ -65,16 +65,16 @@ public class StudentController {
     @RequestMapping(value = "/questions/{id}/answers", method = RequestMethod.GET)
     public String getStudentQuestionDiscussion(@PathVariable("id") Long id, Model model) {
         model.addAttribute("question", studentQuestionService.getQuestionById(id));
-        model.addAttribute("answers", studentQuestionAnswerService.getAnswersByQuestion(id));
-        model.addAttribute("answerForm", new StudentQuestionAnswerForm());
+        model.addAttribute("answers", studentQuestionDialogAnswerService.getAnswersByQuestion(id));
+        model.addAttribute("answerForm", new StudentQuestionDialogAnswerForm());
         includeUrl(model, "/student/questions");
         return "discussion";
     }
 
     @RequestMapping(value = "/questions/{id}/answers", method = RequestMethod.POST)
     public String createNewAnswer(@PathVariable("id") Long id,
-                                  @ModelAttribute("answerForm") @Valid StudentQuestionAnswerForm form) {
-        studentQuestionAnswerService.creteNewAnswer(id, form);
+                                  @ModelAttribute("answerForm") @Valid StudentQuestionDialogAnswerForm form) {
+        studentQuestionDialogAnswerService.creteNewAnswer(id, form);
         return "redirect:/student/questions/" + id + "/answers";
     }
 

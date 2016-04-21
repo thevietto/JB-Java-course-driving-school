@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.driving_school.form.QuestionForm;
-import ru.kpfu.driving_school.form.StudentQuestionAnswerForm;
+import ru.kpfu.driving_school.form.StudentQuestionDialogAnswerForm;
 import ru.kpfu.driving_school.form.StudentQuestionForm;
 import ru.kpfu.driving_school.repository.CategoryRepository;
 import ru.kpfu.driving_school.service.*;
@@ -41,7 +41,7 @@ public class TeacherController {
     StudentQuestionService studentQuestionService;
 
     @Autowired
-    StudentQuestionAnswerService studentQuestionAnswerService;
+    StudentQuestionDialogAnswerService studentQuestionDialogAnswerService;
 
     @RequestMapping(value = "")
     public String getTeacherIndex() {
@@ -194,8 +194,8 @@ public class TeacherController {
     @RequestMapping(value = "/student_groups/{id}/discussion/{discussionId}/answers", method = RequestMethod.GET)
     public String getGroupDiscussion(@PathVariable("id") Long id, Model model, @PathVariable("discussionId") Long discussionId) {
         model.addAttribute("question", studentQuestionService.getQuestionById(discussionId));
-        model.addAttribute("answers", studentQuestionAnswerService.getAnswersByQuestion(discussionId));
-        model.addAttribute("answerForm", new StudentQuestionAnswerForm());
+        model.addAttribute("answers", studentQuestionDialogAnswerService.getAnswersByQuestion(discussionId));
+        model.addAttribute("answerForm", new StudentQuestionDialogAnswerForm());
         includeUrl(model, "/teacher/student_groups/" + id + "/discussion");
         return "discussion";
     }
@@ -203,8 +203,8 @@ public class TeacherController {
     @RequestMapping(value = "/student_groups/{id}/discussion/{discussionId}/answers", method = RequestMethod.POST)
     public String createNewAnswerForStudentQuestion(@PathVariable("id") Long id,
                                                     @PathVariable("discussionId") Long discussionId,
-                                                    @ModelAttribute("answerForm") @Valid StudentQuestionAnswerForm form) {
-        studentQuestionAnswerService.creteNewAnswer(discussionId, form);
+                                                    @ModelAttribute("answerForm") @Valid StudentQuestionDialogAnswerForm form) {
+        studentQuestionDialogAnswerService.creteNewAnswer(discussionId, form);
         return "redirect:/teacher/student_groups/" + id + "/discussion/" + discussionId + "/answers";
     }
 
