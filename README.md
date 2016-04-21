@@ -12,3 +12,11 @@ in folder src/main/resources:
      </ul>
 <p>changelog.xml file is for migrations</p>
 <p>special profile and plugin for it you can see in pom.xml in jbds-domain module</p>
+
+<h1>Настройка пути</h1>
+<h2>Модуль jbds-web</h2>
+в папке resources:
+
+Создайте файл application.properties, по примеру существующего application.properties.example.
+Установите переменной img.dir **абсолютный путь**
+    до папки в вашей ОС, куда будут сохраняться картинки. Эта папка должна быть вне вашего проекта.
