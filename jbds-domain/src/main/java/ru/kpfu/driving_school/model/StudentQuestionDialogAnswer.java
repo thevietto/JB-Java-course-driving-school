@@ -20,7 +20,7 @@ public class StudentQuestionDialogAnswer {
 
     private String answer;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "answerer_credential_id")
     private Credential credential;
 
