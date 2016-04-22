@@ -11,5 +11,5 @@ import java.util.List;
 public interface StudentQuestionDialogAnswerService {
     List<StudentQuestionDialogAnswer> getAnswersByQuestion(Long questionId);
 
-    void creteNewAnswer(Long studentQuestionId, StudentQuestionDialogAnswerForm form);
+    void createNewAnswer(Long studentQuestionId, StudentQuestionDialogAnswerForm form);
 }

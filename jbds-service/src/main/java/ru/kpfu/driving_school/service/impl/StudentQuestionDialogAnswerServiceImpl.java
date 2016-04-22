@@ -28,7 +28,7 @@ public class StudentQuestionDialogAnswerServiceImpl implements StudentQuestionDi
     }
 
     @Override
-    public void creteNewAnswer(Long studentQuestionId, StudentQuestionDialogAnswerForm form) {
+    public void createNewAnswer(Long studentQuestionId, StudentQuestionDialogAnswerForm form) {
         StudentQuestionDialogAnswer answer = transformer.apply(form, studentQuestionId);
         studentQuestionDialogAnswerRepository.save(answer);
     }
