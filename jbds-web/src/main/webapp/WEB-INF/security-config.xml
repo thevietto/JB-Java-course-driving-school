@@ -12,6 +12,7 @@
         <security:intercept-url pattern="/teacher/**" access="hasRole('ROLE_TEACHER')"/>
         <security:intercept-url pattern="/student/**" access="hasRole('ROLE_STUDENT')"/>
         <security:intercept-url pattern="/system/**" access="hasRole('ROLE_SYSTEM_ADMIN')"/>
+
         <security:form-login
                 login-page="/login"
                 login-processing-url="/login/process"
@@ -24,10 +25,13 @@
         <security:csrf disabled="true"/>
     </security:http>
 
+
     <security:authentication-manager>
+        <security:authentication-provider ref="TokenAuthProvider"/>
         <security:authentication-provider ref="authProvider"/>
     </security:authentication-manager>
 
     <bean id="authProvider" class="ru.kpfu.driving_school.security.AuthProviderImpl"/>
+    <bean id="TokenAuthProvider" class="ru.kpfu.driving_school.security.TokenAuthProviderImpl"/>
 
 </beans>
