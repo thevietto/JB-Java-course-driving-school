@@ -204,7 +204,7 @@ public class TeacherController {
     public String createNewAnswerForStudentQuestion(@PathVariable("id") Long id,
                                                     @PathVariable("discussionId") Long discussionId,
                                                     @ModelAttribute("answerForm") @Valid StudentQuestionDialogAnswerForm form) {
-        studentQuestionDialogAnswerService.creteNewAnswer(discussionId, form);
+        studentQuestionDialogAnswerService.createNewAnswer(discussionId, form);
         return "redirect:/teacher/student_groups/" + id + "/discussion/" + discussionId + "/answers";
     }
 

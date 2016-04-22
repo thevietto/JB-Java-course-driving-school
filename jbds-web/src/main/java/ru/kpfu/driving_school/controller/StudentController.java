@@ -74,7 +74,7 @@ public class StudentController {
     @RequestMapping(value = "/questions/{id}/answers", method = RequestMethod.POST)
     public String createNewAnswer(@PathVariable("id") Long id,
                                   @ModelAttribute("answerForm") @Valid StudentQuestionDialogAnswerForm form) {
-        studentQuestionDialogAnswerService.creteNewAnswer(id, form);
+        studentQuestionDialogAnswerService.createNewAnswer(id, form);
         return "redirect:/student/questions/" + id + "/answers";
     }
 
