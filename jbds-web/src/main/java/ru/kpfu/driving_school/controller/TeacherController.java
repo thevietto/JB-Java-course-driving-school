@@ -6,11 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.kpfu.driving_school.form.QuestionForm;
+import ru.kpfu.driving_school.form.StudentQuestionDialogAnswerForm;
+import ru.kpfu.driving_school.form.StudentQuestionForm;
 import ru.kpfu.driving_school.repository.CategoryRepository;
-import ru.kpfu.driving_school.service.QuestionService;
-import ru.kpfu.driving_school.service.StudentService;
-import ru.kpfu.driving_school.service.TeacherService;
-import ru.kpfu.driving_school.service.TestService;
+import ru.kpfu.driving_school.service.*;
 
 import javax.validation.Valid;
 import java.text.ParseException;
@@ -37,6 +36,12 @@ public class TeacherController {
 
     @Autowired
     CategoryRepository categoryRepository;
+
+    @Autowired
+    StudentQuestionService studentQuestionService;
+
+    @Autowired
+    StudentQuestionDialogAnswerService studentQuestionDialogAnswerService;
 
     @RequestMapping(value = "")
     public String getTeacherIndex() {
@@ -163,5 +168,47 @@ public class TeacherController {
 
         model.addAttribute("question", questionService.findQuestionById(questionId));
         return "question_details";
+    }
+
+    @RequestMapping(value = "/student_groups/{id}/discussion", method = RequestMethod.GET)
+    public String getGroupDiscussion(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("questions", studentQuestionService.getGroupQuestions(id));
+        includeUrl(model, "/teacher/student_groups/" + id + "/discussion");
+        return "student_questions";
+    }
+
+    @RequestMapping(value = "/student_groups/{id}/discussion/new", method = RequestMethod.GET)
+    public String getFormToCreateQuestionInDiscussion(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("questionForm", new StudentQuestionForm());
+        includeUrl(model, "/teacher/student_groups/" + id + "/discussion");
+        return "ask_question";
+    }
+
+    @RequestMapping(value = "/student_groups/{id}/discussion", method = RequestMethod.POST)
+    public String createNewQuestionInDiscussion(@PathVariable("id") Long id,
+                                                @ModelAttribute("questionForm") StudentQuestionForm form) {
+        studentQuestionService.createStudentQuestion(form);
+        return "redirect:/teacher/student_groups/" + id + "/discussion";
+    }
+
+    @RequestMapping(value = "/student_groups/{id}/discussion/{discussionId}/answers", method = RequestMethod.GET)
+    public String getGroupDiscussion(@PathVariable("id") Long id, Model model, @PathVariable("discussionId") Long discussionId) {
+        model.addAttribute("question", studentQuestionService.getQuestionById(discussionId));
+        model.addAttribute("answers", studentQuestionDialogAnswerService.getAnswersByQuestion(discussionId));
+        model.addAttribute("answerForm", new StudentQuestionDialogAnswerForm());
+        includeUrl(model, "/teacher/student_groups/" + id + "/discussion");
+        return "discussion";
+    }
+
+    @RequestMapping(value = "/student_groups/{id}/discussion/{discussionId}/answers", method = RequestMethod.POST)
+    public String createNewAnswerForStudentQuestion(@PathVariable("id") Long id,
+                                                    @PathVariable("discussionId") Long discussionId,
+                                                    @ModelAttribute("answerForm") @Valid StudentQuestionDialogAnswerForm form) {
+        studentQuestionDialogAnswerService.createNewAnswer(discussionId, form);
+        return "redirect:/teacher/student_groups/" + id + "/discussion/" + discussionId + "/answers";
+    }
+
+    private void includeUrl(Model model, String url) {
+        model.addAttribute("url", url);
     }
 }
