@@ -1,0 +1,76 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="20160421132020_1" author="GoodBoy">
+        <createTable tableName="student_questions_dialog">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="student_id" type="bigint"/>
+            <column name="question" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20160421132020_2" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="student_questions_dialog"
+                                 baseColumnNames="student_id"
+                                 constraintName="student_questions_dialog_students_fk"
+                                 referencedTableName="students"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="20160421132020_3" author="GoodBoy">
+        <createSequence sequenceName="student_questions_dialog_id_seq"
+                        startValue="50"
+                        incrementBy="1"
+                        minValue="50"
+        />
+    </changeSet>
+
+    <changeSet id="20160421132020_4" author="GoodBoy">
+        <createTable tableName="student_question_dialog_answers">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="answerer_credential_id" type="bigint"/>
+            <column name="student_question_id" type="bigint"/>
+            <column name="answer" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="20160421132020_5" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="student_question_dialog_answers"
+                                 baseColumnNames="answerer_credential_id"
+                                 constraintName="student_question_dialog_answers_credentials_fk"
+                                 referencedTableName="credentials"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="20160421132020_6" author="GoodBoy">
+        <addForeignKeyConstraint baseTableName="student_question_dialog_answers"
+                                 baseColumnNames="student_question_id"
+                                 constraintName="student_question_dialog_answers_student_questions_dialog_fk"
+                                 referencedTableName="student_questions_dialog"
+                                 referencedColumnNames="id"
+        />
+    </changeSet>
+
+    <changeSet id="20160421132020_7" author="GoodBoy">
+        <createSequence sequenceName="student_question_dialog_answers_id_seq"
+                        startValue="50"
+                        incrementBy="1"
+                        minValue="50"
+        />
+    </changeSet>
+
+
+</databaseChangeLog>
