@@ -15,6 +15,4 @@ public interface AnswerVariantService {
 
     AnswerVariant findOne(Long id);
 
-
-
 }

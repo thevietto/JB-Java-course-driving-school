@@ -3,12 +3,13 @@ package ru.kpfu.driving_school.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.driving_school.model.AnswerVariant;
-import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.StudentQuestionAnswer;
-import ru.kpfu.driving_school.model.Test;
 import ru.kpfu.driving_school.repository.AnswerVariantRepository;
 import ru.kpfu.driving_school.repository.StudentQuestionAnswerRepository;
+import ru.kpfu.driving_school.repository.StudentRepository;
+import ru.kpfu.driving_school.repository.TaskRepository;
 import ru.kpfu.driving_school.service.StudentQuestionAnswersService;
+import ru.kpfu.driving_school.util.SecurityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,20 +26,24 @@ public class StudentQuestionAnswersServiceImpl implements StudentQuestionAnswers
     @Autowired
     StudentQuestionAnswerRepository studentQuestionAnswerRepository;
 
+    @Autowired
+    StudentRepository studentRepository;
+
+    @Autowired
+    TaskRepository taskRepository;
+
     @Override
-    public List<StudentQuestionAnswer> saveStudentResults(Student student, Test test, List<AnswerVariant> answers) {
+    public List<StudentQuestionAnswer> saveStudentResults(Long taskId, String studentAnswers) {
         List<StudentQuestionAnswer> studentQuestionAnswers = new ArrayList<>();
-        try{
-            for (AnswerVariant answerVariant : answers) {
-                StudentQuestionAnswer answer = new StudentQuestionAnswer();
-                answer.setTest(test);
-                answer.setStudent(student);
-                answer.setAnswerVariant(answerVariant);
-                answer.setQuestion(answerVariant.getQuestion());
-                studentQuestionAnswers.add(answer);
-            }
-        } catch (NullPointerException e){
-            e.printStackTrace();
+        String [] studentAnswersId = studentAnswers.split(" ");
+
+        for (String st : studentAnswersId) {
+            AnswerVariant answerVariant = answerVariantRepository.findOne(Long.parseLong(st));
+            studentQuestionAnswers.add(new StudentQuestionAnswer(
+                    studentRepository.findByCredential(SecurityUtils.getCurrentUser()), //current user
+                    taskRepository.findOne(taskId).getTest(),                           //find test by task id
+                    answerVariant.getQuestion(),
+                    answerVariant));
         }
 
         studentQuestionAnswerRepository.save(studentQuestionAnswers);

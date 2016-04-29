@@ -21,10 +21,7 @@ public class AnswerVariantServiceImpl implements AnswerVariantService{
     @Override
     public HashMap<String, List<AnswerVariant>> getAnswerVariantsByQuestions(List<Question> questions) {
         HashMap answers = new HashMap<String, List<AnswerVariant>>();
-        for (Question question : questions) {
-            List<AnswerVariant> questionVariants = question.getAnswerVariants();
-            answers.put(question.getId().toString(), questionVariants);
-        }
+        questions.stream().forEach(q -> answers.put(q.getId().toString(), q.getAnswerVariants()));
         return answers;
     }
 

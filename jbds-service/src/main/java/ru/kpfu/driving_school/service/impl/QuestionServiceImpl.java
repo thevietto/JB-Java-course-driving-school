@@ -5,7 +5,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.kpfu.driving_school.form.QuestionForm;
 import ru.kpfu.driving_school.model.Question;
+import ru.kpfu.driving_school.model.Task;
+import ru.kpfu.driving_school.model.Test;
 import ru.kpfu.driving_school.repository.QuestionRepository;
+import ru.kpfu.driving_school.repository.TaskRepository;
 import ru.kpfu.driving_school.repository.TestRepository;
 import ru.kpfu.driving_school.service.QuestionService;
 
@@ -26,6 +29,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     BiFunction<QuestionForm, Long, Question> questionFormTransformer;
+
+    @Autowired
+    TaskRepository taskRepository;
 
     @Override
     @Transactional

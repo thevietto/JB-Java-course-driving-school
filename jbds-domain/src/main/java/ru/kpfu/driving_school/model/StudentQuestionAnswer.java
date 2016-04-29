@@ -30,6 +30,15 @@ public class StudentQuestionAnswer {
     @JoinColumn(name = "answer_variant_id")
     private AnswerVariant answerVariant;
 
+    public StudentQuestionAnswer(Student student, Test test, Question question, AnswerVariant answerVariant) {
+        this.student = student;
+        this.test = test;
+        this.question = question;
+        this.answerVariant = answerVariant;
+    }
+
+    public StudentQuestionAnswer() {}
+
     public AnswerVariant getAnswerVariant() {
         return answerVariant;
     }
