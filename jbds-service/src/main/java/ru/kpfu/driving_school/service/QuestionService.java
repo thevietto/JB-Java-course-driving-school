@@ -15,4 +15,7 @@ public interface QuestionService {
     List<Question> getQuestions(Long testId);
 
     Question findQuestionById(Long questionId);
+
+    List<Question> getQuestionsByTaskId(Long id);
+
 }

@@ -52,6 +52,13 @@
         </loadUpdateData>
     </changeSet>
 
+    <changeSet id="bitches_12" author="GoodBoy">
+        <loadUpdateData tableName="tests" primaryKey="id" file="db/seeds/tests.csv">
+            <column name="id" type="numeric"/>
+            <column name="deadline" type="date"/>
+        </loadUpdateData>
+    </changeSet>
+
     <changeSet id="bitches_9" author="GoodBoy">
         <loadUpdateData tableName="questions" primaryKey="id" file="db/seeds/questions.csv">
             <column name="id" type="numeric"/>
@@ -70,12 +77,7 @@
         </loadUpdateData>
     </changeSet>
 
-    <changeSet id="bitches_12" author="GoodBoy">
-        <loadUpdateData tableName="tests" primaryKey="id" file="db/seeds/tests.csv">
-            <column name="id" type="numeric"/>
-            <column name="deadline" type="date"/>
-        </loadUpdateData>
-    </changeSet>
+
 
     <changeSet id="bitches_13" author="GoodBoy">
         <loadUpdateData tableName="test_questions" primaryKey="test_id, question_id" file="db/seeds/test_questions.csv">
@@ -114,5 +116,4 @@
     <changeSet id="bitches_19" author="GoodBoy">
         <loadUpdateData tableName="tasks_tests" primaryKey="task_id, test_id" file="db/seeds/tasks_tests.csv"/>
     </changeSet>
-
 </databaseChangeLog>

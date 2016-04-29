@@ -1,17 +1,17 @@
 package ru.kpfu.driving_school.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import ru.kpfu.driving_school.form.StudentQuestionDialogAnswerForm;
 import ru.kpfu.driving_school.form.StudentQuestionForm;
-import ru.kpfu.driving_school.service.StudentQuestionDialogAnswerService;
-import ru.kpfu.driving_school.service.StudentQuestionService;
-import ru.kpfu.driving_school.service.StudentService;
+import ru.kpfu.driving_school.model.*;
+import ru.kpfu.driving_school.service.*;
+
+import java.util.HashMap;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -30,6 +30,19 @@ public class StudentController {
 
     @Autowired
     StudentQuestionDialogAnswerService studentQuestionDialogAnswerService;
+
+    @Autowired
+    TaskService taskService;
+
+    @Autowired
+    AnswerVariantService answerVariantService;
+
+    @Autowired
+    StudentQuestionAnswersService studentQuestionAnswersService;
+
+    @Autowired
+    QuestionService questionService;
+
 
     @RequestMapping("")
     public String getStudentPage() {
@@ -82,4 +95,20 @@ public class StudentController {
         model.addAttribute("url", url);
     }
 
+    @RequestMapping(value = "/tasks/{id}", method = RequestMethod.GET)
+    public String getQuestions(@PathVariable ("id") Long id, Model model){
+        Task task = taskService.findOne(id);
+        List<Question> questions = questionService.getQuestionsByTaskId(id);
+        HashMap<String, List<AnswerVariant>> answerVariants = answerVariantService.getAnswerVariantsByQuestions(questions);
+        model.addAttribute("questions", questions);
+        model.addAttribute("task", task);
+        model.addAttribute("answerVariants", answerVariants);
+        return "test-executing";
+    }
+
+    @RequestMapping(value = "/tasks/{id}", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.OK)
+    public void setStudentQuestionAnswers(@PathVariable("id") Long taskId, @RequestParam("result") String studentAnswers){
+        studentQuestionAnswersService.saveStudentResults(taskId, studentAnswers);
+    }
 }

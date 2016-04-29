@@ -27,7 +27,7 @@ public class Question {
     @JoinColumn(name = "test_id")
     private Test test;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<AnswerVariant> answerVariants;
 
     @OneToOne(cascade = CascadeType.ALL)

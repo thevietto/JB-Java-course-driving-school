@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.kpfu.driving_school.exception.NoSuchStudentException;
 import ru.kpfu.driving_school.exception.NoSuchStudentGroupException;
+import ru.kpfu.driving_school.model.Credential;
 import ru.kpfu.driving_school.model.Student;
 import ru.kpfu.driving_school.model.StudentMark;
 import ru.kpfu.driving_school.model.Task;
@@ -67,6 +68,11 @@ public class StudentServiceImpl implements StudentService {
     public List<Task> getStudentTasks() {
         Student student = studentRepository.findByCredential(SecurityUtils.getCurrentUser());
         return taskRepository.findByStudent(student);
+    }
+
+    @Override
+    public Student findByCredential(Credential credential) {
+        return studentRepository.findByCredential(credential);
     }
 }
 
